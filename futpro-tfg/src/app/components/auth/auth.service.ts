@@ -10,11 +10,10 @@ import {HttpClient} from "@angular/common/http";
 export class AuthService {
   private baseUrl = 'http://localhost:8000';
   private currentUserSubject: BehaviorSubject<Account | null>;
-  public currentUser: Observable<Account | null>
+  public currentUser: Observable<Account | null>;
   jwtHelper = new JwtHelperService();
 
   constructor(private http: HttpClient) {
-    const currentUser = localStorage.getItem('currentUser');
     this.currentUserSubject = new BehaviorSubject<Account | null>(JSON.parse(localStorage.getItem('currentUser')!));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -31,11 +30,11 @@ export class AuthService {
           this.currentUserSubject.next(response);
         }
         return response;
-      }))
+      }));
   }
 
   register(user: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/account/register/`, user)
+    return this.http.post(`${this.baseUrl}/account/register/`, user);
   }
 
   logout() {
@@ -43,11 +42,9 @@ export class AuthService {
     this.currentUserSubject.next(null);
   }
 
-  public isAuthenticated(): boolean {
-    const token = localStorage.getItem('currentUser');
+  isAuthenticated(): boolean {
+    const token = this.currentUserValue?.token.access;
     return token ? !this.jwtHelper.isTokenExpired(token) : false;
   }
-
-
 }
 

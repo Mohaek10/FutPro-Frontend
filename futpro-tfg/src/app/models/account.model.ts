@@ -12,4 +12,8 @@ export interface Account {
   is_staff: boolean;
   is_active: boolean;
   is_superuser: boolean;
+  token: {
+    access: string;
+    refresh: string;
+  };
 }
