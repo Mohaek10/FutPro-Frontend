@@ -1,19 +1,39 @@
-<header class="bg-green-500 p-4 shadow-md">
+<header class="bg-black p-4 shadow-md">
   <div class="container mx-auto flex justify-between items-center">
     <div class="flex items-center space-x-4">
-      <img src="https://via.placeholder.com/50" alt="Logo" class="w-10 h-10 rounded-full">
-      <h1 class="text-white text-2xl font-bold">Futbol Cards</h1>
+      <img src="assets/images/logos/logo-header.webp.png" alt="Logo" class="w-32 h-14">
+      <h1 class="text-purple-600 text-2xl font-bold">FutPro</h1>
     </div>
-    <nav class="flex space-x-6">
-      <a href="#" class="text-white hover:text-gray-300">Inicio</a>
-      <a href="#" class="text-white hover:text-gray-300">Mis Jugadores</a>
-      <a href="#" class="text-white hover:text-gray-300">Mercado del Sistema</a>
-      <a href="#" class="text-white hover:text-gray-300">Mercado de Usuarios</a>
-      <a href="#" class="text-white hover:text-gray-300">Administración</a>
+    <nav class="hidden md:flex space-x-6">
+      <a href="#" class="text-white hover:text-purple-300 transition duration-300">Inicio</a>
+      <a href="#" class="text-white hover:text-purple-300 transition duration-300">Mis Jugadores</a>
+      <a href="#" class="text-white hover:text-purple-300 transition duration-300">Mercado del Sistema</a>
+      <a href="#" class="text-white hover:text-purple-300 transition duration-300">Mercado de Usuarios</a>
+      <a href="#" class="text-white hover:text-purple-300 transition duration-300">Administración</a>
     </nav>
-    <div class="flex items-center space-x-4">
+    <div class="hidden md:flex items-center space-x-4">
       <span class="text-white">Monedas: 1000</span>
-      <button class="bg-white text-green-500 px-4 py-2 rounded-md hover:bg-gray-200">Login</button>
+      <button class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition duration-300">Login
+      </button>
     </div>
+    <button class="md:hidden text-white" (click)="toggleMenu()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+      </svg>
+    </button>
   </div>
+  @if (menuOpen) {
+    <div class="md:hidden mt-4 space-y-2">
+      <a href="#" class="block text-white hover:text-purple-300 transition duration-300">Inicio</a>
+      <a href="#" class="block text-white hover:text-purple-300 transition duration-300">Mis Jugadores</a>
+      <a href="#" class="block text-white hover:text-purple-300 transition duration-300">Mercado del Sistema</a>
+      <a href="#" class="block text-white hover:text-purple-300 transition duration-300">Mercado de Usuarios</a>
+      <a href="#" class="block text-white hover:text-purple-300 transition duration-300">Administración</a>
+      <div class="flex items-center space-x-4">
+        <span class="text-white">Monedas: 1000</span>
+        <button class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition duration-300">Login
+        </button>
+      </div>
+    </div>
+  }
 </header>
