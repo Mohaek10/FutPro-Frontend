@@ -1,18 +1,4 @@
-@media (max-width: 768px) {
-  header .container {
-    flex-direction: column;
-    align-items: start;
-  }
-
-  header nav {
-    flex-direction: column;
-    align-items: start;
-
-  }
-
-  header div {
-    flex-direction: column;
-    align-items: start;
-
-  }
+#menu-backdrop {
+  transition: all 0.5s ease-in-out;
+  z-index: -10;
 }
