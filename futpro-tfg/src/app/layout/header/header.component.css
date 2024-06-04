@@ -1,4 +1,15 @@
 #menu-backdrop {
   transition: all 0.5s ease-in-out;
   z-index: -10;
+  background-color: rgba(255, 255, 255, 0.1); /* Fondo más claro */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para resaltar */
+  border-radius: 8px;
+}
+
+#mobile-menu {
+  transition: all 0.5s ease-in-out;
+  z-index: -10;
+  background-color: rgba(255, 255, 255, 0.1); /* Fondo más claro */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para resaltar */
+  border-radius: 8px;
 }
