@@ -39,11 +39,10 @@ export class HeaderComponent implements OnInit {
 
     const observerOptions = {
       root: null,
-      rootMargin: "0px", // en cuanto se vea el elemento
-      threshold: 0.9, // porcentaje de visibilidad
+      rootMargin: "0px",
+      threshold: 0.9,
     };
 
-// Verifica si el elemento esta en el viewport o no
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const {isIntersecting} = entry;
@@ -57,5 +56,13 @@ export class HeaderComponent implements OnInit {
 
     const sectionElements = document.querySelectorAll(".landing-section");
     sectionElements.forEach((section) => observer.observe(section));
+
+    // Manejo del menú móvil
+    const menuButton = document.querySelector("#menu-button") as HTMLElement;
+    const mobileMenu = document.querySelector("#mobile-menu") as HTMLElement;
+
+    menuButton.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
   }
 }
