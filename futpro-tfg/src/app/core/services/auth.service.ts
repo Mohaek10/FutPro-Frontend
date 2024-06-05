@@ -9,16 +9,16 @@ import {Router} from "@angular/router";
 })
 export class AuthService {
   private apiUrl = 'http://localhost:8000/account/';
-  private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  private currentUserSubject: BehaviorSubject<User | null>;
+  public currentUser: Observable<User | null>;
 
   constructor(private http: HttpClient, private router: Router) {
     const user = localStorage.getItem('currentUser');
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(user !== null ? user : '{}'));
+    this.currentUserSubject = new BehaviorSubject<User | null>(user ? JSON.parse(user) : null);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): User {
+  public get currentUserValue(): User | null {
     return this.currentUserSubject.value;
   }
 
@@ -26,14 +26,14 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}login/`, {email, password})
       .pipe(tap(response => {
         if (response.token) {
-          const user = {
+          const user: User = {
             email: response.email,
             username: response.username,
             first_name: response.first_name,
             last_name: response.last_name,
             phone_number: response.phone_number,
             futcoins: response.futcoins,
-            date_joined: response.date_joined,
+            date_joined: new Date(response.date_joined),
             is_admin: response.is_admin,
           };
           localStorage.setItem('currentUser', JSON.stringify(user));
@@ -48,7 +48,6 @@ export class AuthService {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
-    // @ts-ignore
     this.currentUserSubject.next(null);
     this.http.post(`${this.apiUrl}logout/`, {}).subscribe();
     this.router.navigate(['/login']);
@@ -62,7 +61,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return this.getTokens().access !== null && this.currentUserValue.email !== '';
+    return this.getTokens().access !== null && this.currentUserValue !== null && this.currentUserValue.email !== '';
   }
 
   isTokenExpired(): boolean {
