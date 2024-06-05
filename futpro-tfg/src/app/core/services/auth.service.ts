@@ -40,6 +40,33 @@ export class AuthService {
           localStorage.setItem('accessToken', response.token.access);
           localStorage.setItem('refreshToken', response.token.refresh);
           this.currentUserSubject.next(user);
+        } else {
+          // Quitar el console.log
+          this.currentUserSubject.next(null);
+          console.log('Error en login', response);
+        }
+
+      }));
+  }
+
+  register(user: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}register/`, user)
+      .pipe(tap(response => {
+        if (response.token) {
+          const newUser: User = {
+            email: response.email,
+            username: response.username,
+            first_name: response.first_name,
+            last_name: response.last_name,
+            phone_number: response.phone_number,
+            futcoins: response.futcoins,
+            date_joined: new Date(response.date_joined),
+            is_admin: response.is_admin,
+          };
+          localStorage.setItem('currentUser', JSON.stringify(newUser));
+          localStorage.setItem('accessToken', response.token.access);
+          localStorage.setItem('refreshToken', response.token.refresh);
+          this.currentUserSubject.next(newUser);
         }
       }));
   }
