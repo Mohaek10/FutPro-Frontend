@@ -88,13 +88,15 @@ export class AuthService {
   }
 
   checkAdminStatus(): Observable<boolean> {
-    const url = `${this.apiUrl}/check-admin-status`;
+    const url = `${this.apiUrl}check-admin-status/`;
     return this.http.get<{ is_admin: boolean }>(url, {headers: this.getAuthHeaders()}).pipe(
       map(response => response.is_admin)
     );
   }
 
-  isAdmin(): boolean {
-    return this.currentUserValue?.is_admin || false;
+  isAdmin(): Observable<boolean> {
+    return this.checkAdminStatus();
   }
+
+
 }

@@ -1,16 +1,20 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {AuthService} from "../services/auth.service";
 import {inject} from "@angular/core";
+import {firstValueFrom} from 'rxjs';
 
-export const adminGuard: CanActivateFn = (route, state) => {
+export const adminGuard: CanActivateFn = async (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (authService.isAuthenticated() && authService.isAdmin()) {
+  const isAdmin = await firstValueFrom(authService.isAdmin());
+
+  if (authService.isAuthenticated() && isAdmin) {
     console.log('User is admin');
     return true;
   }
+  console.log('User is not admin');
 
-  router.navigate(['/forbidden']).then(r => r);
+  await router.navigate(['/forbidden']);
   return false;
 };
