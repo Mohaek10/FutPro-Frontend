@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {User} from "../../shared/models/user.models";
-import {BehaviorSubject, Observable, tap} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {BehaviorSubject, map, Observable, tap} from "rxjs";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 
 @Injectable({
@@ -73,5 +73,28 @@ export class AuthService {
       return isExpired;
     }
     return true;
+  }
+
+  getToken(): string | null {
+    return this.getTokens().access;
+  }
+
+  getAuthHeaders(): HttpHeaders {
+    const token = this.getToken();
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+  }
+
+  checkAdminStatus(): Observable<boolean> {
+    const url = `${this.apiUrl}/check-admin-status`;
+    return this.http.get<{ is_admin: boolean }>(url, {headers: this.getAuthHeaders()}).pipe(
+      map(response => response.is_admin)
+    );
+  }
+
+  isAdmin(): boolean {
+    return this.currentUserValue?.is_admin || false;
   }
 }
