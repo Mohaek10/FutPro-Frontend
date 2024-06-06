@@ -17,6 +17,8 @@ import {AsyncPipe, NgIf} from "@angular/common";
 export class HeaderComponent implements OnInit {
   usuarioActual: Observable<User | null>;
   verMenuPerfil: boolean = false;
+  esAdmin: boolean = false;
+
 
   constructor(private authService: AuthService) {
     this.usuarioActual = this.authService.currentUser;
@@ -26,6 +28,8 @@ export class HeaderComponent implements OnInit {
     this.initMenuBackDrop();
     this.initIntersectionObserver();
     this.initMobileMenu();
+    this.checkAdminStatus();
+
   }
 
   initMenuBackDrop(): void {
@@ -98,6 +102,12 @@ export class HeaderComponent implements OnInit {
   }
 
   isAdmin() {
-    return this.authService.isAuthenticated() && this.authService.isAdmin();
+    return this.authService.isAdminSync();
+  }
+
+  checkAdminStatus(): void {
+    this.authService.isAdmin().subscribe(isAdmin => {
+      this.esAdmin = isAdmin;
+    });
   }
 }

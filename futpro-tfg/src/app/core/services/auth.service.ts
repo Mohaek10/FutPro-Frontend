@@ -117,15 +117,17 @@ export class AuthService {
 
   checkAdminStatus(): Observable<boolean> {
     const url = `${this.apiUrl}check-admin-status/`;
-    console.log('checkAdminStatus() en auth.service');
     return this.http.get<{ is_admin: boolean }>(url, {headers: this.getAuthHeaders()}).pipe(
       map(response => response.is_admin)
     );
   }
 
   isAdmin(): Observable<boolean> {
-    console.log('isAdmin() en auth.service' + this.checkAdminStatus());
     return this.checkAdminStatus();
+  }
+
+  isAdminSync(): boolean {
+    return this.currentUserValue?.is_admin || false;
   }
 
 
