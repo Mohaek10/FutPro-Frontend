@@ -16,12 +16,10 @@ import {AsyncPipe, NgIf} from "@angular/common";
 })
 export class HeaderComponent implements OnInit {
   usuarioActual: Observable<User | null>;
-  isAdmin: Observable<boolean>;
   verMenuPerfil: boolean = false;
 
   constructor(private authService: AuthService) {
     this.usuarioActual = this.authService.currentUser;
-    this.isAdmin = this.authService.isAdmin();
   }
 
   ngOnInit(): void {
@@ -99,4 +97,7 @@ export class HeaderComponent implements OnInit {
     return this.authService.isAuthenticated();
   }
 
+  isAdmin() {
+    return this.authService.isAuthenticated() && this.authService.currentUserValue?.is_admin;
+  }
 }
