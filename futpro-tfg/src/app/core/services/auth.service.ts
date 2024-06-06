@@ -77,7 +77,7 @@ export class AuthService {
     localStorage.removeItem('refreshToken');
     this.currentUserSubject.next(null);
     this.http.post(`${this.apiUrl}logout/`, {}).subscribe();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 
   getTokens() {
