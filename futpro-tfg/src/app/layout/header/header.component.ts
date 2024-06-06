@@ -1,18 +1,40 @@
 import {Component, OnInit} from '@angular/core';
+import {Observable} from "rxjs";
+import {User} from "../../shared/models/user.models";
+import {AuthService} from "../../core/services/auth.service";
+import {AsyncPipe, NgIf} from "@angular/common";
+import {FormatoNumeroPipe} from "../../shared/pipes/formato-numero.pipe";
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [
+    AsyncPipe,
+    NgIf,
+    FormatoNumeroPipe
+  ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  usuarioActual: Observable<User | null>;
+  verMenuPerfil: boolean = false;
+  esAdmin: boolean = false;
 
-  constructor() {
+
+  constructor(private authService: AuthService) {
+    this.usuarioActual = this.authService.currentUser;
   }
 
   ngOnInit(): void {
+    this.initMenuBackDrop();
+    this.initIntersectionObserver();
+    this.initMobileMenu();
+    this.checkAdminStatus();
+
+  }
+
+  initMenuBackDrop(): void {
     const listItem = document.querySelectorAll("#landing-header li");
     const menuBackDrop = document.querySelector("#menu-backdrop") as HTMLElement;
 
@@ -34,7 +56,9 @@ export class HeaderComponent implements OnInit {
         menuBackDrop.style.visibility = "hidden";
       });
     });
+  }
 
+  initIntersectionObserver(): void {
     const headerEl = document.querySelector("#landing-header") as HTMLElement;
 
     const observerOptions = {
@@ -56,13 +80,36 @@ export class HeaderComponent implements OnInit {
 
     const sectionElements = document.querySelectorAll(".landing-section");
     sectionElements.forEach((section) => observer.observe(section));
+  }
 
-    // Manejo del menú móvil
+  initMobileMenu(): void {
     const menuButton = document.querySelector("#menu-button") as HTMLElement;
     const mobileMenu = document.querySelector("#mobile-menu") as HTMLElement;
 
     menuButton.addEventListener("click", () => {
       mobileMenu.classList.toggle("hidden");
+    });
+  }
+
+  toggleProfileMenu(): void {
+    this.verMenuPerfil = !this.verMenuPerfil;
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
+
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
+  isAdmin() {
+    return this.authService.isAdminSync();
+  }
+
+  checkAdminStatus(): void {
+    this.authService.isAdmin().subscribe(isAdmin => {
+      this.esAdmin = isAdmin;
     });
   }
 }
