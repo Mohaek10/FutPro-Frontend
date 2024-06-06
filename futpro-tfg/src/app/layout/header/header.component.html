@@ -1,21 +1,21 @@
 <header
   id="landing-header"
-  class="py-3 px-6 md:px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white bg-opacity-90 bg-black"
+  class="py-3 px-6 md:px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white bg-black"
 >
   <div class="flex flex-grow basis-0">
-    <a href="./"><img src="assets/images/logos/logo-header.webp.png" alt="FutPro Logo"
-                      class="w-24 h-10 md:w-32 md:h-14"></a>
+    <a href="/"><img src="assets/images/logos/logo-header.jpg" alt="FutPro Logo"
+                     class="w-24 h-10 object-cover md:w-32 md:h-14"></a>
   </div>
 
   <nav class="hidden md:flex md:flex-grow md:justify-center">
     <ul
       class="flex text-sm md:[&>li>a]:transition-colors md:[&>li>a]:duration-500 md:[&>li>a]:text-current md:[&>li>a]:font-medium md:[&>li>a]:inline-block md:[&>li>a]:px-4 md:[&>li>a]:py-2"
     >
-      <li><a href="#">Inicio</a></li>
-      <li><a href="#">Mis Jugadores</a></li>
-      <li><a href="#">Mercado del Sistema</a></li>
+      <li><a href="#">Jugadores</a></li>
+      <li><a href="#">Mi Equipo</a></li>
+      <li><a href="#">Mercado de jugadores</a></li>
       <li><a href="#">Mercado de Usuarios</a></li>
-      <li><a href="#">Administración</a></li>
+      <li><a href="#">Equipos</a></li>
     </ul>
   </nav>
 
@@ -23,9 +23,35 @@
     <ul
       class="flex text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
     >
-      <li class="hidden md:block"><a href="#">Tienda</a></li>
-      <li class="hidden md:block"><a href="#">Cuenta</a></li>
-      <li><a href="#" id="menu-toggle" class="md:hidden">Menú</a></li>
+      @if (!(usuarioActual | async)) {
+        <li><a href="/login">Iniciar Sesión</a></li>
+        <li><a href="/register">Registrarse</a></li>
+      }
+      <li *ngIf="usuarioActual | async as user" class="relative inline-block text-left">
+        <button type="button"
+                class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-gray-900"
+                (click)="toggleProfileMenu()" aria-expanded="true" aria-haspopup="true">
+          {{ user.username }}
+          <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                  clip-rule="evenodd"/>
+          </svg>
+        </button>
+        <div
+          class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          *ngIf="verMenuPerfil" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+          <div class="py-1" role="none">
+            <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1">Ver Datos</a>
+            <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1">Actualizar Datos</a>
+            <a (click)="logout()" class="text-gray-700 block px-4 py-2 text-sm cursor-pointer" role="menuitem"
+               tabindex="-1">Cerrar Sesión</a>
+          </div>
+        </div>
+      </li>
+      @if ()
+      <li *ngIf="usuarioActual | async as user"><a href="#">Futcoins: {{ user.futcoins }}F</a></li>
+      <li *ngIf="isAdmin | async"><a href="/admin">Panel de Admin</a></li>
     </ul>
   </nav>
 
@@ -41,14 +67,16 @@
     <ul
       class="flex flex-col items-center text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:block [&>li>a]:px-4 [&>li>a]:py-2"
     >
-      <li><a href="#">Inicio</a></li>
-      <li><a href="#">Mis Jugadores</a></li>
-      <li><a href="#">Mercado del Sistema</a></li>
+      <li><a href="#">Jugadores</a></li>
+      <li><a href="#">Mi Equipo</a></li>
+      <li><a href="#">Mercado de jugadores</a></li>
       <li><a href="#">Mercado de Usuarios</a></li>
-      <li><a href="#">Administración</a></li>
-      <li><a href="#">Tienda</a></li>
-      <li><a href="#">Cuenta</a></li>
-      <li><a href="#">Menú</a></li>
+      <li><a href="#">Equipos</a></li>
+      <li *ngIf="!(usuarioActual | async as user)"><a href="/login">Iniciar Sesión</a></li>
+      <li *ngIf="!(usuarioActual | async)"><a href="/register">Registrarse</a></li>
+      <li *ngIf="usuarioActual | async as user"><a href="#">Ver Perfil</a></li>
+      <li *ngIf="usuarioActual | async as user"><a href="#">Futcoins: {{ user.futcoins }}F</a></li>
+      <li *ngIf="isAdmin | async"><a href="/admin">Panel de Admin</a></li>
     </ul>
   </nav>
 
