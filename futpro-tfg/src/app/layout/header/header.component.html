@@ -16,6 +16,8 @@
       <li><a href="#" class="hover:text-gray-300">Mercado de jugadores</a></li>
       <li><a href="#" class="hover:text-gray-300">Mercado de Usuarios</a></li>
       <li><a href="#" class="hover:text-gray-300">Equipos</a></li>
+      <li *ngIf="isAdmin()"><a href="/admin/users" class="hover:text-gray-300">Panel de Admin</a></li>
+
     </ul>
   </nav>
 
@@ -42,24 +44,24 @@
           </button>
           <div
             class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-            *ngIf="verMenuPerfil" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-            <div class="py-1" role="none">
-              <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1">Ver
-                Datos</a>
-              <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1">
-                Actualizar Datos</a>
-              <a (click)="logout()" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
-                 role="menuitem"
-                 tabindex="-1">Cerrar Sesión</a>
-            </div>
+            role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+            @if (verMenuPerfil) {
+              <div class="py-1" role="none">
+                <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem"
+                   tabindex="-1">Ver Datos</a>
+                <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem"
+                   tabindex="-1">Actualizar Datos</a>
+                <a (click)="logout()" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
+                   role="menuitem" tabindex="-1">Cerrar Sesión</a>
+              </div>
+            }
           </div>
         </li>
+        <li><a href="#"
+               class="hover:text-gray-300">Futcoins: {{ (usuarioActual | async)?.futcoins }} F</a></li>
 
       }
 
-      <li *ngIf="isAuthenticated() && (usuarioActual | async)?.futcoins"><a href="#" class="hover:text-gray-300">Futcoins: {{ (usuarioActual | async)?.futcoins }}
-        F</a></li>
-      <li *ngIf="isAdmin()"><a href="/admin" class="hover:text-gray-300">Panel de Admin</a></li>
     </ul>
   </nav>
 
@@ -85,7 +87,7 @@
       <li *ngIf="isAuthenticated()"><a href="#" class="hover:text-gray-300">Ver Perfil</a></li>
       <li *ngIf="isAuthenticated() && (usuarioActual | async)?.futcoins"><a href="#" class="hover:text-gray-300">Futcoins: {{ (usuarioActual | async)?.futcoins }}
         F</a></li>
-      <li *ngIf="isAdmin()"><a href="/admin" class="hover:text-gray-300">Panel de Admin</a></li>
+      <li *ngIf="isAdmin()"><a href="/admin/users" class="hover:text-gray-300">Panel de Admin</a></li>
     </ul>
   </nav>
 

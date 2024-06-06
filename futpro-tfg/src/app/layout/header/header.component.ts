@@ -98,6 +98,6 @@ export class HeaderComponent implements OnInit {
   }
 
   isAdmin() {
-    return this.authService.isAuthenticated() && this.authService.currentUserValue?.is_admin;
+    return this.authService.isAuthenticated() && this.authService.isAdmin();
   }
 }
