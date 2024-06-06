@@ -3,13 +3,15 @@ import {Observable} from "rxjs";
 import {User} from "../../shared/models/user.models";
 import {AuthService} from "../../core/services/auth.service";
 import {AsyncPipe, NgIf} from "@angular/common";
+import {FormatoNumeroPipe} from "../../shared/pipes/formato-numero.pipe";
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
     AsyncPipe,
-    NgIf
+    NgIf,
+    FormatoNumeroPipe
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
