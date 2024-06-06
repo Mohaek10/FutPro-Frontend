@@ -58,8 +58,8 @@
           </div>
         </li>
         <li class="flex items-center hover:text-gray-800 hover:bg-gray-50">
-          <a href="#">Futcoins: {{ (usuarioActual | async)?.futcoins || 0 }}</a>
-          <img src="assets/images/futcoin.webp" alt="Futcoins Logo" class="w-5 h-5 mr-2">
+          <a class="items-center" href="#">Futcoins: {{ ((usuarioActual | async)?.futcoins) || 0 }}F</a>
+          <img src="assets/images/futcoin.webp" alt="Futcoins Logo" class="w-5 h-5 mr-5 flex ">
 
         </li>
       }
