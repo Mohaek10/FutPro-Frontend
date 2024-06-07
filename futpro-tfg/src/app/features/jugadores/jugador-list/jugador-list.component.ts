@@ -3,13 +3,15 @@ import {Jugador} from "../../../shared/models/jugador.models";
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {JugadoresService} from '../../../core/services/jugadores.service';
 import {NgForOf} from "@angular/common";
+import {JugadorComponent} from "../../../shared/components/jugador/jugador.component";
 
 @Component({
   selector: 'app-jugador-list',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    NgForOf
+    NgForOf,
+    JugadorComponent
   ],
   templateUrl: './jugador-list.component.html',
   styleUrl: './jugador-list.component.css'
