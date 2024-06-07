@@ -70,9 +70,8 @@ export class HeaderComponent implements OnInit {
       entries.forEach((entry) => {
         const {isIntersecting} = entry;
         if (isIntersecting) {
-          const color = entry.target.getAttribute("data-header-color");
           // @ts-ignore
-          headerEl.style.color = color;
+          headerEl.style.color = entry.target.getAttribute("data-header-color");
         }
       });
     }, observerOptions);
