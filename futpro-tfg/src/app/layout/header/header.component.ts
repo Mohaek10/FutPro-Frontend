@@ -19,19 +19,18 @@ import {FormatoNumeroPipe} from "../../shared/pipes/formato-numero.pipe";
 export class HeaderComponent implements OnInit {
   usuarioActual: Observable<User | null>;
   verMenuPerfil: boolean = false;
-  esAdmin: boolean = false;
+  esAdmin: Observable<boolean>;
 
 
   constructor(private authService: AuthService) {
-    this.usuarioActual = this.authService.currentUser;
+    this.usuarioActual = this.authService.usuarioActual;
+    this.esAdmin = this.authService.isAdmin();
   }
 
   ngOnInit(): void {
     this.initMenuBackDrop();
     this.initIntersectionObserver();
     this.initMobileMenu();
-    this.checkAdminStatus();
-
   }
 
   initMenuBackDrop(): void {
@@ -104,12 +103,10 @@ export class HeaderComponent implements OnInit {
   }
 
   isAdmin() {
-    return this.authService.isAdminSync();
+    return this.authService.isAdmin();
   }
 
   checkAdminStatus(): void {
-    this.authService.isAdmin().subscribe(isAdmin => {
-      this.esAdmin = isAdmin;
-    });
+    this.authService.checkAdminStatus().subscribe();
   }
 }
