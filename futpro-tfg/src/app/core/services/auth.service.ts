@@ -9,19 +9,17 @@ import {Router} from "@angular/router";
 })
 export class AuthService {
   private apiUrl = 'http://localhost:8000/account/';
-  private usuarioActualSubject: BehaviorSubject<User | null>;
-  public usuarioActual: Observable<User | null>;
-  public isAdminSubject: BehaviorSubject<boolean>;
+  private currentUserSubject: BehaviorSubject<User | null>;
+  public currentUser: Observable<User | null>;
 
   constructor(private http: HttpClient, private router: Router) {
     const user = localStorage.getItem('currentUser');
-    this.usuarioActualSubject = new BehaviorSubject<User | null>(user ? JSON.parse(user) : null);
-    this.usuarioActual = this.usuarioActualSubject.asObservable();
-    this.isAdminSubject = new BehaviorSubject<boolean>(false);
+    this.currentUserSubject = new BehaviorSubject<User | null>(user ? JSON.parse(user) : null);
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get usuarioActualValue(): User | null {
-    return this.usuarioActualSubject.value;
+  public get currentUserValue(): User | null {
+    return this.currentUserSubject.value;
   }
 
   login(email: string, password: string): Observable<any> {
@@ -41,12 +39,10 @@ export class AuthService {
           localStorage.setItem('currentUser', JSON.stringify(user));
           localStorage.setItem('accessToken', response.token.access);
           localStorage.setItem('refreshToken', response.token.refresh);
-          this.usuarioActualSubject.next(user);
-          console.log('Login correcto', response);
-          this.isAdminSubject.next(user.is_admin);
+          this.currentUserSubject.next(user);
         } else {
           // Quitar el console.log
-          this.usuarioActualSubject.next(null);
+          this.currentUserSubject.next(null);
           console.log('Error en login', response);
         }
 
@@ -70,9 +66,7 @@ export class AuthService {
           localStorage.setItem('currentUser', JSON.stringify(newUser));
           localStorage.setItem('accessToken', response.token.access);
           localStorage.setItem('refreshToken', response.token.refresh);
-          this.usuarioActualSubject.next(newUser);
-          this.isAdminSubject.next(newUser.is_admin);
-          console.log('Registro correcto', response);
+          this.currentUserSubject.next(newUser);
         }
       }));
   }
@@ -82,7 +76,7 @@ export class AuthService {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
-    this.usuarioActualSubject.next(null);
+    this.currentUserSubject.next(null);
     this.http.post(`${this.apiUrl}logout/`, {refresh}).subscribe();
     this.router.navigate(['/']);
   }
@@ -95,7 +89,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return this.getTokens().access !== null && this.usuarioActualValue !== null && this.usuarioActualValue.email !== '';
+    return this.getTokens().access !== null && this.currentUserValue !== null && this.currentUserValue.email !== '';
   }
 
   isTokenExpired(): boolean {
@@ -124,13 +118,17 @@ export class AuthService {
   checkAdminStatus(): Observable<boolean> {
     const url = `${this.apiUrl}check-admin-status/`;
     return this.http.get<{ is_admin: boolean }>(url, {headers: this.getAuthHeaders()}).pipe(
-      tap(response => this.isAdminSubject.next(response.is_admin)),
       map(response => response.is_admin)
     );
   }
 
   isAdmin(): Observable<boolean> {
-    return this.isAdminSubject.asObservable();
+    return this.checkAdminStatus();
   }
+
+  isAdminSync(): boolean {
+    return this.currentUserValue?.is_admin || false;
+  }
+
 
 }

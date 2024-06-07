@@ -19,18 +19,19 @@ import {FormatoNumeroPipe} from "../../shared/pipes/formato-numero.pipe";
 export class HeaderComponent implements OnInit {
   usuarioActual: Observable<User | null>;
   verMenuPerfil: boolean = false;
-  esAdmin: Observable<boolean>;
+  esAdmin: boolean = false;
 
 
   constructor(private authService: AuthService) {
-    this.usuarioActual = this.authService.usuarioActual;
-    this.esAdmin = this.authService.isAdmin();
+    this.usuarioActual = this.authService.currentUser;
   }
 
   ngOnInit(): void {
     this.initMenuBackDrop();
     this.initIntersectionObserver();
     this.initMobileMenu();
+    this.checkAdminStatus();
+
   }
 
   initMenuBackDrop(): void {
@@ -70,8 +71,9 @@ export class HeaderComponent implements OnInit {
       entries.forEach((entry) => {
         const {isIntersecting} = entry;
         if (isIntersecting) {
+          const color = entry.target.getAttribute("data-header-color");
           // @ts-ignore
-          headerEl.style.color = entry.target.getAttribute("data-header-color");
+          headerEl.style.color = color;
         }
       });
     }, observerOptions);
@@ -102,10 +104,12 @@ export class HeaderComponent implements OnInit {
   }
 
   isAdmin() {
-    return this.authService.isAdmin();
+    return this.authService.isAdminSync();
   }
 
   checkAdminStatus(): void {
-    this.authService.checkAdminStatus().subscribe();
+    this.authService.isAdmin().subscribe(isAdmin => {
+      this.esAdmin = isAdmin;
+    });
   }
 }

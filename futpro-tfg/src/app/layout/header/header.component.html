@@ -16,7 +16,7 @@
       <li><a href="#" class="hover:text-gray-300">Mercado de jugadores</a></li>
       <li><a href="#" class="hover:text-gray-300">Mercado de Usuarios</a></li>
       <li><a href="#" class="hover:text-gray-300">Equipos</a></li>
-      <li *ngIf="esAdmin | async"><a href="/admin/users" class="hover:text-gray-300">Panel de Admin</a></li>
+      <li *ngIf="isAdmin()"><a href="/admin/users" class="hover:text-gray-300">Panel de Admin</a></li>
     </ul>
   </nav>
 
@@ -89,7 +89,7 @@
       <li *ngIf="isAuthenticated()"><a href="#" class="hover:text-gray-300">Ver Perfil</a></li>
       <li *ngIf="isAuthenticated() && (usuarioActual | async)?.futcoins"><a href="#" class="hover:text-gray-300">Futcoins: {{ (usuarioActual | async)?.futcoins }}
         F</a></li>
-      <li *ngIf="esAdmin | async"><a href="/admin/users" class="hover:text-gray-300">Panel de Admin</a></li>
+      <li *ngIf="isAdmin()"><a href="/admin/users" class="hover:text-gray-300">Panel de Admin</a></li>
     </ul>
   </nav>
 
