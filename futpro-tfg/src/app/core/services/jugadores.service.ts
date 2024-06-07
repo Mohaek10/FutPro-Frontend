@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Jugador} from "../../shared/models/jugador.models";
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Jugador} from '../../shared/models/jugador.models';
 
 @Injectable({
   providedIn: 'root'
@@ -19,15 +19,12 @@ export class JugadoresService {
     }
     if (filters) {
       Object.keys(filters).forEach(key => {
-        params = params.set(key, filters[key]);
+        if (filters[key]) {
+          params = params.set(key, filters[key]);
+        }
       });
     }
     return this.http.get<{ count: number, results: Jugador[] }>(this.apiUrl, {params});
-  }
-
-  getAllJugadores(): Observable<Jugador[]> {
-    return this.http.get<Jugador[]>(this.apiUrl);
-
   }
 
   getJugador(id: number): Observable<Jugador> {

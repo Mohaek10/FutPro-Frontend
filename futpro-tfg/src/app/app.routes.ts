@@ -5,6 +5,7 @@ import {ForbiddenComponent} from "./errors/forbidden/forbidden.component";
 import {ManageUsersComponent} from "./features/admin/manage-users/manage-users.component";
 import {adminGuard} from "./core/guards/admin.guard";
 import {RegisterComponent} from "./features/auth/register/register.component";
+import {JugadorListComponent} from "./features/jugadores/jugador-list/jugador-list.component";
 
 export const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -13,4 +14,6 @@ export const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'forbidden', component: ForbiddenComponent},
   {path: 'admin/users', component: ManageUsersComponent, canActivate: [adminGuard]},
+  {path: 'jugadores', component: JugadorListComponent},
+
 ];
