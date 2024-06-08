@@ -1,21 +1,27 @@
-<div class="player-card">
-  <div class="player-card__image-wrapper">
-    <img [src]="jugador.imagen" alt="{{ jugador.nombreCompleto }}" class="player-card__image">
+<div [ngClass]="getBorderColor(jugador.rareza)"
+     class="player-card max-w-xs bg-gradient-to-r from-gray-700 via-gray-900 to-white border-4 rounded-lg overflow-hidden shadow-lg transform transition duration-500 hover:scale-105 ">
+
+  <div class="relative">
+    <img [src]="jugador.imagen" alt="{{ jugador.nombreCompleto }}"
+         class="w-full  object-cover animate__animated animate__bounceInLeft animate__delay-1s">
+    <div class="fondo absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+    <h2 class="absolute bottom-0 left-0 m-4 text-xl font-bold text-white">{{ jugador.nombreCompleto }}</h2>
   </div>
-  <div class="player-card__content">
-    <h2 class="player-card__name">{{ jugador.nombreCompleto }}</h2>
-    <p class="player-card__detail">Equipo: {{ jugador.nombre_equipo }}</p>
-    <p class="player-card__detail">Edad: {{ jugador.edad }}</p>
-    <p class="player-card__detail">Media: {{ jugador.media }}</p>
-    <p class="player-card__detail">Rareza:
-      <span [ngClass]="{
-        'player-card__rareza--legendaria': jugador.rareza === 'Legendaria',
-        'player-card__rareza--epica': jugador.rareza === 'Épica',
-        'player-card__rareza--comun': jugador.rareza === 'Común',
-        'player-card__rareza--rara': jugador.rareza === 'Rara'
-      }">{{ jugador.rareza }}</span>
-    </p>
-    <p class="player-card__detail">Posición: {{ jugador.posicion }}</p>
-    <p class="player-card__detail">Valor: {{ jugador.valor }}</p>
+  <div class="p-4 text-white">
+    <div class="flex justify-between items-center">
+      <p class="text-3xl font-bold">{{ jugador.media }}</p>
+      <div>
+        <p class="text-sm">Equipo: {{ jugador.nombre_equipo }}</p>
+        <p class="text-sm">Edad: {{ jugador.edad }}</p>
+      </div>
+    </div>
+    <p class="mt-2"><strong>Rareza:</strong> <span [ngClass]="{
+      'text-yellow-500': jugador.rareza === 'Legendaria',
+      'text-purple-500': jugador.rareza === 'Épica',
+      'text-gray-500': jugador.rareza === 'Común',
+      'text-blue-500': jugador.rareza === 'Rara'
+    }">{{ jugador.rareza }}</span></p>
+    <p class="mt-2"><strong>Posición:</strong> {{ jugador.posicion }}</p>
+    <p class="mt-2"><strong>Valor:</strong> {{ jugador.valor }}</p>
   </div>
 </div>

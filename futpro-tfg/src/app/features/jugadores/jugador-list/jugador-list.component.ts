@@ -44,6 +44,7 @@ export class JugadorListComponent implements OnInit {
   getJugadores(search?: string, filters?: any): void {
     this.jugadoresService.getJugadores(search, filters).subscribe(response => {
       this.jugadores = response.results;
+      console.log(this.jugadores);
     });
   }
 

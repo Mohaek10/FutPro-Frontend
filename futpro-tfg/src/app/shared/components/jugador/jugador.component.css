@@ -16,6 +16,13 @@
   box-shadow: 0 20px 25px rgba(0, 0, 0, 0.4);
 }
 
+.fondo {
+  background-image: url("../../../../assets/images/cartas/fondo.png");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
 .player-card__image-wrapper {
   position: relative;
   overflow: hidden;
