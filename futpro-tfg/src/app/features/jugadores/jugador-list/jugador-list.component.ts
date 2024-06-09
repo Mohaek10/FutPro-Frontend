@@ -4,12 +4,9 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular
 import {JugadoresService} from '../../../core/services/jugadores.service';
 import {NgForOf} from "@angular/common";
 import {JugadorComponent} from "../../../shared/components/jugador/jugador.component";
-import {MatSlider, MatSliderModule} from "@angular/material/slider";
 import {MatInput, MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatButtonToggle} from "@angular/material/button-toggle";
-import {MatIconModule} from "@angular/material/icon";
-import {MatIconButton} from "@angular/material/button";
+import {MatOption, MatSelect} from "@angular/material/select";
 
 @Component({
   selector: 'app-jugador-list',
@@ -19,13 +16,11 @@ import {MatIconButton} from "@angular/material/button";
     NgForOf,
     JugadorComponent,
     MatInput,
-    MatSliderModule,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatButtonToggle,
-    MatIconModule,
-    MatIconButton
+    MatSelect,
+    MatOption
   ],
   templateUrl: './jugador-list.component.html',
   styleUrl: './jugador-list.component.css'

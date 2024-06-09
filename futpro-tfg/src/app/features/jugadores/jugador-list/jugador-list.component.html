@@ -1,73 +1,66 @@
-<section class="container mx-auto mt-24 py-8">
+<section class="container mx-auto mt-20">
   <h1 class="text-4xl font-bold mb-6 text-center">Lista de Jugadores</h1>
 
   <div class="flex flex-col md:flex-row md:justify-between mb-6 space-y-4 md:space-y-0">
-    <mat-form-field class="p-2 rounded w-full md:w-1/3 mb-4 md:-mb-0">
-      <mat-label>Buscar Jugadores ...</mat-label>
+    <mat-form-field appearance="fill" class="w-full md:w-1/3">
+      <mat-label>Buscar Jugadores...</mat-label>
       <input matInput type="text" [formControl]="searchControl">
     </mat-form-field>
 
     <form [formGroup]="filterForm"
           class="flex flex-col md:flex-row md:space-x-4 w-full md:w-2/3 items-center space-y-4 md:space-y-0">
-      <div class="w-full md:w-1/4">
-        <label for="rareza" class="block text-sm font-medium text-gray-700">Rareza</label>
-        <select id="rareza" formControlName="rareza"
-                class="p-3 border border-gray-300 rounded-md w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-          <option value="">Todas las rarezas</option>
-          <option value="Común">Común</option>
-          <option value="Rara">Rara</option>
-          <option value="Épica">Épica</option>
-          <option value="Legendaria">Legendaria</option>
-        </select>
+      <mat-form-field appearance="fill" class="w-full md:w-1/4">
+        <mat-label>Rareza</mat-label>
+        <mat-select formControlName="rareza">
+          <mat-option value="">Todas las rarezas</mat-option>
+          <mat-option value="Común">Común</mat-option>
+          <mat-option value="Rara">Rara</mat-option>
+          <mat-option value="Épica">Épica</mat-option>
+          <mat-option value="Legendaria">Legendaria</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full md:w-1/4">
+        <mat-label>Posición</mat-label>
+        <mat-select formControlName="posicion">
+          <mat-option value="">Todas las posiciones</mat-option>
+          <mat-option value="DC">Delantero Centro</mat-option>
+          <mat-option value="EI">Extremo Izquierdo</mat-option>
+          <mat-option value="ED">Extremo Derecho</mat-option>
+          <mat-option value="SD">Segundo Delantero</mat-option>
+          <mat-option value="MCO">Mediapunta</mat-option>
+          <mat-option value="CM">Mediocentro</mat-option>
+          <mat-option value="CDM">Mediocentro Defensivo</mat-option>
+          <mat-option value="LI">Lateral Izquierdo</mat-option>
+          <mat-option value="LD">Lateral Derecho</mat-option>
+          <mat-option value="CAD">Carrilero derecho</mat-option>
+          <mat-option value="CAI">Carrilero izquierdo</mat-option>
+          <mat-option value="DFC">Defensa Central</mat-option>
+          <mat-option value="PT">Portero</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="w-full md:w-1/2 flex flex-col md:flex-row md:space-x-4">
+        <mat-form-field appearance="fill" class="w-full md:w-1/2">
+          <mat-label>Precio Min</mat-label>
+          <input matInput formControlName="valorMin" placeholder="2000" type="number" min="0">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full md:w-1/2">
+          <mat-label>Precio Max</mat-label>
+          <input matInput formControlName="valorMax" placeholder="10000" type="number" min="0">
+        </mat-form-field>
       </div>
 
-      <div class="w-full md:w-1/4">
-        <label for="posicion" class="block text-sm font-medium text-gray-700">Posición</label>
-        <select id="posicion" formControlName="posicion"
-                class="p-3 border border-gray-300 rounded-md w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-          <option value="">Todas las posiciones</option>
-          <option value="DC">Delantero Centro</option>
-          <option value="EI">Extremo Izquierdo</option>
-          <option value="ED">Extremo Derecho</option>
-          <option value="SD">Segundo Delantero</option>
-          <option value="MCO">Mediapunta</option>
-          <option value="CM">Mediocentro</option>
-          <option value="CDM">Mediocentro Defensivo</option>
-          <option value="LI">Lateral Izquierdo</option>
-          <option value="LD">Lateral Derecho</option>
-          <option value="CAD">Carrilero derecho</option>
-          <option value="CAI">Carrilero izquierdo</option>
-          <option value="DFC">Defensa Central</option>
-          <option value="PT">Portero</option>
-        </select>
-      </div>
-
-      <div class="w-full md:w-1/2">
-        <label class="block text-sm font-medium text-gray-700">Rango de precio</label>
-        <div class="flex space-x-4">
-          <div class="w-1/2">
-            <label for="valorMin" class="block text-xs text-gray-600">Min</label>
-            <input id="valorMin" formControlName="valorMin" placeholder="2000" type="number" min="0"
-                   class="p-3 border border-gray-300 rounded-md w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-          </div>
-          <div class="w-1/2">
-            <label for="valorMax" class="block text-xs text-gray-600">Max</label>
-            <input id="valorMax" formControlName="valorMax" placeholder="10000" type="number" min="0"
-                   class="p-3 border border-gray-300 rounded-md w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-          </div>
-        </div>
-      </div>
-
-      <div class="w-full md:w-1/4">
-        <label for="orderBy" class="block text-sm font-medium text-gray-700">Ordenar por</label>
-        <select id="orderBy" formControlName="orderBy"
-                class="p-3 border border-gray-300 rounded-md w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-          <option value="">Ordenar por</option>
-          <option value="-media">Media</option>
-          <option value="-valor">Valor</option>
-          <option value="-createdAt">Fecha de creación</option>
-        </select>
-      </div>
+      <mat-form-field appearance="fill" class="w-full md:w-1/4">
+        <mat-label>Ordenar por</mat-label>
+        <mat-select formControlName="orderBy">
+          <mat-option value="">Ordenar por</mat-option>
+          <mat-option value="-media">Media</mat-option>
+          <mat-option value="-valor">Valor</mat-option>
+          <mat-option value="-createdAt">Fecha de creación</mat-option>
+        </mat-select>
+      </mat-form-field>
     </form>
   </div>
 
