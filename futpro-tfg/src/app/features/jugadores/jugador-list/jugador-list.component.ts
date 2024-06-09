@@ -1,9 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {Jugador} from "../../../shared/models/jugador.models";
-import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {JugadoresService} from '../../../core/services/jugadores.service';
 import {NgForOf} from "@angular/common";
 import {JugadorComponent} from "../../../shared/components/jugador/jugador.component";
+import {MatSlider, MatSliderModule} from "@angular/material/slider";
+import {MatInput, MatInputModule} from "@angular/material/input";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatButtonToggle} from "@angular/material/button-toggle";
+import {MatIconModule} from "@angular/material/icon";
+import {MatIconButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-jugador-list',
@@ -11,7 +17,15 @@ import {JugadorComponent} from "../../../shared/components/jugador/jugador.compo
   imports: [
     ReactiveFormsModule,
     NgForOf,
-    JugadorComponent
+    JugadorComponent,
+    MatInput,
+    MatSliderModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonToggle,
+    MatIconModule,
+    MatIconButton
   ],
   templateUrl: './jugador-list.component.html',
   styleUrl: './jugador-list.component.css'
@@ -25,7 +39,10 @@ export class JugadorListComponent implements OnInit {
     this.filterForm = new FormGroup({
       equipo: new FormControl(''),
       rareza: new FormControl(''),
-      posicion: new FormControl('')
+      posicion: new FormControl(''),
+      valorMin: new FormControl(0),
+      valorMax: new FormControl(1000000000000),
+      orderBy: new FormControl('')
     });
   }
 
@@ -42,7 +59,14 @@ export class JugadorListComponent implements OnInit {
   }
 
   getJugadores(search?: string, filters?: any): void {
-    this.jugadoresService.getJugadores(search, filters).subscribe(response => {
+    const filterParams = filters ? {
+      ...filters,
+      valor_min: filters.valorMin ?? 0,
+      valor_max: filters.valorMax ?? 1000000000000,
+      ordering: filters.orderBy ?? ''
+    } : {};
+
+    this.jugadoresService.getJugadores(search, filterParams).subscribe(response => {
       this.jugadores = response.results;
       console.log(this.jugadores);
     });

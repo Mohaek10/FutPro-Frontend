@@ -1,41 +1,77 @@
-<div
-  class="container mx-auto mt-24 py-8"
->
+<section class="container mx-auto mt-24 py-8">
   <h1 class="text-4xl font-bold mb-6 text-center">Lista de Jugadores</h1>
 
-  <div class="flex flex-col md:flex-row md:justify-between mb-6">
-    <input type="text" [formControl]="searchControl" placeholder="Buscar jugadores..."
-           class="p-2 border rounded w-full md:w-1/3 mb-4 md:mb-0">
+  <div class="flex flex-col md:flex-row md:justify-between mb-6 space-y-4 md:space-y-0">
+    <mat-form-field class="p-2 rounded w-full md:w-1/3 mb-4 md:-mb-0">
+      <mat-label>Buscar Jugadores ...</mat-label>
+      <input matInput type="text" [formControl]="searchControl">
+    </mat-form-field>
 
-    <form [formGroup]="filterForm" class="flex flex-col md:flex-row md:space-x-4 w-full md:w-2/3">
-      <select formControlName="rareza" class="p-2 border rounded mb-4 md:mb-0">
-        <option value="">Todas las rarezas</option>
-        <option value="Común">Común</option>
-        <option value="Rara">Rara</option>
-        <option value="Épica">Épica</option>
-        <option value="Legendaria">Legendaria</option>
-      </select>
+    <form [formGroup]="filterForm"
+          class="flex flex-col md:flex-row md:space-x-4 w-full md:w-2/3 items-center space-y-4 md:space-y-0">
+      <div class="w-full md:w-1/4">
+        <label for="rareza" class="block text-sm font-medium text-gray-700">Rareza</label>
+        <select id="rareza" formControlName="rareza"
+                class="p-3 border border-gray-300 rounded-md w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+          <option value="">Todas las rarezas</option>
+          <option value="Común">Común</option>
+          <option value="Rara">Rara</option>
+          <option value="Épica">Épica</option>
+          <option value="Legendaria">Legendaria</option>
+        </select>
+      </div>
 
-      <select formControlName="posicion" class="p-2 border rounded">
-        <option value="">Todas las posiciones</option>
-        <option value="DC">Delantero Centro</option>
-        <option value="EI">Extremo Izquierdo</option>
-        <option value="ED">Extremo Derecho</option>
-        <option value="SD">Segundo Delantero</option>
-        <option value="MCO">Mediapunta</option>
-        <option value="CM">Mediocentro</option>
-        <option value="CDM">Mediocentro Defensivo</option>
-        <option value="LI">Lateral Izquierdo</option>
-        <option value="LD">Lateral Derecho</option>
-        <option value="CAD">Carrilero derecho</option>
-        <option value="CAI">Carrilero izquierdo</option>
-        <option value="DFC">Defensa Central</option>
-        <option value="PT">Portero</option>
-      </select>
+      <div class="w-full md:w-1/4">
+        <label for="posicion" class="block text-sm font-medium text-gray-700">Posición</label>
+        <select id="posicion" formControlName="posicion"
+                class="p-3 border border-gray-300 rounded-md w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+          <option value="">Todas las posiciones</option>
+          <option value="DC">Delantero Centro</option>
+          <option value="EI">Extremo Izquierdo</option>
+          <option value="ED">Extremo Derecho</option>
+          <option value="SD">Segundo Delantero</option>
+          <option value="MCO">Mediapunta</option>
+          <option value="CM">Mediocentro</option>
+          <option value="CDM">Mediocentro Defensivo</option>
+          <option value="LI">Lateral Izquierdo</option>
+          <option value="LD">Lateral Derecho</option>
+          <option value="CAD">Carrilero derecho</option>
+          <option value="CAI">Carrilero izquierdo</option>
+          <option value="DFC">Defensa Central</option>
+          <option value="PT">Portero</option>
+        </select>
+      </div>
+
+      <div class="w-full md:w-1/2">
+        <label class="block text-sm font-medium text-gray-700">Rango de precio</label>
+        <div class="flex space-x-4">
+          <div class="w-1/2">
+            <label for="valorMin" class="block text-xs text-gray-600">Min</label>
+            <input id="valorMin" formControlName="valorMin" placeholder="2000" type="number" min="0"
+                   class="p-3 border border-gray-300 rounded-md w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+          </div>
+          <div class="w-1/2">
+            <label for="valorMax" class="block text-xs text-gray-600">Max</label>
+            <input id="valorMax" formControlName="valorMax" placeholder="10000" type="number" min="0"
+                   class="p-3 border border-gray-300 rounded-md w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full md:w-1/4">
+        <label for="orderBy" class="block text-sm font-medium text-gray-700">Ordenar por</label>
+        <select id="orderBy" formControlName="orderBy"
+                class="p-3 border border-gray-300 rounded-md w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+          <option value="">Ordenar por</option>
+          <option value="-media">Media</option>
+          <option value="-valor">Valor</option>
+          <option value="-createdAt">Fecha de creación</option>
+        </select>
+      </div>
     </form>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  animate__animated animate__bounceInLeft">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate__animated animate__bounceInLeft">
     <app-jugador *ngFor="let jugador of jugadores" [jugador]="jugador"></app-jugador>
   </div>
-</div>
+</section>
