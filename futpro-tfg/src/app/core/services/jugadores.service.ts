@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Jugador} from '../../shared/models/jugador.models';
+import {Comentario} from "../../shared/models/comentario.models";
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,13 @@ export class JugadoresService {
     }>(this.apiUrl, {params});
   }
 
+
   getJugador(id: number): Observable<Jugador> {
     return this.http.get<Jugador>(`${this.apiUrl}${id}/`);
+  }
+
+  createComentario(jugadorId: number, comentario: Comentario): Observable<Comentario> {
+    const url = `http://localhost:8000/api/jugador/${jugadorId}/comentario-create`;
+    return this.http.post<Comentario>(url, comentario);
   }
 }
