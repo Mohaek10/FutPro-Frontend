@@ -73,4 +73,7 @@
     <app-jugador *ngFor="let jugador of jugadores" [jugador]="jugador"></app-jugador>
     <div *ngIf="jugadores.length === 0" class="text-center text-white text-2xl">No hay jugadores</div>
   </div>
+  <mat-paginator [length]="totalJugadores" [pageSize]="pageSize" [pageIndex]="pageIndex"
+                 (page)="handlePageEvent($event)">
+  </mat-paginator>
 </section>

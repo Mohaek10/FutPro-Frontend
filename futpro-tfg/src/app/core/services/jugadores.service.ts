@@ -12,7 +12,12 @@ export class JugadoresService {
   constructor(private http: HttpClient) {
   }
 
-  getJugadores(search?: string, filters?: any): Observable<{ count: number, results: Jugador[] }> {
+  getJugadores(search?: string, filters?: any, page: number = 1, pageSize: number = 10): Observable<{
+    count: number,
+    next: string | null,
+    previous: string | null,
+    results: Jugador[]
+  }> {
     let params = new HttpParams();
     if (search) {
       params = params.set('search', search);
@@ -24,7 +29,14 @@ export class JugadoresService {
         }
       });
     }
-    return this.http.get<{ count: number, results: Jugador[] }>(this.apiUrl, {params});
+    params = params.set('limit', pageSize.toString());
+    params = params.set('offset', ((page - 1) * pageSize).toString());
+    return this.http.get<{
+      count: number,
+      next: string | null,
+      previous: string | null,
+      results: Jugador[]
+    }>(this.apiUrl, {params});
   }
 
   getJugador(id: number): Observable<Jugador> {
