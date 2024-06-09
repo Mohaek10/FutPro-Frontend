@@ -2,68 +2,70 @@
   class="container mx-auto mt-20  rounded-3xl p-5  bg-gradient-to-r from-indigo-400 via-purple- to-cyan-800 shadow-2xl">
   <h1 class="text-6xl  mb-6 text-center text-white "><a href="/jugadores">Todos los jugadores</a></h1>
 
-  <div class="flex flex-col md:flex-row md:justify-between mb-6 space-y-4 md:space-y-0">
-    <mat-form-field appearance="fill" class="w-full mr-4 md:w-1/3">
+  <div class="flex flex-col lg:flex-row lg:justify-between mb-6 space-y-4 lg:space-y-0">
+    <mat-form-field appearance="fill" class="w-full mr-4 lg:w-1/3">
       <mat-label>Buscar Jugadores...</mat-label>
       <input matInput type="text" [formControl]="searchControl">
     </mat-form-field>
     <form [formGroup]="filterForm"
-          class="flex flex-col md:flex-row md:space-x-4 w-full md:w-2/3 items-center space-y-4 md:space-y-0">
-      <mat-form-field appearance="fill" class="w-full md:w-1/4">
-        <mat-label>Rareza</mat-label>
-        <mat-select formControlName="rareza">
-          <mat-option value="">Todas las rarezas</mat-option>
-          <mat-option value="Común">Común</mat-option>
-          <mat-option value="Rara">Rara</mat-option>
-          <mat-option value="Épica">Épica</mat-option>
-          <mat-option value="Legendaria">Legendaria</mat-option>
-        </mat-select>
-      </mat-form-field>
+          class="flex flex-col lg:flex-row lg:space-x-4 w-full lg:w-2/3 items-center space-y-4 lg:space-y-0">
+      <div
+        class="flex flex-col md:flex-row lg:flex-row space-y-2 md:space-y-0 lg:space-y-0 md:space-x-2 lg:space-x-2 w-full">
+        <mat-form-field appearance="fill" class="w-full md:w-1/2 lg:w-1/3">
+          <mat-label>Rareza</mat-label>
+          <mat-select formControlName="rareza">
+            <mat-option value="">Todas las rarezas</mat-option>
+            <mat-option value="Común">Común</mat-option>
+            <mat-option value="Rara">Rara</mat-option>
+            <mat-option value="Épica">Épica</mat-option>
+            <mat-option value="Legendaria">Legendaria</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <mat-form-field appearance="fill" class="w-full md:w-1/4">
-        <mat-label>Posición</mat-label>
-        <mat-select formControlName="posicion">
-          <mat-option value="">Todas las posiciones</mat-option>
-          <mat-option value="DC">Delantero Centro</mat-option>
-          <mat-option value="EI">Extremo Izquierdo</mat-option>
-          <mat-option value="ED">Extremo Derecho</mat-option>
-          <mat-option value="SD">Segundo Delantero</mat-option>
-          <mat-option value="MCO">Mediapunta</mat-option>
-          <mat-option value="CM">Mediocentro</mat-option>
-          <mat-option value="CDM">Mediocentro Defensivo</mat-option>
-          <mat-option value="LI">Lateral Izquierdo</mat-option>
-          <mat-option value="LD">Lateral Derecho</mat-option>
-          <mat-option value="CAD">Carrilero derecho</mat-option>
-          <mat-option value="CAI">Carrilero izquierdo</mat-option>
-          <mat-option value="DFC">Defensa Central</mat-option>
-          <mat-option value="PT">Portero</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full md:w-1/2 lg:w-1/3">
+          <mat-label>Posición</mat-label>
+          <mat-select formControlName="posicion">
+            <mat-option value="">Todas las posiciones</mat-option>
+            <mat-option value="DC">Delantero Centro</mat-option>
+            <mat-option value="EI">Extremo Izquierdo</mat-option>
+            <mat-option value="ED">Extremo Derecho</mat-option>
+            <mat-option value="SD">Segundo Delantero</mat-option>
+            <mat-option value="MCO">Mediapunta</mat-option>
+            <mat-option value="CM">Mediocentro</mat-option>
+            <mat-option value="CDM">Mediocentro Defensivo</mat-option>
+            <mat-option value="LI">Lateral Izquierdo</mat-option>
+            <mat-option value="LD">Lateral Derecho</mat-option>
+            <mat-option value="CAD">Carrilero derecho</mat-option>
+            <mat-option value="CAI">Carrilero izquierdo</mat-option>
+            <mat-option value="DFC">Defensa Central</mat-option>
+            <mat-option value="PT">Portero</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <div class="w-full md:w-1/2 flex flex-col md:flex-row md:space-x-4">
-        <mat-form-field appearance="fill" class="w-full md:w-1/2">
+        <mat-form-field appearance="fill" class="w-full md:w-1/2 lg:w-1/3">
           <mat-label>Precio Min</mat-label>
           <input matInput formControlName="valorMin" placeholder="0" type="number" min="0">
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="w-full md:w-1/2">
+        <mat-form-field appearance="fill" class="w-full md:w-1/2 lg:w-1/3">
           <mat-label>Precio Max</mat-label>
           <input matInput formControlName="valorMax" placeholder="0" type="number" min="0">
         </mat-form-field>
-      </div>
 
-      <mat-form-field appearance="fill" class="w-full md:w-1/4">
-        <mat-label>Ordenar por</mat-label>
-        <mat-select formControlName="orderBy">
-          <mat-option value="">Ordenar por</mat-option>
-          <mat-option value="-media">Media</mat-option>
-          <mat-option value="-valor">Valor</mat-option>
-          <mat-option value="-createdAt">Fecha de creación</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-button-toggle appearance="legacy" (change)="limpiarFiltros()" class="w-full s md:w-1/4">
-        Limpiar
-      </mat-button-toggle>
+
+        <mat-form-field appearance="fill" class="w-full md:w-1/2 lg:w-1/3">
+          <mat-label>Ordenar por</mat-label>
+          <mat-select formControlName="orderBy">
+            <mat-option value="">Ordenar por</mat-option>
+            <mat-option value="-media">Media</mat-option>
+            <mat-option value="-valor">Valor</mat-option>
+            <mat-option value="-createdAt">Fecha de creación</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-button-toggle appearance="legacy" (change)="limpiarFiltros()" class="w-full h-14 md:w-1/2 lg:w-1/3">
+          Limpiar
+        </mat-button-toggle>
+      </div>
     </form>
   </div>
 
