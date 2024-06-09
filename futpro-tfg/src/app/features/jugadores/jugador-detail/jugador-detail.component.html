@@ -1,25 +1,29 @@
 <section class="container mx-auto mt-20 p-5 bg-gradient-to-r from-indigo-400  to-cyan-800 shadow-2xl">
   @if (jugador.id) {
     <div class="flex flex-col lg:flex-row">
-      <div class="lg:w-1/3 p-4 animate__bounceIn">
+      <div class="lg:w-1/3 mx-20 animate__bounceIn">
         <app-jugador [jugador]="jugador"></app-jugador>
       </div>
 
       <div class="lg:w-2/3 p-4">
-        <h3 class="text-3xl font-bold mb-4">Comentarios</h3>
+        <h3 class="text-3xl text-white font-bold mb-4">Comentarios</h3>
 
         <div class="mb-4" *ngIf="estaLogueado">
-          <form [formGroup]="comentarioForm" (ngSubmit)="onSubmitComentario()">
-            <mat-form-field appearance="fill" class="w-full mb-4">
+          <form [formGroup]="comentarioForm" (ngSubmit)="onSubmitComentario()" class="space-y-4">
+            <mat-form-field appearance="fill" class="w-1/5 m-4 mb-4">
               <mat-label>Calificación</mat-label>
-              <input matInput type="number" formControlName="calificacion" min="0" max="5">
+              <mat-select formControlName="calificacion">
+                <mat-option *ngFor="let i of [0, 1, 2, 3, 4, 5]" [value]="i">
+                  {{ i }}
+                </mat-option>
+              </mat-select>
               <mat-error
                 *ngIf="comentarioForm.get('calificacion')?.invalid && comentarioForm.get('calificacion')?.touched">
-                Calificación debe ser entre 0 y 5
+                Calificación es requerida
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-full mb-4">
+            <mat-form-field appearance="fill" class="w-1/2 m-4 mb-4">
               <mat-label>Comentario</mat-label>
               <textarea matInput formControlName="texto" maxlength="200"></textarea>
               <mat-error *ngIf="comentarioForm.get('texto')?.invalid && comentarioForm.get('texto')?.touched">

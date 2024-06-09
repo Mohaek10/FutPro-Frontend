@@ -12,6 +12,7 @@ import {JugadorComponent} from "../../../shared/components/jugador/jugador.compo
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {MatCard} from "@angular/material/card";
+import {MatOption, MatSelect} from "@angular/material/select";
 
 @Component({
   selector: 'app-jugador-detail',
@@ -29,7 +30,9 @@ import {MatCard} from "@angular/material/card";
     MatButton,
     MatCard,
     MatLabel,
-    MatError
+    MatError,
+    MatSelect,
+    MatOption
   ],
   templateUrl: './jugador-detail.component.html',
   styleUrl: './jugador-detail.component.css'
