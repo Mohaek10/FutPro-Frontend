@@ -7,3 +7,7 @@
   --tw-text-opacity: 1;
   --tw-gradient-to: #162C2D
 }
+
+h1 {
+  font-family: 'atomic', sans-serif;
+}
