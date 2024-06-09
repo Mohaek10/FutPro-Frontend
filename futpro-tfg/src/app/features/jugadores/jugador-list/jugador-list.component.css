@@ -11,3 +11,10 @@
 h1 {
   font-family: 'atomic', sans-serif;
 }
+
+mat-form-field {
+}
+
+mat-label {
+  color: #fff;
+}

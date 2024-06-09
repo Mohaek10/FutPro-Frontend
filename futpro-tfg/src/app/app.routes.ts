@@ -16,5 +16,5 @@ export const routes: Routes = [
   {path: 'forbidden', component: ForbiddenComponent},
   {path: 'admin/users', component: ManageUsersComponent, canActivate: [authGuard, adminGuard]},
   {path: 'jugadores', component: JugadorListComponent},
-
+  {path: 'jugador/:id', component: JugadorListComponent},
 ];
