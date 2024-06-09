@@ -1,3 +1,5 @@
+import {Comentario} from "./comentario.models";
+
 export interface Jugador {
   id: number;
   nombreCompleto: string;
@@ -13,4 +15,5 @@ export interface Jugador {
   nombre_equipo: string;
   equipo: number;
   escudo: string;
+  comentarios: Comentario[];
 }
