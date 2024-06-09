@@ -1,3 +1,25 @@
 mat-card {
   background: #f5f5f5;
 }
+
+.from-indigo-400 {
+  --tw-text-opacity: 1;
+  --tw-gradient-from: #101719
+}
+
+.to-cyan-800 {
+  --tw-text-opacity: 1;
+  --tw-gradient-to: #162C2D
+}
+
+mat-option {
+  color: #fff;
+}
+
+mat-label {
+  color: #fff;
+}
+
+mat-button-toggle {
+  color: #fff;
+}

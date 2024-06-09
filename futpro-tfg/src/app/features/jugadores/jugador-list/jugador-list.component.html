@@ -1,5 +1,5 @@
 <section
-  class="container mx-auto mt-20  rounded-3xl p-5  bg-gradient-to-r from-indigo-400 via-purple- to-cyan-800 shadow-2xl">
+  class="container mx-auto mt-20  rounded-3xl p-5  bg-gradient-to-r from-indigo-400  to-cyan-800 shadow-2xl">
   <h1 class="text-6xl  mb-6 text-center text-white "><a href="/jugadores">Todos los jugadores</a></h1>
 
   <div class="flex flex-col lg:flex-row lg:justify-between mb-6 space-y-4 lg:space-y-0">
@@ -69,7 +69,8 @@
     </form>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate__animated animate__bounceInLeft">
+  <div
+    class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 animate__animated animate__bounceInLeft">
     <app-jugador *ngFor="let jugador of jugadores" [jugador]="jugador"></app-jugador>
     <div *ngIf="jugadores.length === 0" class="text-center text-white text-2xl">No hay jugadores</div>
   </div>
