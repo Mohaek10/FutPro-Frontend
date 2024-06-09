@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Jugador} from "../../models/jugador.models";
 import {trigger, state, style, transition, animate} from '@angular/animations';
 import {NgClass, NgStyle} from "@angular/common";
+import {FormatoNumeroPipe} from "../../pipes/formato-numero.pipe";
 
 @Component({
   selector: 'app-jugador',
@@ -10,7 +11,8 @@ import {NgClass, NgStyle} from "@angular/common";
   standalone: true,
   imports: [
     NgStyle,
-    NgClass
+    NgClass,
+    FormatoNumeroPipe
   ],
   animations: [
     trigger('cardHover', [
@@ -55,4 +57,8 @@ export class JugadorComponent {
   onMouseLeave() {
     this.cardState = 'default';
   }
+
+  protected readonly Number = Number;
+  protected readonly parseFloat = parseFloat;
+  protected readonly parseInt = parseInt;
 }

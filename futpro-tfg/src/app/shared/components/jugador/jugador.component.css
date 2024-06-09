@@ -4,7 +4,7 @@
   background: linear-gradient(145deg, #1e1e1e, #2e2e2e);
   border-radius: 15px;
   overflow: hidden;
-  width: 300px;
+  width: 500px;
   margin: 20px;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -47,7 +47,7 @@
   opacity: 0;
 }
 
-.player-card:hover .player-card__image {
+.player-card:hover {
   transform: scale(1.1);
 }
 

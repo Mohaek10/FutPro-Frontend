@@ -12,4 +12,5 @@ export interface Jugador {
   isActive: boolean;
   nombre_equipo: string;
   equipo: number;
+  escudo: string;
 }
