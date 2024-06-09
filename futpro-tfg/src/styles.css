@@ -1,5 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'animate.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: #1a202c;
+}
+
+@font-face {
+  font-family: 'atomic';
+  src: url('assets/fonts/ATOMIC__.TTF');
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__label {
+  background-color: #ffffff;
+  color: #f30000 !important;
+  font-weight: bold;
+}
 

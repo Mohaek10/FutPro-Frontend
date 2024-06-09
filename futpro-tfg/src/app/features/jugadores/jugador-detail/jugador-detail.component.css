@@ -1,3 +1,7 @@
+mat-card {
+  background: #f5f5f5;
+}
+
 .from-indigo-400 {
   --tw-text-opacity: 1;
   --tw-gradient-from: #101719
@@ -6,10 +10,6 @@
 .to-cyan-800 {
   --tw-text-opacity: 1;
   --tw-gradient-to: #162C2D
-}
-
-h1 {
-  font-family: 'atomic', sans-serif;
 }
 
 mat-option {
