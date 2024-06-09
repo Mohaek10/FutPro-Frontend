@@ -13,8 +13,9 @@ body {
   src: url('assets/fonts/ATOMIC__.TTF');
 }
 
-.error-snackbar {
-  background-color: #d32f2f;
-  color: white;
+.mat-mdc-snack-bar-container .mdc-snackbar__label {
+  background-color: #ffffff;
+  color: #f30000 !important;
   font-weight: bold;
 }
+
