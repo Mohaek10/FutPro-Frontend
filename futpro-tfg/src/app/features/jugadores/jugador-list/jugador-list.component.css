@@ -12,9 +12,14 @@ h1 {
   font-family: 'atomic', sans-serif;
 }
 
-mat-form-field {
+mat-option {
+  color: #fff;
 }
 
 mat-label {
+  color: #fff;
+}
+
+mat-button-toggle {
   color: #fff;
 }

@@ -2,11 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {Jugador} from "../../../shared/models/jugador.models";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {JugadoresService} from '../../../core/services/jugadores.service';
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {JugadorComponent} from "../../../shared/components/jugador/jugador.component";
 import {MatInput, MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
+import {MatButton} from "@angular/material/button";
+import {MatButtonToggle} from "@angular/material/button-toggle";
 
 @Component({
   selector: 'app-jugador-list',
@@ -20,7 +22,10 @@ import {MatOption, MatSelect} from "@angular/material/select";
     MatInputModule,
     FormsModule,
     MatSelect,
-    MatOption
+    MatOption,
+    MatButton,
+    MatButtonToggle,
+    NgIf
   ],
   templateUrl: './jugador-list.component.html',
   styleUrl: './jugador-list.component.css'
@@ -65,6 +70,12 @@ export class JugadorListComponent implements OnInit {
       this.jugadores = response.results;
       console.log(this.jugadores);
     });
+  }
+
+  limpiarFiltros(): void {
+    this.filterForm.reset();
+    this.searchControl.reset();
+    this.getJugadores();
   }
 
 }
