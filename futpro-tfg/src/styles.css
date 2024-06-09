@@ -12,3 +12,9 @@ body {
   font-family: 'atomic';
   src: url('assets/fonts/ATOMIC__.TTF');
 }
+
+.error-snackbar {
+  background-color: #d32f2f;
+  color: white;
+  font-weight: bold;
+}
