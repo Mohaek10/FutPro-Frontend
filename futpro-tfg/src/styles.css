@@ -12,3 +12,10 @@ body {
   font-family: 'atomic';
   src: url('assets/fonts/ATOMIC__.TTF');
 }
+
+.mat-mdc-snack-bar-container .mdc-snackbar__label {
+  background-color: #ffffff;
+  color: #f30000 !important;
+  font-weight: bold;
+}
+
