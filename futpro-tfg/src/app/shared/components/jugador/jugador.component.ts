@@ -1,8 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {Jugador} from "../../models/jugador.models";
 import {trigger, state, style, transition, animate} from '@angular/animations';
-import {NgClass, NgStyle} from "@angular/common";
+import {CurrencyPipe, NgClass, NgStyle} from "@angular/common";
 import {FormatoNumeroPipe} from "../../pipes/formato-numero.pipe";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-jugador',
@@ -12,7 +13,8 @@ import {FormatoNumeroPipe} from "../../pipes/formato-numero.pipe";
   imports: [
     NgStyle,
     NgClass,
-    FormatoNumeroPipe
+    FormatoNumeroPipe,
+    CurrencyPipe
   ],
   animations: [
     trigger('cardHover', [
@@ -34,19 +36,26 @@ export class JugadorComponent {
   @Input() jugador!: Jugador;
   cardState = 'default';
 
+  constructor(private router: Router) {
+  }
+
   getBorderColor(rareza: string): string {
     switch (rareza) {
       case 'Legendaria':
-        return '#FFD700';
+        return 'rgba(255,215,0,0.4)';
       case 'Épica':
-        return '#8A2BE2';
+        return 'rgba(138,43,226,0.4)';
       case 'Común':
-        return '#808080';
+        return 'rgba(128,128,128,0.4)';
       case 'Rara':
-        return '#1E90FF';
+        return 'rgba(30,144,255,0.4)';
       default:
         return '#000000';
     }
+  }
+
+  navigateToDetail(): void {
+    this.router.navigate(['/jugador', this.jugador.id]);
   }
 
 

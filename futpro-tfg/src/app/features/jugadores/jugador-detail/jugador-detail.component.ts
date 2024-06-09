@@ -35,7 +35,7 @@ import {MatCard} from "@angular/material/card";
   styleUrl: './jugador-detail.component.css'
 })
 export class JugadorDetailComponent implements OnInit {
-  jugador: Jugador | null = null;
+  jugador: Jugador = {} as Jugador;
   comentarios: Comentario[] = [];
   comentarioForm: FormGroup;
   estaLogueado: boolean = false;

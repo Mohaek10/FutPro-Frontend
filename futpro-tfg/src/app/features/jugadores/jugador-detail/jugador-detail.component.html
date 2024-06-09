@@ -1,6 +1,6 @@
 <section class="container mx-auto mt-20 p-5 bg-white rounded-lg shadow-lg">
   <div *ngIf="jugador" class="flex flex-col lg:flex-row">
-    <div class="lg:w-1/3 p-4">
+    <div class="lg:w-1/3 p-4 animate__bounceIn">
       <app-jugador [jugador]="jugador"></app-jugador>
     </div>
 
@@ -41,7 +41,7 @@
           <p class="text-sm text-gray-500">Calificación: {{ comentario.calificacion }}</p>
           <p class="text-sm text-gray-500">{{ comentario.createdAt | date:'short' }}</p>
         </mat-card>
-        <div *ngIf="comentarios?.length === 0" class="text-gray-500">No hay comentarios.</div>
+        <div *ngIf="comentarios.length === 0" class="text-gray-500">No hay comentarios.</div>
       </div>
     </div>
   </div>
