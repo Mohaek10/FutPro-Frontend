@@ -9,6 +9,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatButton} from "@angular/material/button";
 import {MatButtonToggle} from "@angular/material/button-toggle";
+import {MatPaginatorModule, PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-jugador-list',
@@ -25,7 +26,8 @@ import {MatButtonToggle} from "@angular/material/button-toggle";
     MatOption,
     MatButton,
     MatButtonToggle,
-    NgIf
+    NgIf,
+    MatPaginatorModule,
   ],
   templateUrl: './jugador-list.component.html',
   styleUrl: './jugador-list.component.css'
@@ -34,6 +36,9 @@ export class JugadorListComponent implements OnInit {
   jugadores: Jugador[] = [];
   searchControl = new FormControl('');
   filterForm: FormGroup;
+  totalJugadores: number = 0;
+  pageSize: number = 12;
+  pageIndex: number = 0;
 
   constructor(private jugadoresService: JugadoresService) {
     this.filterForm = new FormGroup({
@@ -50,24 +55,20 @@ export class JugadorListComponent implements OnInit {
     this.getJugadores();
 
     this.searchControl.valueChanges.subscribe(value => {
+      this.pageIndex = 0;
       this.getJugadores(value ?? undefined, this.filterForm.value);
     });
 
     this.filterForm.valueChanges.subscribe(value => {
+      this.pageIndex = 0;
       this.getJugadores(this.searchControl.value ?? undefined, value);
     });
   }
 
   getJugadores(search?: string, filters?: any): void {
-    const filterParams = filters ? {
-      ...filters,
-      valor_min: filters.valorMin ?? 0,
-      valor_max: filters.valorMax ?? 1000000000000,
-      ordering: filters.orderBy ?? ''
-    } : {};
-
-    this.jugadoresService.getJugadores(search, filterParams).subscribe(response => {
+    this.jugadoresService.getJugadores(search, filters, this.pageIndex + 1, this.pageSize).subscribe(response => {
       this.jugadores = response.results;
+      this.totalJugadores = response.count;
       console.log(this.jugadores);
     });
   }
@@ -75,7 +76,13 @@ export class JugadorListComponent implements OnInit {
   limpiarFiltros(): void {
     this.filterForm.reset();
     this.searchControl.reset();
+    this.pageIndex = 0;
     this.getJugadores();
   }
 
+  handlePageEvent(event: PageEvent): void {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.getJugadores(this.searchControl.value ?? undefined, this.filterForm.value);
+  }
 }

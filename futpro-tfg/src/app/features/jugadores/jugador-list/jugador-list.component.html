@@ -59,7 +59,7 @@
             <mat-option value="">Ordenar por</mat-option>
             <mat-option value="-media">Media</mat-option>
             <mat-option value="-valor">Valor</mat-option>
-            <mat-option value="-createdAt">Fecha de creación</mat-option>
+            <mat-option value="-createdAt">Últimos jugadores</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-button-toggle appearance="legacy" (change)="limpiarFiltros()" class="w-full h-14 md:w-1/2 lg:w-1/3">
@@ -73,4 +73,7 @@
     <app-jugador *ngFor="let jugador of jugadores" [jugador]="jugador"></app-jugador>
     <div *ngIf="jugadores.length === 0" class="text-center text-white text-2xl">No hay jugadores</div>
   </div>
+  <mat-paginator [length]="totalJugadores" [pageSize]="pageSize" [pageIndex]="pageIndex"
+                 (page)="handlePageEvent($event)">
+  </mat-paginator>
 </section>
