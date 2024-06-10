@@ -57,17 +57,5 @@ export class JugadorComponent {
   navigateToDetail(): void {
     this.router.navigate(['/jugador', this.jugador.id]);
   }
-
-
-  onMouseEnter() {
-    this.cardState = 'hover';
-  }
-
-  onMouseLeave() {
-    this.cardState = 'default';
-  }
-
-  protected readonly Number = Number;
-  protected readonly parseFloat = parseFloat;
-  protected readonly parseInt = parseInt;
+  
 }
