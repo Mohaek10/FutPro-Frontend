@@ -1,28 +1,30 @@
-<section class="mi-equipo">
-  <h1>Mi Equipo</h1>
+<section class="p-10 mt-18 bg-gray-800">
+  <div class=" flex justify-center  ">
+    <h1 class="text-6xl text-white text-center rounded-2xl pb-4 p-2 bg-gray-900  font-bold mt-8">Mi Equipo</h1>
+  </div>
 
-  <div class="posicion-container">
-    <h2>Delanteros</h2>
-    <div class="carrusel">
-      <div class="carrusel-item" *ngFor="let jugador of delanteros">
+  <div>
+    <h2 class="text-4xl text-white text-center font-semibold">Delanteros</h2>
+    <div class="flex overflow-x-auto p-5 space-x-5">
+      <div class="flex-none" *ngFor="let jugador of delanteros">
         <app-jugador [jugador]="jugador"></app-jugador>
       </div>
     </div>
   </div>
 
-  <div class="posicion-container">
-    <h2>Centrocampistas</h2>
-    <div class="carrusel">
-      <div class="carrusel-item" *ngFor="let jugador of centrocampistas">
+  <div>
+    <h2 class="text-2xl text-white text-center font-semibold mb-5">Centrocampistas</h2>
+    <div class="flex overflow-x-auto p-5 space-x-5">
+      <div class="flex-none" *ngFor="let jugador of centrocampistas">
         <app-jugador [jugador]="jugador"></app-jugador>
       </div>
     </div>
   </div>
 
-  <div class="posicion-container">
-    <h2>Defensas y Porteros</h2>
-    <div class="carrusel">
-      <div class="carrusel-item" *ngFor="let jugador of defensasYPorteros">
+  <div>
+    <h2 class="text-2xl text-white text-center font-semibold mb-5">Defensas y Porteros</h2>
+    <div class="flex overflow-x-auto p-5 space-x-5">
+      <div class="flex-none" *ngFor="let jugador of defensasYPorteros">
         <app-jugador [jugador]="jugador"></app-jugador>
       </div>
     </div>

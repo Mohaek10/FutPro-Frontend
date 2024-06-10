@@ -16,3 +16,14 @@
   flex: 0 0 auto;
   margin-right: 10px;
 }
+
+section {
+  background-image: url("../../../assets/images/campo3.jpg");
+  background-size: cover;
+  background-position: center;
+
+}
+
+.bg-gray-900 {
+  background-color: #121212;
+}
