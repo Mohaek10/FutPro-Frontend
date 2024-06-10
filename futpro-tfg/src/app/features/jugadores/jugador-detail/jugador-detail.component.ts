@@ -13,6 +13,7 @@ import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {MatCard} from "@angular/material/card";
 import {MatOption, MatSelect} from "@angular/material/select";
+import {catchError, of, tap} from "rxjs";
 
 @Component({
   selector: 'app-jugador-detail',
@@ -42,6 +43,7 @@ export class JugadorDetailComponent implements OnInit {
   comentarios: Comentario[] = [];
   comentarioForm: FormGroup;
   estaLogueado: boolean = false;
+  errorMensaje: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -70,14 +72,22 @@ export class JugadorDetailComponent implements OnInit {
     });
   }
 
+
   onSubmitComentario(): void {
     if (this.comentarioForm.valid && this.jugador) {
       const comentarioData = {...this.comentarioForm.value, jugador: this.jugador.id};
-      this.jugadoresService.createComentario(this.jugador.id, comentarioData).subscribe(response => {
-        this.comentarios.push(response);
-        this.comentarioForm.reset();
-      });
+      this.jugadoresService.createComentario(this.jugador.id, comentarioData).pipe(
+        tap(response => {
+          this.comentarios.push(response);
+          this.comentarioForm.reset();
+        }),
+        catchError(error => {
+          const message = error.error;
+          this.errorMensaje = message.error;
+          console.error(this.errorMensaje);
+          return of(null);
+        })
+      ).subscribe();
     }
   }
-
 }
