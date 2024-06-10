@@ -1,18 +1,40 @@
 import {Component, Inject} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MercadoService} from "../../../core/services/mercado.service";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle
+} from "@angular/material/dialog";
 import {Jugador} from "../../../shared/models/jugador.models";
+import {FormatoNumeroPipe} from "../../../shared/pipes/formato-numero.pipe";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+import {MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-compra-dialog',
   standalone: true,
-  imports: [],
+  imports: [
+    MatDialogContent,
+    MatDialogTitle,
+    ReactiveFormsModule,
+    FormatoNumeroPipe,
+    MatFormField,
+    MatInput,
+    MatDialogActions,
+    MatButton,
+    MatLabel
+  ],
   templateUrl: './compra-dialog.component.html',
   styleUrl: './compra-dialog.component.css'
 })
 export class CompraDialogComponent {
   compraForm: FormGroup;
+  precioTotal: number = 0;
+
 
   constructor(
     private fb: FormBuilder,
@@ -22,8 +44,14 @@ export class CompraDialogComponent {
   ) {
     this.compraForm = this.fb.group({
       cantidad: [1, [Validators.required, Validators.min(1)]]
-
     });
+    this.updatePrecioTotal();
+
+  }
+
+  updatePrecioTotal(): void {
+    const cantidad = this.compraForm.get('cantidad')?.value || 0;
+    this.precioTotal = cantidad * this.data.jugador.valor;
   }
 
   comprar(): void {
