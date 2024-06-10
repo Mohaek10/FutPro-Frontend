@@ -20,17 +20,17 @@ import {CompraDialogComponent} from "../../../features/mercado/compra-dialog/com
     NgIf
   ],
   animations: [
-    trigger('cardHover', [
+    trigger('cardBought', [
       state('default', style({
-        transform: 'scale(1)',
-        boxShadow: '0px 0px 0px rgba(0, 0, 0, 0)'
+        transform: 'translateY(0)',
+        opacity: 1
       })),
-      state('hover', style({
-        transform: 'scale(1.05)',
-        boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.5)'
+      state('bought', style({
+        transform: 'translateY(-100%)',
+        opacity: 0
       })),
-      transition('default <=> hover', [
-        animate('0.5s')
+      transition('default <=> bought', [
+        animate('1s')
       ])
     ])
   ]
@@ -38,6 +38,7 @@ import {CompraDialogComponent} from "../../../features/mercado/compra-dialog/com
 export class JugadorComponent {
   @Input() jugador!: Jugador;
   @Input() showComprar: boolean = false;
+  boughtState: string = 'default';
 
   constructor(private router: Router, private dialog: MatDialog) {
   }
@@ -50,7 +51,14 @@ export class JugadorComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.success) {
+        this.boughtState = 'bought';
+
         console.log('Compra realizada exitosamente');
+
+        setTimeout(() => {
+          this.boughtState = 'default';
+
+        }, 1000)
       }
     });
   }
