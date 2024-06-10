@@ -1,0 +1,30 @@
+<section class=" mt-20">
+  <div class="admin-dashboard">
+    <div class="admin-card" (click)="navigateTo('jugadores')">
+      <div class="card-content">
+        <img src="assets/icons/players-icon.png" alt="Jugadores" class="card-icon">
+        <h3>Gestión de Jugadores</h3>
+        <p>Listar, crear, editar y borrar jugadores.</p>
+        <button mat-raised-button color="primary">Gestionar Jugadores</button>
+      </div>
+    </div>
+
+    <div class="admin-card" (click)="navigateTo('equipos')">
+      <div class="card-content">
+        <img src="assets/icons/teams-icon.png" alt="Equipos" class="card-icon">
+        <h3>Gestión de Equipos</h3>
+        <p>Listar, crear, editar y borrar equipos.</p>
+        <button mat-raised-button color="primary">Gestionar Equipos</button>
+      </div>
+    </div>
+
+    <div class="admin-card" (click)="navigateTo('usuarios')">
+      <div class="card-content">
+        <img src="assets/icons/users-icon.png" alt="Usuarios" class="card-icon">
+        <h3>Gestión de Usuarios</h3>
+        <p>Listar y desactivar cuentas de usuario.</p>
+        <button mat-raised-button color="primary">Gestionar Usuarios</button>
+      </div>
+    </div>
+  </div>
+</section>
