@@ -12,6 +12,8 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {Jugador} from "../../../shared/models/jugador.models";
+import Swal from 'sweetalert2'
+
 
 @Component({
   selector: 'app-venta-dialog',
@@ -49,9 +51,11 @@ export class VentaDialogComponent {
       const {cantidad, precio} = this.ventaForm.value;
       this.mercadoService.ponerEnVenta(this.data.jugador.id_usuario_jugador, cantidad, precio).subscribe({
         next: response => {
+          Swal.fire('Puesta en venta realizada exitosamente', '', 'success');
           this.dialogRef.close({success: true, message: 'Puesta en venta realizada exitosamente.', response});
         },
         error: err => {
+          Swal.fire('Error', err.error.error + ' O ya lo tienes en venta, revisa el mercado de usuario' || 'Error al realizar la puesta en venta.', 'error');
           this.dialogRef.close({success: false, message: err.error.error || 'Error al realizar la puesta en venta.'});
         }
       });

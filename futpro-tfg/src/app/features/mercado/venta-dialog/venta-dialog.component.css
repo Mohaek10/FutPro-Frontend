@@ -1,0 +1,28 @@
+.compra-dialog-container {
+  padding: 20px;
+}
+
+.jugador-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.jugador-imagen {
+  width: 200px;
+  height: 200px;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.futcoin-logo {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+.precio-total {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 20px;
+}

@@ -12,6 +12,6 @@ export class UserService {
   }
 
   getMisJuagdores(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}mis-jugadores/`);
+    return this.http.get<any>(`${this.apiUrl}mis-jugadores/?limit=1000`);
   }
 }
