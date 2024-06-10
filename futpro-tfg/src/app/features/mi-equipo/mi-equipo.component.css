@@ -1,42 +1,46 @@
-.container {
-  display: flex;
-  flex-direction: row;
-}
-
-.jugador-card {
-  margin-bottom: 10px;
-  padding: 10px;
-  background: white;
-  border: 1px solid #ccc;
-  cursor: grab;
-}
-
 .campo-futbol {
   display: grid;
   grid-template-areas:
-    'pos0 pos1 pos2 pos3 pos4 pos5'
-    'pos6 pos7 pos8 pos9 pos10';
-  gap: 10px;
-  width: 100%;
+    'pos0 pos1 pos2'
+    'pos3 pos4 pos5'
+    'pos6 pos7 pos8'
+    'pos9 pos10 pos11';
+  grid-gap: 10px;
   height: 100%;
 }
 
 .posicion {
-  width: 100px;
-  height: 100px;
-  border: 2px dashed #ccc;
+  border: 1px dashed #ccc;
+  min-height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  position: relative;
 }
 
-.jugador-en-campo {
-  text-align: center;
+.jugador-card {
+  cursor: grab;
 }
 
 .jugador-en-campo img {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
+}
+
+.jugador-en-campo p {
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+
+.remove-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: red;
 }

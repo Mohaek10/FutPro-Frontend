@@ -1,26 +1,30 @@
 <div class="container mx-auto mt-20">
   <div class="flex">
-    <div class="w-1/4 bg-gray-200 p-4">
+    <div class="w-1/4 bg-gray-200 p-4 overflow-y-scroll" style="max-height: 80vh;">
       <h2 class="text-2xl mb-4">Mis Jugadores</h2>
-      <div *ngFor="let jugador of jugadores" class="jugador-card" draggable="true"
+      <div *ngFor="let jugador of jugadores" class="jugador-card mb-4 p-2 bg-white rounded shadow" draggable="true"
            (dragstart)="dragStart($event, jugador)">
         <img [src]="jugador.jugadorSerializado.imagen" alt="{{ jugador.jugadorSerializado.nombreCompleto }}"
-             class="w-full h-auto">
-        <div>
-          <p>{{ jugador.jugadorSerializado.nombreCompleto }}</p>
+             class="w-full h-auto rounded">
+        <div class="text-center mt-2">
+          <p class="font-bold">{{ jugador.jugadorSerializado.nombreCompleto }}</p>
           <p>{{ jugador.jugadorSerializado.posicion }}</p>
         </div>
       </div>
     </div>
     <div class="w-3/4 bg-green-500 p-4 relative">
-      <h2 class="text-2xl mb-4 text-center">Mi Equipo</h2>
-      <div class="campo-futbol">
-        <div class="posicion" *ngFor="let pos of formacion; let i = index" [ngStyle]="{'grid-area': 'pos' + i}"
-             (drop)="onDrop($event, i)" (dragover)="allowDrop($event)">
-          <div *ngIf="pos" class="jugador-en-campo">
+      <h2 class="text-2xl mb-4 text-center text-white">Mi Equipo</h2>
+      <div class="campo-futbol grid grid-cols-3 gap-4">
+        <div *ngFor="let pos of formacion; let i = index"
+             class="posicion bg-white rounded shadow p-4 flex items-center justify-center relative"
+             [ngStyle]="{'grid-area': 'pos' + i}"
+             (drop)="onDrop($event, i)"
+             (dragover)="allowDrop($event)">
+          <div *ngIf="pos" class="jugador-en-campo text-center">
             <img [src]="pos.jugadorSerializado.imagen" alt="{{ pos.jugadorSerializado.nombreCompleto }}"
-                 class="w-full h-auto">
+                 class="w-16 h-16 rounded-full mx-auto">
             <p>{{ pos.jugadorSerializado.nombreCompleto }}</p>
+            <button class="remove-button" (click)="removePlayer(i)">✖️</button>
           </div>
         </div>
       </div>

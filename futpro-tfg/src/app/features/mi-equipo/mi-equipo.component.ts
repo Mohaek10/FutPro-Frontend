@@ -11,7 +11,7 @@ import {NgForOf, NgIf, NgStyle} from "@angular/common";
     NgForOf
   ],
   templateUrl: './mi-equipo.component.html',
-  styleUrl: './mi-equipo.component.css'
+  styleUrls: ['./mi-equipo.component.css']
 })
 export class MiEquipoComponent implements OnInit {
   jugadores: any[] = [];
@@ -29,7 +29,18 @@ export class MiEquipoComponent implements OnInit {
 
   onDrop(event: DragEvent, index: number): void {
     event.preventDefault();
-    this.formacion[index] = JSON.parse(event.dataTransfer?.getData('jugador') || '{}');
+    const jugador = JSON.parse(event.dataTransfer?.getData('jugador') || '{}');
+
+    // Verificar si el jugador ya está en la formación
+    const existingIndex = this.formacion.findIndex(j => j?.jugadorSerializado?.id === jugador.jugadorSerializado.id);
+    if (existingIndex !== -1) {
+      this.formacion[existingIndex] = null; // Quitar el jugador de la posición anterior
+    }
+
+    this.formacion[index] = jugador;
+
+    // Quitar el jugador de la lista lateral
+    this.jugadores = this.jugadores.filter(j => j.jugadorSerializado.id !== jugador.jugadorSerializado.id);
   }
 
   allowDrop(event: any): void {
@@ -40,4 +51,11 @@ export class MiEquipoComponent implements OnInit {
     event.dataTransfer.setData('jugador', JSON.stringify(jugador));
   }
 
+  removePlayer(index: number): void {
+    const jugador = this.formacion[index];
+    if (jugador) {
+      this.jugadores.push(jugador); // Agregar el jugador de nuevo a la lista lateral
+      this.formacion[index] = null; // Quitar el jugador de la formación
+    }
+  }
 }
