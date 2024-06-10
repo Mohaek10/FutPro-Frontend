@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../core/services/user.service";
 import {NgForOf, NgIf, NgStyle} from "@angular/common";
+import {JugadorComponent} from "../../shared/components/jugador/jugador.component";
+import {Jugador} from "../../shared/models/jugador.models";
 
 @Component({
   selector: 'app-mi-equipo',
@@ -8,54 +10,34 @@ import {NgForOf, NgIf, NgStyle} from "@angular/common";
   imports: [
     NgIf,
     NgStyle,
-    NgForOf
+    NgForOf,
+    JugadorComponent
   ],
   templateUrl: './mi-equipo.component.html',
   styleUrls: ['./mi-equipo.component.css']
 })
 export class MiEquipoComponent implements OnInit {
-  jugadores: any[] = [];
-  formacion: any[] = [];
+  delanteros: Jugador[] = [];
+  centrocampistas: Jugador[] = [];
+  defensasYPorteros: Jugador[] = [];
 
   constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
-    this.userService.getMisJuagdores().subscribe(data => {
-      this.jugadores = data.results;
-      this.formacion = Array(11).fill(null);
+    this.getJugadores();
+
+
+  }
+
+  getJugadores() {
+    this.userService.getMisJuagdores().subscribe(response => {
+      const jugadores = response.results.map((j: any) => j.jugadorSerializado);
+
+      this.delanteros = jugadores.filter((j: any) => ['DC', 'EI', 'ED', 'SD'].includes(j.posicion));
+      this.centrocampistas = jugadores.filter((j: any) => ['MCO', 'CM', 'CDM'].includes(j.posicion));
+      this.defensasYPorteros = jugadores.filter((j: any) => ['DFC', 'LD', 'LI', 'CAD', 'CAI', 'PT'].includes(j.posicion));
     });
   }
 
-  onDrop(event: DragEvent, index: number): void {
-    event.preventDefault();
-    const jugador = JSON.parse(event.dataTransfer?.getData('jugador') || '{}');
-
-    // Verificar si el jugador ya está en la formación
-    const existingIndex = this.formacion.findIndex(j => j?.jugadorSerializado?.id === jugador.jugadorSerializado.id);
-    if (existingIndex !== -1) {
-      this.formacion[existingIndex] = null; // Quitar el jugador de la posición anterior
-    }
-
-    this.formacion[index] = jugador;
-
-    // Quitar el jugador de la lista lateral
-    this.jugadores = this.jugadores.filter(j => j.jugadorSerializado.id !== jugador.jugadorSerializado.id);
-  }
-
-  allowDrop(event: any): void {
-    event.preventDefault();
-  }
-
-  dragStart(event: any, jugador: any): void {
-    event.dataTransfer.setData('jugador', JSON.stringify(jugador));
-  }
-
-  removePlayer(index: number): void {
-    const jugador = this.formacion[index];
-    if (jugador) {
-      this.jugadores.push(jugador); // Agregar el jugador de nuevo a la lista lateral
-      this.formacion[index] = null; // Quitar el jugador de la formación
-    }
-  }
 }
