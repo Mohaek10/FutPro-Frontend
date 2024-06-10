@@ -16,4 +16,6 @@ export interface Jugador {
   equipo: number;
   escudo: string;
   comentarios: Comentario[];
+  cantidad: number;
+  id_usuario_jugador: number;
 }

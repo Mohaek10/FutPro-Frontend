@@ -1,9 +1,13 @@
 import {Component, Input} from '@angular/core';
 import {Jugador} from "../../models/jugador.models";
 import {trigger, state, style, transition, animate} from '@angular/animations';
-import {CurrencyPipe, NgClass, NgStyle} from "@angular/common";
+import {CurrencyPipe, NgClass, NgIf, NgStyle} from "@angular/common";
 import {FormatoNumeroPipe} from "../../pipes/formato-numero.pipe";
 import {Router} from '@angular/router';
+import {MatDialog} from "@angular/material/dialog";
+import {CompraDialogComponent} from "../../../features/mercado/compra-dialog/compra-dialog.component";
+import {MatTooltip} from "@angular/material/tooltip";
+import {VentaDialogComponent} from "../../../features/mercado/venta-dialog/venta-dialog.component";
 
 @Component({
   selector: 'app-jugador',
@@ -14,29 +18,66 @@ import {Router} from '@angular/router';
     NgStyle,
     NgClass,
     FormatoNumeroPipe,
-    CurrencyPipe
+    CurrencyPipe,
+    NgIf,
+    MatTooltip
   ],
   animations: [
-    trigger('cardHover', [
+    trigger('cardBought', [
       state('default', style({
-        transform: 'scale(1)',
-        boxShadow: '0px 0px 0px rgba(0, 0, 0, 0)'
+        transform: 'translateY(0)',
+        opacity: 1
       })),
-      state('hover', style({
-        transform: 'scale(1.05)',
-        boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.5)'
+      state('bought', style({
+        transform: 'translateY(-100%)',
+        opacity: 0
       })),
-      transition('default <=> hover', [
-        animate('0.5s')
+      transition('default <=> bought', [
+        animate('1s')
       ])
     ])
   ]
 })
 export class JugadorComponent {
   @Input() jugador!: Jugador;
-  cardState = 'default';
+  @Input() showComprar: boolean = false;
+  @Input() showVendedor: boolean = false;
+  boughtState: string = 'default';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private dialog: MatDialog) {
+  }
+
+  openComprarModal(): void {
+    const dialogRef = this.dialog.open(CompraDialogComponent, {
+      width: '400px',
+      data: {jugador: this.jugador}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.success) {
+        this.boughtState = 'bought';
+
+        console.log('Compra realizada exitosamente');
+
+        setTimeout(() => {
+          this.boughtState = 'default';
+
+        }, 1000)
+      }
+    });
+  }
+
+  openVenderModal(): void {
+    const dialogRef = this.dialog.open(VentaDialogComponent, { // Abre el nuevo diálogo de venta
+      width: '400px',
+      data: {jugador: this.jugador}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.success) {
+        console.log('Puesta en venta realizada exitosamente');
+      }
+    });
   }
 
   getBorderColor(rareza: string): string {
@@ -58,16 +99,4 @@ export class JugadorComponent {
     this.router.navigate(['/jugador', this.jugador.id]);
   }
 
-
-  onMouseEnter() {
-    this.cardState = 'hover';
-  }
-
-  onMouseLeave() {
-    this.cardState = 'default';
-  }
-
-  protected readonly Number = Number;
-  protected readonly parseFloat = parseFloat;
-  protected readonly parseInt = parseInt;
 }

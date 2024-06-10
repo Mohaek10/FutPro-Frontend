@@ -81,6 +81,13 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
+  updateUser(): void {
+    this.http.get<User>(`${this.apiUrl}user/me/`, {headers: this.getAuthHeaders()}).subscribe(user => {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      this.currentUserSubject.next(user);
+    });
+  }
+
   removeTokens(): void {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('accessToken');

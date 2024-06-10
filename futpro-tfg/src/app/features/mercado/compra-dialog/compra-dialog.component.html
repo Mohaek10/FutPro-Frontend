@@ -1,0 +1,27 @@
+<div class="compra-dialog-container">
+  <h2 mat-dialog-title>Comprar Jugador</h2>
+  <mat-dialog-content>
+    <form [formGroup]="compraForm">
+      <div class="jugador-info">
+        <img [src]="data.jugador.imagen" alt="{{ data.jugador.nombreCompleto }}" class="jugador-imagen">
+        <div>
+          <h3>{{ data.jugador.nombreCompleto }}</h3>
+          <p>Precio por unidad: {{ data.jugador.valor | formatoNumero }} <img src="assets/images/futcoin.webp"
+                                                                              alt="Futcoins Logo" class="futcoin-logo">
+          </p>
+        </div>
+      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Cantidad</mat-label>
+        <input matInput formControlName="cantidad" type="number" min="1" (input)="updatePrecioTotal()">
+      </mat-form-field>
+      <p class="precio-total">Precio total: {{ precioTotal | formatoNumero }} <img src="assets/images/futcoin.webp"
+                                                                                   alt="Futcoins Logo"
+                                                                                   class="futcoin-logo"></p>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="cancelar()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="comprar()" [disabled]="compraForm.invalid">Comprar</button>
+  </mat-dialog-actions>
+</div>

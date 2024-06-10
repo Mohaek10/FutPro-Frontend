@@ -48,7 +48,7 @@
 }
 
 .player-card:hover {
-  transform: scale(1.1);
+  transform: scale(1.05) !important;
 }
 
 .player-card:hover .player-card__image-wrapper::before {

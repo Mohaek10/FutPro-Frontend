@@ -1,0 +1,29 @@
+.mi-equipo {
+  padding: 20px;
+}
+
+.posicion-container {
+  margin-bottom: 40px;
+}
+
+.carrusel {
+  display: flex;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.carrusel-item {
+  flex: 0 0 auto;
+  margin-right: 10px;
+}
+
+section {
+  background-image: url("../../../assets/images/campo3.jpg");
+  background-size: cover;
+  background-position: center;
+
+}
+
+.bg-gray-900 {
+  background-color: #121212;
+}

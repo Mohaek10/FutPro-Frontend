@@ -45,8 +45,8 @@ export class JugadorListComponent implements OnInit {
       equipo: new FormControl(''),
       rareza: new FormControl(''),
       posicion: new FormControl(''),
-      valorMin: new FormControl(''),
-      valorMax: new FormControl(''),
+      valor_min: new FormControl(''),
+      valor_max: new FormControl(''),
       ordering: new FormControl('')
     });
   }

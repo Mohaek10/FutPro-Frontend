@@ -1,0 +1,31 @@
+<div class="compra-dialog-container">
+  <h2 mat-dialog-title>Comprar Jugador</h2>
+  <mat-dialog-content>
+    <form [formGroup]="compraForm">
+      <div class="jugador-info">
+        <img [src]="data.jugador.imagen" alt="{{ data.jugador.nombreCompleto }}" class="jugador-imagen">
+        <div>
+          <h3>{{ data.jugador.nombreCompleto }}</h3>
+          <p>Precio por unidad: {{ data.precio | formatoNumero }} <img src="assets/images/futcoin.webp"
+                                                                       alt="Futcoins Logo" class="w-5 h-5 inline"></p>
+        </div>
+      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Cantidad</mat-label>
+        <input matInput formControlName="cantidad" type="number" max="{{data.cantidad}}" (input)="updatePrecioTotal()">
+        <mat-error *ngIf="compraForm.get('cantidad')?.hasError('required')">La cantidad es requerida</mat-error>
+        <mat-error *ngIf="compraForm.get('cantidad')?.hasError('max')">No puedes comprar más de {{ data.cantidad }}
+          unidades
+        </mat-error>
+        <mat-error *ngIf="compraForm.get('cantidad')?.hasError('min')">La cantidad mínima es 1</mat-error>
+      </mat-form-field>
+      <p class="mt-6"><strong>Total:</strong> {{ precioTotal | formatoNumero }} <img src="assets/images/futcoin.webp"
+                                                                                     alt="Futcoins Logo"
+                                                                                     class="w-5 h-5 inline"></p>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="cancelar()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="comprar()" [disabled]="compraForm.invalid">Comprar</button>
+  </mat-dialog-actions>
+</div>
