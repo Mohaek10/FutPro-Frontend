@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Jugador} from "../../../shared/models/jugador.models";
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {MercadoService} from "../../../core/services/mercado.service";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
