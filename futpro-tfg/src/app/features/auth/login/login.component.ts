@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {AuthService} from "../../../core/services/auth.service";
 import {Router} from "@angular/router";
 import {FormsModule} from "@angular/forms";
+import Swal from 'sweetalert2'
+
 
 @Component({
   selector: 'app-login',
@@ -21,8 +23,16 @@ export class LoginComponent {
 
   onSubmit(): void {
     this.authService.login(this.email, this.password).subscribe({
-      next: () => this.router.navigate(['/']),
-      error: err => console.error('Login failed', err)
+      next: () => {
+        Swal.fire('Bienvenido', 'Has iniciado sesión correctamente', 'success');
+        this.router.navigate(['/']);
+      },
+      error: err => {
+        Swal.fire('Error',
+          'Correo o contraseña incorrectos',
+          'error');
+        console.error(err);
+      }
     });
   }
 

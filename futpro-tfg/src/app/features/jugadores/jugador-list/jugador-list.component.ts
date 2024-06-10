@@ -47,7 +47,7 @@ export class JugadorListComponent implements OnInit {
       posicion: new FormControl(''),
       valorMin: new FormControl(''),
       valorMax: new FormControl(''),
-      orderBy: new FormControl('')
+      ordering: new FormControl('')
     });
   }
 

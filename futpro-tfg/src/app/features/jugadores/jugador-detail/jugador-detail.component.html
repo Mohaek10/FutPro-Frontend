@@ -35,6 +35,9 @@
               Enviar
             </button>
           </form>
+          @if (errorMensaje !== '') {
+            <mat-error class="text-red-500">{{ errorMensaje }}</mat-error>
+          }
 
         </div>
 
