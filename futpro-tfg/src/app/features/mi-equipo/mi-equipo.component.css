@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.jugador-card {
+  margin-bottom: 10px;
+  padding: 10px;
+  background: white;
+  border: 1px solid #ccc;
+  cursor: grab;
+}
+
+.campo-futbol {
+  display: grid;
+  grid-template-areas:
+    'pos0 pos1 pos2 pos3 pos4 pos5'
+    'pos6 pos7 pos8 pos9 pos10';
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.posicion {
+  width: 100px;
+  height: 100px;
+  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.jugador-en-campo {
+  text-align: center;
+}
+
+.jugador-en-campo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
