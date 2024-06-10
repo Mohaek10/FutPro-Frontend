@@ -1,9 +1,11 @@
 import {Component, Input} from '@angular/core';
 import {Jugador} from "../../models/jugador.models";
 import {trigger, state, style, transition, animate} from '@angular/animations';
-import {CurrencyPipe, NgClass, NgStyle} from "@angular/common";
+import {CurrencyPipe, NgClass, NgIf, NgStyle} from "@angular/common";
 import {FormatoNumeroPipe} from "../../pipes/formato-numero.pipe";
 import {Router} from '@angular/router';
+import {MatDialog} from "@angular/material/dialog";
+import {CompraDialogComponent} from "../../../features/mercado/compra-dialog/compra-dialog.component";
 
 @Component({
   selector: 'app-jugador',
@@ -14,7 +16,8 @@ import {Router} from '@angular/router';
     NgStyle,
     NgClass,
     FormatoNumeroPipe,
-    CurrencyPipe
+    CurrencyPipe,
+    NgIf
   ],
   animations: [
     trigger('cardHover', [
@@ -34,9 +37,22 @@ import {Router} from '@angular/router';
 })
 export class JugadorComponent {
   @Input() jugador!: Jugador;
-  cardState = 'default';
+  @Input() showComprar: boolean = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private dialog: MatDialog) {
+  }
+
+  openComprarModal(): void {
+    const dialogRef = this.dialog.open(CompraDialogComponent, {
+      width: '400px',
+      data: {jugador: this.jugador}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.success) {
+        console.log('Compra realizada exitosamente');
+      }
+    });
   }
 
   getBorderColor(rareza: string): string {
@@ -57,5 +73,5 @@ export class JugadorComponent {
   navigateToDetail(): void {
     this.router.navigate(['/jugador', this.jugador.id]);
   }
-  
+
 }

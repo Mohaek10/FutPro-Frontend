@@ -1,11 +1,10 @@
-<div (click)="navigateToDetail()" [ngStyle]="{'border-color': getBorderColor(jugador.rareza)}"
-     class="player-card max-w-xs bg-gradient-to-r from-gray-700 via-gray-900 to-white border-4 border-gray-600 rounded-lg overflow-hidden shadow-lg transform transition duration-500 hover:scale-105 ">
+<div [ngStyle]="{'border-color': getBorderColor(jugador.rareza)}"
+     class="player-card max-w-xs bg-gradient-to-r from-gray-700 via-gray-900 to-white border-4 border-gray-600 rounded-lg overflow-hidden shadow-lg transform transition duration-500 hover:scale-105">
   <div class="relative">
     <img [src]="jugador.imagen" alt="{{ jugador.nombreCompleto }}"
          class="w-full object-cover animate__animated animate__bounceInLeft  transform transition-all hover:scale-150">
     <div class="fondo absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
-    <h2
-      class="absolute bottom-0 left-0 m-4 text-3xl  text-center font-bold text-white">{{ jugador.nombreCompleto }}</h2>
+    <h2 class="absolute bottom-0 left-0 m-4 text-3xl text-center font-bold text-white">{{ jugador.nombreCompleto }}</h2>
   </div>
 
   <div class="p-4 text-white">
@@ -26,10 +25,12 @@
     }"> {{ jugador.rareza }}</span>
     </p>
     <p class="mt-2"><strong>Posición:</strong> {{ jugador.posicion }}</p>
-    <p class="mt-2"><strong>Valor:</strong> {{ jugador.valor | formatoNumero }} <img
-      src="assets/images/futcoin.webp"
-      alt="Futcoins Logo"
-      class="w-5 h-5  inline">
+    <p class="mt-2"><strong>Valor:</strong> {{ jugador.valor | formatoNumero }} <img src="assets/images/futcoin.webp"
+                                                                                     alt="Futcoins Logo"
+                                                                                     class="w-5 h-5 inline">
     </p>
+    <button *ngIf="showComprar" (click)="openComprarModal()"
+            class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Comprar
+    </button>
   </div>
 </div>
