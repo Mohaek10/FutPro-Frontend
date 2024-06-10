@@ -1,6 +1,8 @@
-<div [@cardBought]="boughtState" [ngStyle]="{'border-color': getBorderColor(jugador.rareza)}"
-     class="player-card max-w-xs bg-gradient-to-r from-gray-700 via-gray-900 to-white border-4 border-gray-600 rounded-lg overflow-hidden shadow-lg transform transition duration-500">
-  <div class="relative">
+<div [@cardBought]="boughtState"
+     [ngStyle]="{'border-color': getBorderColor(jugador.rareza)}"
+     class="player-card max-w-xs bg-gradient-to-r from-gray-700 via-gray-900 to-white border-4 border-gray-600 rounded-lg overflow-hidden shadow-lg transform transition duration-500"
+     matTooltip="Ver detalles o comentar">
+  <div (click)="navigateToDetail()" class="relative">
     <img [src]="jugador.imagen" alt="{{ jugador.nombreCompleto }}"
          class="w-full object-cover animate__animated animate__bounceInLeft  transform transition-all hover:scale-150">
     <div class="fondo absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>

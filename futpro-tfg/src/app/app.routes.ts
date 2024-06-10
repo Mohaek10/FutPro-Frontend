@@ -19,5 +19,5 @@ export const routes: Routes = [
   {path: 'admin/users', component: ManageUsersComponent, canActivate: [authGuard, adminGuard]},
   {path: 'jugadores', component: JugadorListComponent},
   {path: 'jugador/:id', component: JugadorDetailComponent},
-  {path: 'mercado-sis', component: MercadoSisComponent},
+  {path: 'mercado-sis', component: MercadoSisComponent, canActivate: [authGuard]},
 ];

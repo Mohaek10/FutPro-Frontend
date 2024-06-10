@@ -6,6 +6,7 @@ import {FormatoNumeroPipe} from "../../pipes/formato-numero.pipe";
 import {Router} from '@angular/router';
 import {MatDialog} from "@angular/material/dialog";
 import {CompraDialogComponent} from "../../../features/mercado/compra-dialog/compra-dialog.component";
+import {MatTooltip} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-jugador',
@@ -17,7 +18,8 @@ import {CompraDialogComponent} from "../../../features/mercado/compra-dialog/com
     NgClass,
     FormatoNumeroPipe,
     CurrencyPipe,
-    NgIf
+    NgIf,
+    MatTooltip
   ],
   animations: [
     trigger('cardBought', [
