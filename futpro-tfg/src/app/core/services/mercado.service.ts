@@ -77,4 +77,9 @@ export class MercadoService {
     const endPoints = this.apiUrl.concat('poner-en-venta/');
     return this.http.post(endPoints, {jugador_usuario: jugadorUsuarioId, cantidad, precio});
   }
+
+  comprarJugadorUsuario(ventaId: number, cantidad: number): Observable<any> {
+    const endPoints = this.apiUrl.concat('comprar-usuario/${ventaId}/');
+    return this.http.post(endPoints, {cantidad});
+  }
 }
