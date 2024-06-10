@@ -83,7 +83,10 @@
         <p class="card-text"><strong>Cantidad:</strong> {{ item.cantidad }}</p>
         <p class="card-text"><strong>Vendedor:</strong> {{ item.vendedor }}</p>
         <p class="card-text"><strong>Fecha:</strong> {{ item.fecha | date: 'medium' }}</p>
-        <mat-button-toggle class="m-2 bg-amber-700">Comprar Jugador</mat-button-toggle>
+        <mat-button-toggle (click)="openCompraDialog( item.jugador, item.id, item.precio, item.cantidad)"
+                           class="m-2 bg-amber-700">
+          Comprar Jugador
+        </mat-button-toggle>
       </div>
     </div>
   </div>

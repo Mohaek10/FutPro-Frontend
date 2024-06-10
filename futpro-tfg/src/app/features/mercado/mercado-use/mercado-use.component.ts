@@ -10,6 +10,10 @@ import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {FormatoNumeroPipe} from "../../../shared/pipes/formato-numero.pipe";
+import {Jugador} from "../../../shared/models/jugador.models";
+import {CompraUserDialogComponent} from "../compra-user-dialog/compra-user-dialog.component";
+import {MatDialog} from '@angular/material/dialog';
+import {AuthService} from "../../../core/services/auth.service";
 
 @Component({
   selector: 'app-mercado-use',
@@ -40,7 +44,7 @@ export class MercadoUseComponent implements OnInit {
   pageSize: number = 12;
   pageIndex: number = 0;
 
-  constructor(private mercadoService: MercadoService) {
+  constructor(private mercadoService: MercadoService, private dialog: MatDialog, private auhtService: AuthService) {
     this.filterForm = new FormGroup({
       equipo: new FormControl(''),
       rareza: new FormControl(''),
@@ -62,6 +66,21 @@ export class MercadoUseComponent implements OnInit {
     this.filterForm.valueChanges.subscribe(value => {
       this.pageIndex = 0;
       this.getMercadoUserList(this.searchControl.value ?? undefined, value);
+    });
+  }
+
+  openCompraDialog(jugador: Jugador, ventaId: number, precio: number, cantidad: number): void {
+    const dialogRef = this.dialog.open(CompraUserDialogComponent, {
+      width: '600px',
+      data: {jugador, ventaId, precio, cantidad}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.success) {
+        console.log('Compra realizada exitosamente');
+        this.getMercadoUserList();
+        this.auhtService.updateUser()
+      }
     });
   }
 
