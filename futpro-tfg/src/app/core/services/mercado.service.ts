@@ -39,4 +39,9 @@ export class MercadoService {
       results: Jugador[]
     }>(endPoints, {params});
   }
+
+  comprarJugadorSistema(jugador_id: number, cantidad: number): Observable<any> {
+    const endPoints = this.apiUrl.concat('comprar-sistema/');
+    return this.http.post(endPoints, {jugador_id, cantidad});
+  }
 }
