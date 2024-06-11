@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
     this.initMenuBackDrop();
     this.initIntersectionObserver();
     this.initMobileMenu();
+    this.authService.updateUser();
 
   }
 
