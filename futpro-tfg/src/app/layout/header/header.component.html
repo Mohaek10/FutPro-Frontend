@@ -81,16 +81,16 @@
       class="flex flex-col items-center text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:block [&>li>a]:px-4 [&>li>a]:py-2"
     >
       <li><a href="jugadores/" class="hover:text-gray-300">Jugadores</a></li>
-      <li><a href="#" class="hover:text-gray-300">Mi Equipo</a></li>
+      <li><a href="equipos/" class="hover:text-gray-300">Mi Equipo</a></li>
       <li><a href="mercado-sis/" class="hover:text-gray-300">Mercado de jugadores</a></li>
-      <li><a href="#" class="hover:text-gray-300">Mercado de Usuarios</a></li>
-      <li><a href="#" class="hover:text-gray-300">Equipos</a></li>
+      <li><a href="mercado-user/" class="hover:text-gray-300">Mercado de Usuarios</a></li>
       <li *ngIf="!isAuthenticated()"><a href="/login" class="hover:text-gray-300">Iniciar Sesión</a></li>
       <li *ngIf="!isAuthenticated()"><a href="/register" class="hover:text-gray-300">Registrarse</a></li>
       <li *ngIf="isAuthenticated()"><a href="#" class="hover:text-gray-300">Ver Perfil</a></li>
-      <li *ngIf="isAuthenticated() && (usuarioActual | async)?.futcoins"><a href="#" class="hover:text-gray-300">Futcoins: {{ (usuarioActual | async)?.futcoins }}
+      <li *ngIf="isAuthenticated() && (usuarioActual | async)?.futcoins"><a href="futcoins/"
+                                                                            class="hover:text-gray-300">Futcoins: {{ (usuarioActual | async)?.futcoins }}
         F</a></li>
-      <li *ngIf="isAdmin()"><a href="/admin/users" class="hover:text-gray-300">Panel de Admin</a></li>
+      <li *ngIf="isAdmin()"><a href="admin/" class="hover:text-gray-300">Panel de Admin</a></li>
     </ul>
   </nav>
 
