@@ -1,0 +1,68 @@
+<div class="container mt-5">
+  <h1 class="text-center">Crear Jugador</h1>
+  <form [formGroup]="jugadorForm" (ngSubmit)="submit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre Completo</mat-label>
+      <input matInput formControlName="nombreCompleto" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Edad</mat-label>
+      <input matInput type="number" formControlName="edad" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Equipo</mat-label>
+      <input matInput formControlName="equipo" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Media</mat-label>
+      <input matInput type="number" formControlName="media" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Rareza</mat-label>
+      <mat-select formControlName="rareza" required>
+        <mat-option value="Común">Común</mat-option>
+        <mat-option value="Rara">Rara</mat-option>
+        <mat-option value="Épica">Épica</mat-option>
+        <mat-option value="Legendaria">Legendaria</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Valor</mat-label>
+      <input matInput type="number" formControlName="valor" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Posición</mat-label>
+      <mat-select formControlName="posicion" required>
+        <mat-option value="DC">Delantero Centro</mat-option>
+        <mat-option value="EI">Extremo Izquierdo</mat-option>
+        <mat-option value="ED">Extremo Derecho</mat-option>
+        <mat-option value="SD">Segundo Delantero</mat-option>
+        <mat-option value="MCO">Mediapunta</mat-option>
+        <mat-option value="CDM">Mediocentro Defensivo</mat-option>
+        <mat-option value="CM">Mediocentro</mat-option>
+        <mat-option value="DFC">Defensa Central</mat-option>
+        <mat-option value="LD">Lateral Derecho</mat-option>
+        <mat-option value="LI">Lateral Izquierdo</mat-option>
+        <mat-option value="CAD">Carrilero Derecho</mat-option>
+        <mat-option value="CAI">Carrilero Izquierdo</mat-option>
+        <mat-option value="PT">Portero</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Imagen</mat-label>
+      <input type="file" (change)="onFileSelected($event)" required>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="en_mercado">En Mercado</mat-checkbox>
+    <mat-checkbox formControlName="isActive">Activo</mat-checkbox>
+
+    <button mat-raised-button color="primary" type="submit">Crear Jugador</button>
+  </form>
+</div>

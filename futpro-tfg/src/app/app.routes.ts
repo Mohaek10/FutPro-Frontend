@@ -15,6 +15,8 @@ import {ManageJugadoresComponent} from "./features/admin/manage-jugadores/manage
 import {ManageEquipoComponent} from "./features/admin/manage-equipo/manage-equipo.component";
 import {ManageUsersComponent} from "./features/admin/manage-users/manage-users.component";
 import {TransaccionesComponent} from "./features/admin/transacciones/transacciones.component";
+import {CreateJugadorComponent} from "./features/admin/jugador/crate-jugador/create-jugador.component";
+import {UpdateJugadorComponent} from "./features/admin/jugador/update-jugador/update-jugador.component";
 
 export const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -31,8 +33,8 @@ export const routes: Routes = [
   {path: 'admin/transacciones', component: TransaccionesComponent, canActivate: [authGuard, adminGuard]},
   // Seccion de admin -- Jugadores
   {path: 'admin/jugadores/edit', component: TransaccionesComponent, canActivate: [authGuard, adminGuard]},
-  {path: 'admin/jugadores/view', component: TransaccionesComponent, canActivate: [authGuard, adminGuard]},
-  {path: 'admin/jugadores/create', component: TransaccionesComponent, canActivate: [authGuard, adminGuard]},
+  {path: 'admin/jugadores/view', component: UpdateJugadorComponent, canActivate: [authGuard, adminGuard]},
+  {path: 'admin/jugadores/create', component: CreateJugadorComponent, canActivate: [authGuard, adminGuard]},
 
 
   {path: 'jugadores', component: JugadorListComponent},

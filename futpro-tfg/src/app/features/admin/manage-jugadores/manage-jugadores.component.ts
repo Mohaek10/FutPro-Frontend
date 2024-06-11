@@ -21,6 +21,7 @@ import {MatOption, MatSelect} from "@angular/material/select";
 import {MatButtonToggle} from "@angular/material/button-toggle";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatCheckbox} from "@angular/material/checkbox";
+import {ConfirmDialogComponent} from "./confirm-dialog.component";
 
 @Component({
   selector: 'app-manage-jugadores',
@@ -102,12 +103,21 @@ export class ManageJugadoresComponent implements OnInit {
   }
 
   deleteJugador(id: number): void {
-    if (confirm('¿Estás seguro de que deseas eliminar este jugador?')) {
-      this.jugadoresService.deleteJugador(id).subscribe(() => {
-        this.snackBar.open('Jugador eliminado exitosamente', 'Cerrar', {duration: 3000});
-        this.getJugadores();
-      });
-    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.jugadoresService.deleteJugador(id).subscribe({
+          next: () => {
+            this.snackBar.open('Jugador eliminado exitosamente', 'Cerrar', {duration: 5000});
+            this.getJugadores();
+          },
+          error: err => {
+            this.snackBar.open('Error al eliminar el jugador' + err, 'Cerrar', {duration: 5000});
+            console.error(err);
+          }
+        });
+      }
+    });
   }
 
   editJugador(id: number): void {
