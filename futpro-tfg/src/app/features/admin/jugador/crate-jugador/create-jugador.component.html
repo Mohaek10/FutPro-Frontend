@@ -1,68 +1,92 @@
-<div class="container mt-5">
-  <h1 class="text-center">Crear Jugador</h1>
-  <form [formGroup]="jugadorForm" (ngSubmit)="submit()">
-    <mat-form-field appearance="fill">
-      <mat-label>Nombre Completo</mat-label>
-      <input matInput formControlName="nombreCompleto" required>
-    </mat-form-field>
+<div class="container mt-20 text-white">
+  <h1 class="text-center mb-8">Crear Jugador</h1>
+  <div class="flex flex-col lg:flex-row justify-center items-center">
+    <div class="lg:w-1/3 w-full flex justify-center lg:justify-start mb-4 lg:mb-0">
+      <div class="w-3/4 lg:w-full">
+        <label class="block mb-2">Imagen</label>
+        <input type="file" (change)="onFileSelected($event)" required class="block mb-2 w-full text-white">
+        <div *ngIf="jugadorForm.get('imagen')?.hasError('required')" class="text-red-500">Imagen es obligatorio</div>
+        <img alt="Imagen" [src]="imagePreview" *ngIf="imagePreview" class="preview-image rounded-lg mt-4">
+      </div>
+    </div>
+    <div class="lg:w-2/3 w-full">
+      <form [formGroup]="jugadorForm" (ngSubmit)="submit()" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Nombre Completo</mat-label>
+          <input matInput formControlName="nombreCompleto" required>
+          <mat-error *ngIf="jugadorForm.get('nombreCompleto')?.hasError('required')">Nombre Completo es obligatorio
+          </mat-error>
+        </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Edad</mat-label>
-      <input matInput type="number" formControlName="edad" required>
-    </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Edad</mat-label>
+          <input matInput type="number" formControlName="edad" required>
+          <mat-error *ngIf="jugadorForm.get('edad')?.hasError('required')">Edad es obligatorio</mat-error>
+          <mat-error *ngIf="jugadorForm.get('edad')?.hasError('min')">Edad no puede ser menor que 0</mat-error>
+          <mat-error *ngIf="jugadorForm.get('edad')?.hasError('max')">Edad no puede ser mayor que 100</mat-error>
+        </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Equipo</mat-label>
-      <input matInput formControlName="equipo" required>
-    </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Equipo</mat-label>
+          <input matInput formControlName="equipo" required>
+          <mat-error *ngIf="jugadorForm.get('equipo')?.hasError('required')">Equipo es obligatorio</mat-error>
+        </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Media</mat-label>
-      <input matInput type="number" formControlName="media" required>
-    </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Media</mat-label>
+          <input matInput type="number" formControlName="media" required>
+          <mat-error *ngIf="jugadorForm.get('media')?.hasError('required')">Media es obligatorio</mat-error>
+          <mat-error *ngIf="jugadorForm.get('media')?.hasError('min')">Media no puede ser menor que 0</mat-error>
+          <mat-error *ngIf="jugadorForm.get('media')?.hasError('max')">Media no puede ser mayor que 100</mat-error>
+        </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Rareza</mat-label>
-      <mat-select formControlName="rareza" required>
-        <mat-option value="Común">Común</mat-option>
-        <mat-option value="Rara">Rara</mat-option>
-        <mat-option value="Épica">Épica</mat-option>
-        <mat-option value="Legendaria">Legendaria</mat-option>
-      </mat-select>
-    </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Rareza</mat-label>
+          <mat-select formControlName="rareza" required>
+            <mat-option value="Común">Común</mat-option>
+            <mat-option value="Rara">Rara</mat-option>
+            <mat-option value="Épica">Épica</mat-option>
+            <mat-option value="Legendaria">Legendaria</mat-option>
+          </mat-select>
+          <mat-error *ngIf="jugadorForm.get('rareza')?.hasError('required')">Rareza es obligatorio</mat-error>
+        </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Valor</mat-label>
-      <input matInput type="number" formControlName="valor" required>
-    </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Valor</mat-label>
+          <input matInput type="number" formControlName="valor" required>
+          <mat-error *ngIf="jugadorForm.get('valor')?.hasError('required')">Valor es obligatorio</mat-error>
+          <mat-error *ngIf="jugadorForm.get('valor')?.hasError('min')">Valor no puede ser negativo</mat-error>
+        </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Posición</mat-label>
-      <mat-select formControlName="posicion" required>
-        <mat-option value="DC">Delantero Centro</mat-option>
-        <mat-option value="EI">Extremo Izquierdo</mat-option>
-        <mat-option value="ED">Extremo Derecho</mat-option>
-        <mat-option value="SD">Segundo Delantero</mat-option>
-        <mat-option value="MCO">Mediapunta</mat-option>
-        <mat-option value="CDM">Mediocentro Defensivo</mat-option>
-        <mat-option value="CM">Mediocentro</mat-option>
-        <mat-option value="DFC">Defensa Central</mat-option>
-        <mat-option value="LD">Lateral Derecho</mat-option>
-        <mat-option value="LI">Lateral Izquierdo</mat-option>
-        <mat-option value="CAD">Carrilero Derecho</mat-option>
-        <mat-option value="CAI">Carrilero Izquierdo</mat-option>
-        <mat-option value="PT">Portero</mat-option>
-      </mat-select>
-    </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Posición</mat-label>
+          <mat-select formControlName="posicion" required>
+            <mat-option value="DC">Delantero Centro</mat-option>
+            <mat-option value="EI">Extremo Izquierdo</mat-option>
+            <mat-option value="ED">Extremo Derecho</mat-option>
+            <mat-option value="SD">Segundo Delantero</mat-option>
+            <mat-option value="MCO">Mediapunta</mat-option>
+            <mat-option value="CDM">Mediocentro Defensivo</mat-option>
+            <mat-option value="CM">Mediocentro</mat-option>
+            <mat-option value="DFC">Defensa Central</mat-option>
+            <mat-option value="LD">Lateral Derecho</mat-option>
+            <mat-option value="LI">Lateral Izquierdo</mat-option>
+            <mat-option value="CAD">Carrilero Derecho</mat-option>
+            <mat-option value="CAI">Carrilero Izquierdo</mat-option>
+            <mat-option value="PT">Portero</mat-option>
+          </mat-select>
+          <mat-error *ngIf="jugadorForm.get('posicion')?.hasError('required')">Posición es obligatorio</mat-error>
+        </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Imagen</mat-label>
-      <input type="file" (change)="onFileSelected($event)" required>
-    </mat-form-field>
+        <div class="col-span-1 flex  items-center">
+          <mat-checkbox formControlName="en_mercado">En Mercado</mat-checkbox>
+          <mat-checkbox formControlName="isActive">Activo</mat-checkbox>
+        </div>
 
-    <mat-checkbox formControlName="en_mercado">En Mercado</mat-checkbox>
-    <mat-checkbox formControlName="isActive">Activo</mat-checkbox>
-
-    <button mat-raised-button color="primary" type="submit">Crear Jugador</button>
-  </form>
+        <div class="col-span-2 flex justify-center">
+          <button mat-raised-button color="primary" type="submit">Crear Jugador</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
