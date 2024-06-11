@@ -1,5 +1,12 @@
 import {Component, Inject} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators
+} from "@angular/forms";
 import {UserService} from "../../../core/services/user.service";
 import {
   MAT_DIALOG_DATA,
@@ -34,6 +41,9 @@ import {MatButton} from "@angular/material/button";
 })
 export class CompraFutcoinsDialogComponent {
   compraForm: FormGroup;
+  localStorage = localStorage.getItem('currentUser')?.toString();
+  usuario = JSON.parse(this.localStorage || '{}');
+  nombreDelUsuario = this.usuario.first_name + ' ' + this.usuario.last_name;
 
   constructor(
     private fb: FormBuilder,
@@ -43,8 +53,8 @@ export class CompraFutcoinsDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: { lote: any }
   ) {
     this.compraForm = this.fb.group({
-      numero_tarjeta: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]],
-      fecha_expiracion: ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]],
+      numero_tarjeta: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16), numeroTarjetaValidator, sinEspaciosValidator]],
+      fecha_expiracion: ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/), fechaExpiracionValidator]],
       cvv: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]]
     });
   }
@@ -76,4 +86,42 @@ export class CompraFutcoinsDialogComponent {
   }
 
 
+}
+
+function fechaExpiracionValidator(control: AbstractControl): ValidationErrors | null {
+  const value = control.value;
+  const [month, year] = value.split('/').map(Number);
+  const currentYear = new Date().getFullYear() % 100;
+
+  if (month > 12 || month < 1) {
+    return {'monthInvalid': true};
+  }
+
+  if (year < currentYear || year < 24) {
+    return {'yearInvalid': true};
+  }
+
+  return null;
+}
+
+function numeroTarjetaValidator(control: AbstractControl): ValidationErrors | null {
+  const value = control.value;
+  const isNumber = !isNaN(value);
+
+  if (!isNumber) {
+    return {'notNumber': true};
+  }
+
+  return null;
+}
+
+function sinEspaciosValidator(control: AbstractControl): ValidationErrors | null {
+  const value = control.value;
+  const tieneEspacios = /\s/.test(value);
+
+  if (tieneEspacios) {
+    return {'tieneEspacios': true};
+  }
+
+  return null;
 }

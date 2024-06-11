@@ -6,13 +6,15 @@ import {CompraFutcoinsDialogComponent} from "./compra-futcoins-dialog/compra-fut
 import {AuthService} from "../../core/services/auth.service";
 import {MatButton} from "@angular/material/button";
 import {NgForOf} from "@angular/common";
+import {FormatoNumeroPipe} from "../../shared/pipes/formato-numero.pipe";
 
 @Component({
   selector: 'app-futcoins',
   standalone: true,
   imports: [
     MatButton,
-    NgForOf
+    NgForOf,
+    FormatoNumeroPipe
   ],
   templateUrl: './futcoins.component.html',
   styleUrl: './futcoins.component.css'
