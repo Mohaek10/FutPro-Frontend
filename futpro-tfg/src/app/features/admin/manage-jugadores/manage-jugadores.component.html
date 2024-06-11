@@ -97,6 +97,14 @@
       <th mat-header-cell *matHeaderCellDef> Posición</th>
       <td mat-cell *matCellDef="let element"> {{ element.posicion }}</td>
     </ng-container>
+ 
+
+    <ng-container matColumnDef="en_mercado">
+      <th mat-header-cell *matHeaderCellDef> En Mercado</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [(ngModel)]="element.en_mercado" (change)="updateJugador(element)">En Mercado</mat-checkbox>
+      </td>
+    </ng-container>
 
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones</th>
@@ -116,6 +124,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
   <mat-paginator [length]="totalJugadores" [pageSize]="pageSize" [pageIndex]="pageIndex"
                  (page)="handlePageEvent($event)" class="mt-5">
 

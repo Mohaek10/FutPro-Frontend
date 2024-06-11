@@ -15,11 +15,12 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
-import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormField, MatInput, MatLabel} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatButtonToggle} from "@angular/material/button-toggle";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
+import {MatCheckbox} from "@angular/material/checkbox";
 
 @Component({
   selector: 'app-manage-jugadores',
@@ -45,13 +46,15 @@ import {MatPaginator, PageEvent} from "@angular/material/paginator";
     MatLabel,
     MatButtonToggle,
     MatOption,
-    MatPaginator
+    MatPaginator,
+    MatCheckbox,
+    FormsModule
   ],
   templateUrl: './manage-jugadores.component.html',
   styleUrl: './manage-jugadores.component.css'
 })
 export class ManageJugadoresComponent implements OnInit {
-  displayedColumns: string[] = ['nombreCompleto', 'equipo', 'edad', 'media', 'rareza', 'posicion', 'acciones'];
+  displayedColumns: string[] = ['nombreCompleto', 'equipo', 'edad', 'media', 'rareza', 'posicion', 'en_mercado', 'acciones'];
   dataSource: MatTableDataSource<Jugador> = new MatTableDataSource();
   searchControl = new FormControl('');
   filterForm: FormGroup;
@@ -117,6 +120,13 @@ export class ManageJugadoresComponent implements OnInit {
 
   createJugador(): void {
     this.router.navigate(['/admin/jugadores/create']);
+  }
+
+  updateJugador(jugador: Jugador): void {
+    this.jugadoresService.updateJugador(jugador.id, jugador).subscribe(() => {
+      this.snackBar.open('Jugador actualizado exitosamente', 'Cerrar', {duration: 3000});
+      this.getJugadores();
+    });
   }
 
 

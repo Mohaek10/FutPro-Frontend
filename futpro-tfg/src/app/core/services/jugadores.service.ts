@@ -45,13 +45,40 @@ export class JugadoresService {
     return this.http.get<Jugador>(`${this.apiUrl}${id}/`);
   }
 
-  createJugador(jugador: Jugador): Observable<Jugador> {
-    return this.http.post<Jugador>(this.apiUrl, jugador);
+  createJugador(jugador: Jugador, imagen: File): Observable<Jugador> {
+    const formData = new FormData();
+    formData.append('nombreCompleto', jugador.nombreCompleto);
+    formData.append('edad', jugador.edad.toString());
+    formData.append('equipo', jugador.equipo.toString());
+    formData.append('media', jugador.media.toString());
+    formData.append('rareza', jugador.rareza);
+    formData.append('imagen', imagen);
+    formData.append('valor', jugador.valor.toString());
+    formData.append('posicion', jugador.posicion);
+    formData.append('en_mercado', jugador.en_mercado.toString());
+    formData.append('isActive', jugador.isActive.toString());
+
+    return this.http.post<Jugador>(this.apiUrl, formData);
   }
 
-  updateJugador(id: number, jugador: Jugador): Observable<Jugador> {
-    return this.http.put<Jugador>(`${this.apiUrl}${id}/`, jugador);
+  updateJugador(id: number, jugador: Jugador, imagen?: File): Observable<Jugador> {
+    const formData = new FormData();
+    formData.append('nombreCompleto', jugador.nombreCompleto);
+    formData.append('edad', jugador.edad.toString());
+    formData.append('equipo', jugador.equipo.toString());
+    formData.append('media', jugador.media.toString());
+    formData.append('rareza', jugador.rareza);
+    if (imagen) {
+      formData.append('imagen', imagen);
+    }
+    formData.append('valor', jugador.valor.toString());
+    formData.append('posicion', jugador.posicion);
+    formData.append('en_mercado', jugador.en_mercado.toString());
+    formData.append('isActive', jugador.isActive.toString());
+
+    return this.http.put<Jugador>(`${this.apiUrl}${id}/`, formData);
   }
+
 
   deleteJugador(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}${id}/`);

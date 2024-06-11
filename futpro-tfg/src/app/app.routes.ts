@@ -22,13 +22,18 @@ export const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'forbidden', component: ForbiddenComponent},
-  
+
   // Seccion de admin
   {path: 'admin', component: AdminDashboardComponent, canActivate: [authGuard, adminGuard]},
   {path: 'admin/jugadores', component: ManageJugadoresComponent, canActivate: [authGuard, adminGuard]},
   {path: 'admin/equipos', component: ManageEquipoComponent, canActivate: [authGuard, adminGuard]},
   {path: 'admin/usuarios', component: ManageUsersComponent, canActivate: [authGuard, adminGuard]},
   {path: 'admin/transacciones', component: TransaccionesComponent, canActivate: [authGuard, adminGuard]},
+  // Seccion de admin -- Jugadores
+  {path: 'admin/jugadores/edit', component: TransaccionesComponent, canActivate: [authGuard, adminGuard]},
+  {path: 'admin/jugadores/view', component: TransaccionesComponent, canActivate: [authGuard, adminGuard]},
+  {path: 'admin/jugadores/create', component: TransaccionesComponent, canActivate: [authGuard, adminGuard]},
+
 
   {path: 'jugadores', component: JugadorListComponent},
   {path: 'jugador/:id', component: JugadorDetailComponent},
