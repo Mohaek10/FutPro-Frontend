@@ -35,6 +35,8 @@ export class AuthService {
             futcoins: response.futcoins,
             date_joined: new Date(response.date_joined),
             is_admin: response.is_admin,
+            last_login: new Date(response.last_login),
+            is_active: response.is_active,
           };
           localStorage.setItem('currentUser', JSON.stringify(user));
           localStorage.setItem('accessToken', response.token.access);
@@ -62,6 +64,8 @@ export class AuthService {
             futcoins: response.futcoins,
             date_joined: new Date(response.date_joined),
             is_admin: response.is_admin,
+            last_login: new Date(response.last_login),
+            is_active: response.is_active,
           };
           localStorage.setItem('currentUser', JSON.stringify(newUser));
           localStorage.setItem('accessToken', response.token.access);

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {LoteFutCoins} from "../../shared/models/lote-futcoins.models";
+import {User} from "../../shared/models/user.models";
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,13 @@ export class UserService {
 
   comprarFutCoins(compraData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}comprar-futcoins/`, compraData);
+  }
+
+  getUserProfile(): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}user/me/`);
+  }
+
+  updateUserProfile(data: Partial<User>): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}user/me/`, data);
   }
 }

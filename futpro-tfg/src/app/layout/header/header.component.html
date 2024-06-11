@@ -45,8 +45,8 @@
             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
             @if (verMenuPerfil) {
               <div class="py-1" role="none">
-                <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem"
-                   tabindex="-1">Ver Datos</a>
+                <a href="perfil/" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem"
+                   tabindex="-1">Ver Perfil</a>
                 <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem"
                    tabindex="-1">Actualizar Datos</a>
                 <a href="transacciones/" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem"
@@ -87,7 +87,7 @@
       <li><a href="mercado-user/" class="hover:text-gray-300">Mercado de Usuarios</a></li>
       <li *ngIf="!isAuthenticated()"><a href="/login" class="hover:text-gray-300">Iniciar Sesión</a></li>
       <li *ngIf="!isAuthenticated()"><a href="/register" class="hover:text-gray-300">Registrarse</a></li>
-      <li *ngIf="isAuthenticated()"><a href="#" class="hover:text-gray-300">Ver Perfil</a></li>
+      <li *ngIf="isAuthenticated()"><a href="perfil/" class="hover:text-gray-300">Ver Perfil</a></li>
       <li *ngIf="isAuthenticated() && (usuarioActual | async)?.futcoins"><a href="futcoins/"
                                                                             class="hover:text-gray-300">Futcoins: {{ (usuarioActual | async)?.futcoins }}
         F</a></li>

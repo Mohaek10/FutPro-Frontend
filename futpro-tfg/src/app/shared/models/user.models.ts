@@ -7,4 +7,6 @@ export interface User {
   futcoins: number;
   date_joined: Date;
   is_admin: boolean;
+  last_login: Date;
+  is_active: boolean;
 }

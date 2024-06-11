@@ -31,6 +31,8 @@
         <mat-label>Apellidos</mat-label>
         <input matInput formControlName="last_name" required>
         <mat-error *ngIf="registerForm.get('last_name')?.hasError('required')">Apellidos es obligatorio</mat-error>
+        <mat-error *ngIf="registerForm.get('last_name')?.hasError('whitespace')">Tiene que ser un apellido válido
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill" class="w-full">
         <mat-label>Email</mat-label>

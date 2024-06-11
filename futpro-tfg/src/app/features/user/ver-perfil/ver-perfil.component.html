@@ -1,0 +1,58 @@
+<div class="container mx-auto mt-20 bg-gradient-to-b from-indigo-950 to-cyan-800 rounded-3xl p-5 text-white">
+  <h1 class="text-center text-4xl font-light mb-8">Mi Perfil</h1>
+
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="first_name" required>
+      <mat-error *ngIf="profileForm.get('first_name')?.hasError('required')">Nombre es obligatorio</mat-error>
+      <mat-error *ngIf="profileForm.get('first_name')?.hasError('whitespace')">Tiene que ser un nombre válido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Apellido</mat-label>
+      <input matInput formControlName="last_name" required>
+      <mat-error *ngIf="profileForm.get('last_name')?.hasError('required')">El apellido es obligatorio</mat-error>
+      <mat-error *ngIf="profileForm.get('last_name')?.hasError('whitespace')">Tiene que ser un apellido válido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Número de Teléfono</mat-label>
+      <input matInput formControlName="phone_number" [maxLength]="9" [minlength]="9" required>
+      <mat-error *ngIf="profileForm.get('phone_number')?.hasError('required')">El telefono es obligatorio</mat-error>
+      <mat-error *ngIf="profileForm.get('phone_number')?.hasError('pattern')">Tiene que ser un número válido, que
+        tenga
+        9 dígitos.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Usename</mat-label>
+      <input matInput formControlName="username">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>futcoins</mat-label>
+      <input matInput formControlName="futcoins">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Fecha de alta</mat-label>
+      <input matInput formControlName="date_joined">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Ultimo inicio de sesión</mat-label>
+      <input matInput formControlName="last_login">
+    </mat-form-field>
+
+
+    <div class="col-span-2 flex justify-center">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!profileForm.valid">Actualizar Perfil</button>
+    </div>
+  </form>
+</div>
