@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {FooterComponent} from "../../layout/footer/footer.component";
 
 @Component({
   selector: 'app-notfound',
   standalone: true,
-  imports: [],
+  imports: [
+    FooterComponent
+  ],
   templateUrl: './notfound.component.html',
   styleUrl: './notfound.component.css'
 })
