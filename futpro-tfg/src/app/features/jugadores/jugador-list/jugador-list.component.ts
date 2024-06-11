@@ -10,6 +10,7 @@ import {MatOption, MatSelect} from "@angular/material/select";
 import {MatButton} from "@angular/material/button";
 import {MatButtonToggle} from "@angular/material/button-toggle";
 import {MatPaginatorModule, PageEvent} from "@angular/material/paginator";
+import {FooterComponent} from "../../../layout/footer/footer.component";
 
 @Component({
   selector: 'app-jugador-list',
@@ -28,6 +29,7 @@ import {MatPaginatorModule, PageEvent} from "@angular/material/paginator";
     MatButtonToggle,
     NgIf,
     MatPaginatorModule,
+    FooterComponent,
   ],
   templateUrl: './jugador-list.component.html',
   styleUrl: './jugador-list.component.css'

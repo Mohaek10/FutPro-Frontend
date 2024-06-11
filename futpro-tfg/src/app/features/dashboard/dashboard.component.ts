@@ -1,10 +1,11 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {HeaderComponent} from "../../layout/header/header.component";
+import {FooterComponent} from "../../layout/footer/footer.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, FooterComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

@@ -3,6 +3,7 @@ import {UserService} from "../../core/services/user.service";
 import {NgForOf, NgIf, NgStyle} from "@angular/common";
 import {JugadorComponent} from "../../shared/components/jugador/jugador.component";
 import {Jugador} from "../../shared/models/jugador.models";
+import {FooterComponent} from "../../layout/footer/footer.component";
 
 @Component({
   selector: 'app-mi-equipo',
@@ -11,7 +12,8 @@ import {Jugador} from "../../shared/models/jugador.models";
     NgIf,
     NgStyle,
     NgForOf,
-    JugadorComponent
+    JugadorComponent,
+    FooterComponent
   ],
   templateUrl: './mi-equipo.component.html',
   styleUrls: ['./mi-equipo.component.css']

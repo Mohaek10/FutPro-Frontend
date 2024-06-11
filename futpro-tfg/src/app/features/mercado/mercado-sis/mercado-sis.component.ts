@@ -11,6 +11,7 @@ import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
+import {FooterComponent} from "../../../layout/footer/footer.component";
 
 @Component({
   selector: 'app-mercado-sis',
@@ -27,7 +28,8 @@ import {MatButton} from "@angular/material/button";
     NgForOf,
     NgIf,
     ReactiveFormsModule,
-    MatButton
+    MatButton,
+    FooterComponent
   ],
   templateUrl: './mercado-sis.component.html',
   styleUrl: './mercado-sis.component.css'

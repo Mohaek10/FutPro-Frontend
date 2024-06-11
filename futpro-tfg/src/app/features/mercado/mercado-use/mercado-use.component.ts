@@ -14,6 +14,7 @@ import {Jugador} from "../../../shared/models/jugador.models";
 import {CompraUserDialogComponent} from "../compra-user-dialog/compra-user-dialog.component";
 import {MatDialog} from '@angular/material/dialog';
 import {AuthService} from "../../../core/services/auth.service";
+import {FooterComponent} from "../../../layout/footer/footer.component";
 
 @Component({
   selector: 'app-mercado-use',
@@ -31,7 +32,8 @@ import {AuthService} from "../../../core/services/auth.service";
     ReactiveFormsModule,
     NgForOf,
     FormatoNumeroPipe,
-    DatePipe
+    DatePipe,
+    FooterComponent
   ],
   templateUrl: './mercado-use.component.html',
   styleUrl: './mercado-use.component.css'
