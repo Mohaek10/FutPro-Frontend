@@ -45,12 +45,12 @@ export class RegisterComponent {
     private router: Router
   ) {
     this.registerForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3), NoWhitespaceValidator()]],
+      username: ['', [Validators.required, Validators.minLength(3), NoWhitespaceValidator(), NoInnerWhitespaceValidator()]],
       email: ['', [Validators.required, Validators.email]],
       first_name: ['', [Validators.required, Validators.minLength(3), NoWhitespaceValidator()]],
       last_name: ['', [Validators.required, Validators.minLength(3), NoWhitespaceValidator()]],
       phone_number: ['', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/.*\d.*/)]], // Añadido el validador de patrón
+      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/.*\d.*/)]],
       password2: ['', Validators.required],
       acceptTerms: [false, Validators.requiredTrue]
     }, {validators: this.validacionConfirm});
@@ -95,5 +95,13 @@ export function NoWhitespaceValidator(): ValidatorFn {
     const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : {'whitespace': true};
+  };
+}
+
+export function NoInnerWhitespaceValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const hasInnerWhitespace = /\s+/.test(control.value);
+    const isValid = !hasInnerWhitespace;
+    return isValid ? null : {'innerWhitespace': true};
   };
 }

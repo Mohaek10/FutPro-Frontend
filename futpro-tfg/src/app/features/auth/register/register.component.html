@@ -9,12 +9,16 @@
     </div>
     <form [formGroup]="registerForm" (ngSubmit)="register()" class="sm:grid-cols-2  ">
       <mat-form-field appearance="fill" class="w-full">
-        <mat-label>Usuario</mat-label>
+        <mat-label>Nombre de usuario</mat-label>
         <input matInput formControlName="username" required>
         <mat-error *ngIf="registerForm.get('username')?.hasError('required')">Usuario es obligatorio</mat-error>
-        <mat-error *ngIf="registerForm.get('username')?.hasError('whitespace')">Usuario que ser un nombre válido
+        <mat-error *ngIf="registerForm.get('username')?.hasError('whitespace')">Usuario tiene que ser válido, sin
+          espacios
         </mat-error>
         <mat-error *ngIf="registerForm.get('username')?.hasError('minlength')">Tiene que ser de 8 carácteres</mat-error>
+        <mat-error *ngIf="registerForm.get('username')?.hasError('innerWhitespace')">Usuario tiene que ser válido, sin
+          espacios
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill" class="w-full">
         <mat-label>Nombre</mat-label>

@@ -3,7 +3,7 @@
   <mat-dialog-content>
     <form [formGroup]="compraForm">
       <div class="jugador-info">
-        <img [src]="data.jugador.imagen" alt="{{ data.jugador.nombreCompleto }}" class="jugador-imagen">
+        <img [src]="data.jugador.imagen" alt="{{ data.jugador.nombreCompleto }}" class="jugador-imagen max-h-52">
         <div>
           <h3>{{ data.jugador.nombreCompleto }}</h3>
           <p>Precio por unidad: {{ data.precio | formatoNumero }} <img src="assets/images/futcoin.webp"
