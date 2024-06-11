@@ -131,7 +131,7 @@ export class UpdateJugadorComponent implements OnInit {
   submit(): void {
     if (this.jugadorForm.valid) {
       const jugador = this.jugadorForm.getRawValue();
-      jugador.equipo = jugador.equipo.id;
+      jugador.equipo = jugador.equipoId;
 
       this.jugadoresService.updateJugador(this.jugadorId!, jugador, this.selectedFile).subscribe({
         next: () => {
