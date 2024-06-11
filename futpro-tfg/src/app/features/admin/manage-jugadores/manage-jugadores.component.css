@@ -9,3 +9,11 @@ table {
 button {
   margin: 5px;
 }
+
+mat-button-toggle {
+  background: #6ca456;
+}
+
+.color-ojo {
+  color: white;
+}
