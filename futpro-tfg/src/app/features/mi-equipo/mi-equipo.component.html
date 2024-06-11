@@ -11,10 +11,11 @@
     <div class=" flex justify-center  ">
       <h1 class="text-6xl text-white text-center rounded-2xl pb-4 p-2 bg-gray-900  font-bold mt-8">Mi Equipo</h1>
     </div>
-
-    <hr class="w-full h-1 mx-auto my-1 bg-white border-0 rounded md:my-10 ">
-    <h2 class="text-4xl text-white text-center font-semibold">Delanteros</h2>
-    <hr class="w-full h-1 mx-auto my-4 bg-white border-0 rounded md:my-10 ">
+    <div class="header-title">
+      <hr class="w-full h-1 mx-auto my-1 bg-white border-0 rounded md:my-10 ">
+      <h2 class="text-4xl text-white text-center font-semibold">Delanteros</h2>
+      <hr class="w-full h-1 mx-auto my-4 bg-white border-0 rounded md:my-10 ">
+    </div>
     <div class="delanteros rounded-2xl">
       <div class="flex overflow-x-auto p-5 space-x-5">
         <div class="flex-none" *ngFor="let jugador of delanteros">
@@ -22,10 +23,11 @@
         </div>
       </div>
     </div>
-
-    <hr class="w-full h-1 mx-auto my-4 bg-white border-0 rounded md:my-10 ">
-    <h2 class="text-4xl text-white text-center font-semibold mb-5">Centrocampistas</h2>
-    <hr class="w-full h-1 mx-auto my-4 bg-white border-0 rounded md:my-10 ">
+    <div class="header-title">
+      <hr class="w-full h-1 mx-auto my-4 bg-white border-0 rounded md:my-10 ">
+      <h2 class="text-4xl text-white text-center font-semibold mb-5">Centrocampistas</h2>
+      <hr class="w-full h-1 mx-auto my-4 bg-white border-0 rounded md:my-10 ">
+    </div>
     <div class="centrocampistas rounded-2xl">
       <div class="flex overflow-x-auto p-5 space-x-5">
         <div class="flex-none" *ngFor="let jugador of centrocampistas">
@@ -34,9 +36,11 @@
       </div>
     </div>
 
-    <hr class="w-full h-1 mx-auto my-4 bg-white border-0 rounded md:my-10 ">
-    <h2 class="text-4xl text-white text-center font-semibold mb-5">Defensas y Porteros</h2>
-    <hr class="w-full h-1 mx-auto my-4 bg-white border-0 rounded md:my-10 ">
+    <div class="header-title">
+      <hr class="w-full h-1 mx-auto my-4 bg-white border-0 rounded md:my-10 ">
+      <h2 class="text-4xl text-white text-center font-semibold mb-5">Defensas y Porteros</h2>
+      <hr class="w-full h-1 mx-auto my-4 bg-white border-0 rounded md:my-10 ">
+    </div>
     <div class="defensas rounded-2xl">
       <div class="flex overflow-x-auto p-5 space-x-5">
         <div class="flex-none" *ngFor="let jugador of defensasYPorteros">

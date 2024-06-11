@@ -61,6 +61,12 @@ section {
   z-index: -1;
 }
 
+.header-title {
+  background-image: url("../../../assets/images/header-miequipo.png");
+  background-size: cover;
+  background-position: center;
+}
+
 .bg-gray-900 {
   background-color: #121212;
 }
