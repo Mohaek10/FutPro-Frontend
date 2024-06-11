@@ -23,6 +23,7 @@ import {UpdateEquipoComponent} from "./features/admin/equipo/update-equipo/updat
 import {ViewEquipoComponent} from "./features/admin/equipo/view-equipo/view-equipo.component";
 import {NotfoundComponent} from "./errors/notfound/notfound.component";
 import {FutcoinsComponent} from "./features/futcoins/futcoins.component";
+import {MisTransaccionesComponent} from "./features/user/mis-transacciones/mis-transacciones.component";
 
 export const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -54,6 +55,7 @@ export const routes: Routes = [
   {path: 'mi-equipo', component: MiEquipoComponent, canActivate: [authGuard]},
 
   {path: 'futcoins', component: FutcoinsComponent, canActivate: [authGuard]},
+  {path: 'transacciones', component: MisTransaccionesComponent, canActivate: [authGuard]},
 
   {path: '404', component: NotfoundComponent},
   {path: '**', component: NotfoundComponent}

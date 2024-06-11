@@ -103,4 +103,14 @@ export class MercadoService {
     }>(`${this.apiUrl}transacciones-admin/`, {params});
   }
 
+  getTransaccionesUsuario(search?: string, page: number = 1, pageSize: number = 10): Observable<any> {
+    let params = new HttpParams();
+    if (search) {
+      params = params.set('search', search);
+    }
+    params = params.set('limit', pageSize.toString());
+    params = params.set('offset', ((page - 1) * pageSize).toString());
+
+    return this.http.get<any>(`${this.apiUrl}transacciones-usuario/`, {params});
+  }
 }
