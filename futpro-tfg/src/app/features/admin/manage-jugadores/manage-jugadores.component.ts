@@ -22,6 +22,7 @@ import {MatButtonToggle} from "@angular/material/button-toggle";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {ConfirmDialogComponent} from "./confirm-dialog.component";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-manage-jugadores',
@@ -67,7 +68,8 @@ export class ManageJugadoresComponent implements OnInit {
     private jugadoresService: JugadoresService,
     private router: Router,
     private snackBar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public location: Location
   ) {
     this.filterForm = new FormGroup({
       equipo: new FormControl(''),
@@ -153,5 +155,8 @@ export class ManageJugadoresComponent implements OnInit {
     this.getJugadores(this.searchControl.value ?? undefined, this.filterForm.value);
   }
 
+  goBack() {
+    this.location.back();
+  }
 
 }
