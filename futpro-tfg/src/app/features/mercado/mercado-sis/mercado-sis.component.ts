@@ -67,7 +67,7 @@ export class MercadoSisComponent implements OnInit {
   }
 
   getMercadoSisList(search?: string, filters?: any): void {
-    this.mercadoService.getJugadoresMercadoSistema(search, filters, this.pageIndex, this.pageSize).subscribe(data => {
+    this.mercadoService.getJugadoresMercadoSistema(search, filters, this.pageIndex + 1, this.pageSize).subscribe(data => {
       this.jugadores = data.results;
       this.totalJugadores = data.count;
     });
