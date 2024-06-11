@@ -1,5 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule, ValidationErrors,
+  ValidatorFn,
+  Validators
+} from "@angular/forms";
 import {JugadoresService} from "../../../../core/services/jugadores.service";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -52,7 +60,7 @@ export class CreateJugadorComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.jugadorForm = this.fb.group({
-      nombreCompleto: ['', Validators.required],
+      nombreCompleto: ['', [Validators.required, NoWhitespaceValidator()]],
       // Se deja asi para comprobar error del servidor, edad maxima deberia de ser 200
       edad: ['', [Validators.required, Validators.min(0), Validators.max(200), integerValidator]],
       equipo: [null, Validators.required], // Cambiado a null
@@ -147,4 +155,12 @@ function integerValidator(control: FormControl) {
     return {'notInteger': true};
   }
   return null;
+}
+
+export function NoWhitespaceValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : {'whitespace': true};
+  };
 }
