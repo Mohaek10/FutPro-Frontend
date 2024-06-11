@@ -1,1 +1,36 @@
-<p>update-equipo works!</p>
+<div class="container mx-auto mt-20 bg-gradient-to-b from-indigo-950 to-cyan-800 rounded-3xl p-5 text-white">
+  <h1 class="text-center text-4xl font-light mb-8">Editar Equipo</h1>
+  <form [formGroup]="equipoForm" (ngSubmit)="submit()" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" required>
+      <mat-error *ngIf="equipoForm.get('nombre')?.hasError('required')">Nombre es obligatorio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Liga</mat-label>
+      <input matInput formControlName="liga" required>
+      <mat-error *ngIf="equipoForm.get('liga')?.hasError('required')">Liga es obligatorio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>País</mat-label>
+      <input matInput formControlName="pais" required>
+      <mat-error *ngIf="equipoForm.get('pais')?.hasError('required')">País es obligatorio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>URL del Escudo</mat-label>
+      <input matInput formControlName="escudo" required>
+      <mat-error *ngIf="equipoForm.get('escudo')?.hasError('required')">URL del Escudo es obligatorio</mat-error>
+    </mat-form-field>
+
+    <div class="col-span-1 flex items-center">
+      <mat-checkbox formControlName="isActive">Activo</mat-checkbox>
+    </div>
+
+    <div class="col-span-2 flex justify-center">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!equipoForm.valid">Actualizar Equipo</button>
+    </div>
+  </form>
+</div>
