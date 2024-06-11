@@ -1,29 +1,37 @@
 <section class=" mt-20">
   <div class="admin-dashboard">
-    <div class="admin-card" (click)="navigateTo('jugadores')">
-      <div class="card-content">
-        <img src="assets/icons/players-icon.png" alt="Jugadores" class="card-icon">
-        <h3>Gestión de Jugadores</h3>
-        <p>Listar, crear, editar y borrar jugadores.</p>
-        <button mat-raised-button color="primary">Gestionar Jugadores</button>
+    <div class="max-w-sm rounded overflow-hidden shadow-lg text-center" (click)="navigateTo('jugadores')">
+      <img src="../../../../assets/images/iconos/player-icon.webp" alt="Jugadores" class="w-full">
+      <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2">Gestión de Jugadores</div>
+        <p class="text-gray-700 text-base">Listar, crear, editar y borrar jugadores.</p>
+        <button class="px-6 pt-4 pb-2" mat-raised-button color="primary">Gestionar Jugadores</button>
       </div>
     </div>
 
-    <div class="admin-card" (click)="navigateTo('equipos')">
-      <div class="card-content">
-        <img src="assets/icons/teams-icon.png" alt="Equipos" class="card-icon">
-        <h3>Gestión de Equipos</h3>
-        <p>Listar, crear, editar y borrar equipos.</p>
-        <button mat-raised-button color="primary">Gestionar Equipos</button>
+    <div class="max-w-sm rounded overflow-hidden shadow-lg text-center" (click)="navigateTo('equipos')">
+      <img src="../../../../assets/images/iconos/teams-icon.webp" alt="Equipos" class="w-full">
+      <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2">Gestión de Equipos</div>
+        <p class="text-gray-700 text-base">Listar, crear, editar y borrar equipos.</p>
+        <button class="px-6 pt-4 pb-2" mat-raised-button color="primary">Gestionar Equipos</button>
       </div>
     </div>
 
-    <div class="admin-card" (click)="navigateTo('usuarios')">
-      <div class="card-content">
-        <img src="assets/icons/users-icon.png" alt="Usuarios" class="card-icon">
-        <h3>Gestión de Usuarios</h3>
-        <p>Listar y desactivar cuentas de usuario.</p>
-        <button mat-raised-button color="primary">Gestionar Usuarios</button>
+    <div class="max-w-sm rounded overflow-hidden shadow-lg text-center" (click)="navigateTo('usuarios')">
+      <img src="../../../../assets/images/iconos/users-icon.webp" alt="Usuarios" class="w-full">
+      <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2">Gestión de Usuarios</div>
+        <p class="text-gray-700 text-base">Listar y desactivar cuentas de usuario.</p>
+        <button class="px-6 pt-4 pb-2" mat-raised-button color="primary">Gestionar Usuarios</button>
+      </div>
+    </div>
+    <div class="max-w-sm rounded overflow-hidden shadow-lg text-center" (click)="navigateTo('usuarios')">
+      <img src="../../../../assets/images/iconos/transaccion-icon.webp" alt="Usuarios" class="w-full">
+      <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2">Ver todas las transacciones</div>
+        <p class="text-gray-700 text-base">Listar transacciones.</p>
+        <button class="px-6 pt-4 pb-2" mat-raised-button color="primary">Ver historial de transacciones</button>
       </div>
     </div>
   </div>

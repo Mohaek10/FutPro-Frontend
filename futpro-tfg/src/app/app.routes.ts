@@ -11,6 +11,10 @@ import {MercadoSisComponent} from "./features/mercado/mercado-sis/mercado-sis.co
 import {MiEquipoComponent} from "./features/mi-equipo/mi-equipo.component";
 import {MercadoUseComponent} from "./features/mercado/mercado-use/mercado-use.component";
 import {AdminDashboardComponent} from "./features/admin/admin-dashboard/admin-dashboard.component";
+import {ManageJugadoresComponent} from "./features/admin/manage-jugadores/manage-jugadores.component";
+import {ManageEquipoComponent} from "./features/admin/manage-equipo/manage-equipo.component";
+import {ManageUsersComponent} from "./features/admin/manage-users/manage-users.component";
+import {TransaccionesComponent} from "./features/admin/transacciones/transacciones.component";
 
 export const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -18,7 +22,14 @@ export const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'forbidden', component: ForbiddenComponent},
+  
+  // Seccion de admin
   {path: 'admin', component: AdminDashboardComponent, canActivate: [authGuard, adminGuard]},
+  {path: 'admin/jugadores', component: ManageJugadoresComponent, canActivate: [authGuard, adminGuard]},
+  {path: 'admin/equipos', component: ManageEquipoComponent, canActivate: [authGuard, adminGuard]},
+  {path: 'admin/usuarios', component: ManageUsersComponent, canActivate: [authGuard, adminGuard]},
+  {path: 'admin/transacciones', component: TransaccionesComponent, canActivate: [authGuard, adminGuard]},
+
   {path: 'jugadores', component: JugadorListComponent},
   {path: 'jugador/:id', component: JugadorDetailComponent},
   {path: 'mercado-sis', component: MercadoSisComponent, canActivate: [authGuard]},
