@@ -1,12 +1,14 @@
-<div class="container mt-20 text-white">
-  <h1 class="text-center mb-8">Crear Jugador</h1>
+<div class="container mx-auto mt-20 bg-gradient-to-b from-indigo-950 to-cyan-800 rounded-3xl p-5 text-white">
+  <h1 class="text-center text-4xl font-light mb-8">Crear Jugador</h1>
   <div class="flex flex-col lg:flex-row justify-center items-center">
     <div class="lg:w-1/3 w-full flex justify-center lg:justify-start mb-4 lg:mb-0">
-      <div class="w-3/4 lg:w-full">
+      <div class="w-3/4 lg:w-full h-full">
         <label class="block mb-2">Imagen</label>
-        <input type="file" (change)="onFileSelected($event)" required class="block mb-2 w-full text-white">
+        <input type="file" (change)="onFileSelected($event)"
+               accept="image/jpeg, image/png, image/jfif, image/tiff, image/webp" required
+               class="block mb-2 w-full text-white">
         <div *ngIf="jugadorForm.get('imagen')?.hasError('required')" class="text-red-500">Imagen es obligatorio</div>
-        <img alt="Imagen" [src]="imagePreview" *ngIf="imagePreview" class="preview-image rounded-lg mt-4">
+        <img alt="Imagen" [src]="imagePreview" *ngIf="imagePreview" class="preview-image rounded-lg mt-4 max-h-56">
       </div>
     </div>
     <div class="lg:w-2/3 w-full">
@@ -83,13 +85,13 @@
           <mat-error *ngIf="jugadorForm.get('posicion')?.hasError('required')">Posición es obligatorio</mat-error>
         </mat-form-field>
 
-        <div class="col-span-1 flex justify-between items-center">
+        <div class="col-span-1 flex items-center">
           <mat-checkbox formControlName="en_mercado">En Mercado</mat-checkbox>
           <mat-checkbox formControlName="isActive">Activo</mat-checkbox>
         </div>
 
         <div class="col-span-2 flex justify-center">
-          <button mat-raised-button color="primary" type="submit">Crear Jugador</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!jugadorForm.valid">Crear Jugador</button>
         </div>
       </form>
     </div>
