@@ -26,6 +26,7 @@
           <mat-error *ngIf="jugadorForm.get('edad')?.hasError('required')">Edad es obligatorio</mat-error>
           <mat-error *ngIf="jugadorForm.get('edad')?.hasError('min')">Edad no puede ser menor que 0</mat-error>
           <mat-error *ngIf="jugadorForm.get('edad')?.hasError('max')">Edad no puede ser mayor que 100</mat-error>
+          <mat-error *ngIf="jugadorForm.get('edad')?.hasError('notInteger')">Edad debe ser un número entero</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="w-full">
@@ -45,6 +46,8 @@
           <mat-error *ngIf="jugadorForm.get('media')?.hasError('required')">Media es obligatorio</mat-error>
           <mat-error *ngIf="jugadorForm.get('media')?.hasError('min')">Media no puede ser menor que 0</mat-error>
           <mat-error *ngIf="jugadorForm.get('media')?.hasError('max')">Media no puede ser mayor que 100</mat-error>
+          <mat-error *ngIf="jugadorForm.get('media')?.hasError('notInteger')">Media debe ser un número entero
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="w-full">

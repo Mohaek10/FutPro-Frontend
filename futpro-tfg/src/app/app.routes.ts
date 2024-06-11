@@ -32,7 +32,7 @@ export const routes: Routes = [
   {path: 'admin/usuarios', component: ManageUsersComponent, canActivate: [authGuard, adminGuard]},
   {path: 'admin/transacciones', component: TransaccionesComponent, canActivate: [authGuard, adminGuard]},
   // Seccion de admin -- Jugadores
-  {path: 'admin/jugadores/edit', component: TransaccionesComponent, canActivate: [authGuard, adminGuard]},
+  {path: 'admin/jugadores/edit/:id', component: UpdateJugadorComponent, canActivate: [authGuard, adminGuard]},
   {path: 'admin/jugadores/view', component: UpdateJugadorComponent, canActivate: [authGuard, adminGuard]},
   {path: 'admin/jugadores/create', component: CreateJugadorComponent, canActivate: [authGuard, adminGuard]},
 

@@ -61,7 +61,7 @@ export class JugadoresService {
     return this.http.post<Jugador>(this.apiUrl, formData);
   }
 
-  updateJugador(id: number, jugador: Jugador, imagen?: File): Observable<Jugador> {
+  updateJugador(id: number, jugador: Jugador, imagen?: File | null): Observable<Jugador> {
     const formData = new FormData();
     formData.append('nombreCompleto', jugador.nombreCompleto);
     formData.append('edad', jugador.edad.toString());

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {JugadoresService} from "../../../../core/services/jugadores.service";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -53,9 +53,10 @@ export class CreateJugadorComponent implements OnInit {
   ) {
     this.jugadorForm = this.fb.group({
       nombreCompleto: ['', Validators.required],
-      edad: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+      // Se deja asi para comprobar error del servidor, edad maxima deberia de ser 200
+      edad: ['', [Validators.required, Validators.min(0), Validators.max(200), integerValidator]],
       equipo: [null, Validators.required], // Cambiado a null
-      media: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+      media: ['', [Validators.required, Validators.min(0), Validators.max(100), integerValidator]],
       rareza: ['', Validators.required],
       imagen: [null, Validators.required],
       valor: ['', [Validators.required, Validators.min(0)]],
@@ -119,12 +120,31 @@ export class CreateJugadorComponent implements OnInit {
           this.router.navigate(['/admin/jugadores']);
         },
         error: (err) => {
-          const errorMsg = err.error?.error || 'Error al crear el jugador. Verifica los datos.';
-          this.snackBar.open(errorMsg, 'Cerrar', {duration: 5000});
+          const errorMessages = this.parseErrorMessages(err);
+          this.snackBar.open(errorMessages, 'Cerrar', {duration: 5000});
         }
       });
     } else {
       this.snackBar.open('Por favor, completa todos los campos correctamente.', 'Cerrar', {duration: 5000});
     }
   }
+
+  private parseErrorMessages(err: any): string {
+    if (err.error) {
+      if (typeof err.error === 'string') {
+        return err.error;
+      } else if (typeof err.error === 'object') {
+        return Object.values(err.error).map((error: any) => error.join(' ')).join(' ');
+      }
+    }
+    return 'Error al crear el jugador. Verifica los datos.';
+  }
+}
+
+function integerValidator(control: FormControl) {
+  const value = control.value;
+  if (value != null && (value % 1 !== 0)) {
+    return {'notInteger': true};
+  }
+  return null;
 }

@@ -10,6 +10,7 @@ export interface Jugador {
   valor: number;
   posicion: string;
   createdAt: string;
+  updatedAt: string;
   en_mercado: boolean;
   isActive: boolean;
   nombre_equipo: string;
