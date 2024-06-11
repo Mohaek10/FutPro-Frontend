@@ -1,6 +1,6 @@
-<section class=" mt-20">
+<section class=" mt-20 rounded-2xl px-4">
   <div class="admin-dashboard">
-    <div class="max-w-sm rounded overflow-hidden shadow-lg text-center" (click)="navigateTo('jugadores')">
+    <div class=" admin-card max-w-sm rounded overflow-hidden shadow-lg text-center" (click)="navigateTo('jugadores')">
       <img src="../../../../assets/images/iconos/player-icon.webp" alt="Jugadores" class="w-full">
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">Gestión de Jugadores</div>
@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div class="max-w-sm rounded overflow-hidden shadow-lg text-center" (click)="navigateTo('equipos')">
+    <div class="admin-card max-w-sm rounded overflow-hidden shadow-lg text-center" (click)="navigateTo('equipos')">
       <img src="../../../../assets/images/iconos/teams-icon.webp" alt="Equipos" class="w-full">
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">Gestión de Equipos</div>
@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div class="max-w-sm rounded overflow-hidden shadow-lg text-center" (click)="navigateTo('usuarios')">
+    <div class="admin-card max-w-sm rounded overflow-hidden shadow-lg text-center" (click)="navigateTo('usuarios')">
       <img src="../../../../assets/images/iconos/users-icon.webp" alt="Usuarios" class="w-full">
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">Gestión de Usuarios</div>
@@ -26,12 +26,13 @@
         <button class="px-6 pt-4 pb-2" mat-raised-button color="primary">Gestionar Usuarios</button>
       </div>
     </div>
-    <div class="max-w-sm rounded overflow-hidden shadow-lg text-center" (click)="navigateTo('usuarios')">
+    <div class="admin-card max-w-sm rounded overflow-hidden shadow-lg text-center"
+         (click)="navigateTo('transacciones')">
       <img src="../../../../assets/images/iconos/transaccion-icon.webp" alt="Usuarios" class="w-full">
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">Ver todas las transacciones</div>
         <p class="text-gray-700 text-base">Listar transacciones.</p>
-        <button class="px-6 pt-4 pb-2" mat-raised-button color="primary">Ver historial de transacciones</button>
+        <button class="px-6 p-6" mat-raised-button color="primary">Ver historial de transacciones</button>
       </div>
     </div>
   </div>
