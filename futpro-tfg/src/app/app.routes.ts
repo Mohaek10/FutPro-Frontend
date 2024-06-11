@@ -18,6 +18,8 @@ import {TransaccionesComponent} from "./features/admin/transacciones/transaccion
 import {CreateJugadorComponent} from "./features/admin/jugador/crate-jugador/create-jugador.component";
 import {UpdateJugadorComponent} from "./features/admin/jugador/update-jugador/update-jugador.component";
 import {ViewJugadorComponent} from "./features/admin/jugador/view-jugador/view-jugador.component";
+import {CreateEquipoComponent} from "./features/admin/equipo/create-equipo/create-equipo.component";
+import {UpdateEquipoComponent} from "./features/admin/equipo/update-equipo/update-equipo.component";
 
 export const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -37,6 +39,10 @@ export const routes: Routes = [
   {path: 'admin/jugadores/view/:id', component: ViewJugadorComponent, canActivate: [authGuard, adminGuard]},
   {path: 'admin/jugadores/create', component: CreateJugadorComponent, canActivate: [authGuard, adminGuard]},
 
+  // Seccion de equipos
+  {path: 'admin/equipos/edit/:id', component: ManageEquipoComponent, canActivate: [authGuard, adminGuard]},
+  {path: 'admin/equipos/view/:id', component: UpdateEquipoComponent, canActivate: [authGuard, adminGuard]},
+  {path: 'admin/equipos/create', component: CreateEquipoComponent, canActivate: [authGuard, adminGuard]},
 
   {path: 'jugadores', component: JugadorListComponent},
   {path: 'jugador/:id', component: JugadorDetailComponent},
