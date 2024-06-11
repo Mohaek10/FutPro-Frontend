@@ -44,4 +44,25 @@ export class FutcoinsComponent implements OnInit {
       }
     });
   }
+
+  getLoteImage(loteNombre: string): string {
+    let imageName = '';
+    switch (loteNombre.toLowerCase()) {
+      case 'paquete pequeño':
+        imageName = 'lotepequeno.webp';
+        break;
+      case 'paquete mediano':
+        imageName = 'lotemediano.webp';
+        break;
+      case 'paquete grande':
+        imageName = 'lotegrande.webp';
+        break;
+      case 'paquete extra grande':
+        imageName = 'loteextragrande.webp';
+        break;
+      default:
+        imageName = 'general.webp';
+    }
+    return `assets/images/futcoins/${imageName}`;
+  }
 }

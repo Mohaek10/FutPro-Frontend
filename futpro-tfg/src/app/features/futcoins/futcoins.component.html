@@ -1,11 +1,36 @@
-<div class="container mx-auto mt-20 bg-gradient-to-b from-indigo-950 to-cyan-800 rounded-3xl p-5 text-white">
+<div
+  class="max-w-screen-xl mt-20 mx-auto p-5 sm:p-10 md:p-16 bg-gradient-to-b from-indigo-950 to-cyan-800 rounded-3xl text-white">
   <h1 class="text-center text-4xl font-light mb-8">Comprar FutCoins</h1>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    <div *ngFor="let lote of lotes" class="card bg-white text-black rounded-lg shadow-lg p-6">
-      <h2 class="text-2xl font-bold mb-4">{{ lote.nombre }}</h2>
-      <p class="text-lg mb-2">Cantidad: {{ lote.cantidad | formatoNumero }} FutCoins</p>
-      <p class="text-lg mb-2">Precio: {{ lote.precio }} €</p>
-      <button mat-raised-button color="primary" (click)="openCompraDialog(lote)">Comprar</button>
+  <div class="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 gap-10">
+    <div *ngFor="let lote of lotes" class="rounded overflow-hidden shadow-lg bg-white text-black">
+      <div class="relative">
+        <img class="w-full" [src]="getLoteImage(lote.nombre)" alt="{{ lote.nombre }}">
+        <div
+          class="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
+        <div
+          class="absolute bottom-0 left-0 bg-indigo-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
+          {{ lote.nombre }}
+        </div>
+        <div
+          class="text-sm absolute top-0 right-0 bg-indigo-600 px-4 text-white rounded-full h-16 w-16 flex flex-col items-center justify-center mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
+          <span class="font-bold">{{ lote.cantidad | formatoNumero }}</span>
+          <small>FutCoins</small>
+        </div>
+      </div>
+      <div class="px-6 py-4">
+        <a href="#"
+           class="font-semibold text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out">
+          {{ lote.nombre }}
+        </a>
+        <p class="text-gray-500 text-sm">Cantidad: {{ lote.cantidad | formatoNumero }}</p>
+        <p class="text-gray-500 text-sm">Precio: {{ lote.precio }} €</p>
+      </div>
+      <div class="px-6 py-4 flex flex-row items-center">
+        <button mat-raised-button color="primary" (click)="openCompraDialog(lote)"
+                class="text-sm font-regular text-white bg-indigo-600 hover:bg-indigo-500 transition duration-500 ease-in-out">
+          Comprar
+        </button>
+      </div>
     </div>
   </div>
 </div>
