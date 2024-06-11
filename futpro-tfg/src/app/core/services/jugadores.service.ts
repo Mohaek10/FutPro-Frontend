@@ -45,6 +45,18 @@ export class JugadoresService {
     return this.http.get<Jugador>(`${this.apiUrl}${id}/`);
   }
 
+  createJugador(jugador: Jugador): Observable<Jugador> {
+    return this.http.post<Jugador>(this.apiUrl, jugador);
+  }
+
+  updateJugador(id: number, jugador: Jugador): Observable<Jugador> {
+    return this.http.put<Jugador>(`${this.apiUrl}${id}/`, jugador);
+  }
+
+  deleteJugador(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}${id}/`);
+  }
+
   createComentario(jugadorId: number, comentario: Comentario): Observable<Comentario> {
     const url = `http://localhost:8000/api/jugador/${jugadorId}/comentario-create`;
     return this.http.post<Comentario>(url, comentario);
