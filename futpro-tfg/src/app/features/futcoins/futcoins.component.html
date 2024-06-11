@@ -1,1 +1,11 @@
-<p>futcoins works!</p>
+<div class="container mx-auto mt-20 bg-gradient-to-b from-indigo-950 to-cyan-800 rounded-3xl p-5 text-white">
+  <h1 class="text-center text-4xl font-light mb-8">Comprar FutCoins</h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div *ngFor="let lote of lotes" class="card bg-white text-black rounded-lg shadow-lg p-6">
+      <h2 class="text-2xl font-bold mb-4">{{ lote.nombre }}</h2>
+      <p class="text-lg mb-2">Cantidad: {{ lote.cantidad }} FutCoins</p>
+      <p class="text-lg mb-2">Precio: ${{ lote.precio }}</p>
+      <button mat-raised-button color="primary" (click)="openCompraDialog(lote)">Comprar</button>
+    </div>
+  </div>
+</div>

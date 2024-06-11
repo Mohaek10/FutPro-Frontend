@@ -22,6 +22,7 @@ import {CreateEquipoComponent} from "./features/admin/equipo/create-equipo/creat
 import {UpdateEquipoComponent} from "./features/admin/equipo/update-equipo/update-equipo.component";
 import {ViewEquipoComponent} from "./features/admin/equipo/view-equipo/view-equipo.component";
 import {NotfoundComponent} from "./errors/notfound/notfound.component";
+import {FutcoinsComponent} from "./features/futcoins/futcoins.component";
 
 export const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -51,6 +52,8 @@ export const routes: Routes = [
   {path: 'mercado-sis', component: MercadoSisComponent, canActivate: [authGuard]},
   {path: 'mercado-user', component: MercadoUseComponent, canActivate: [authGuard]},
   {path: 'mi-equipo', component: MiEquipoComponent, canActivate: [authGuard]},
+
+  {path: 'futcoins', component: FutcoinsComponent, canActivate: [authGuard]},
 
   {path: '404', component: NotfoundComponent},
   {path: '**', component: NotfoundComponent}
