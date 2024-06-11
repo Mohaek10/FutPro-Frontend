@@ -1,15 +1,18 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {JugadoresService} from "../../../../core/services/jugadores.service";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {MatOption} from "@angular/material/autocomplete";
+import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatButton} from "@angular/material/button";
-import {NgIf} from "@angular/common";
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
+import {EquiposService} from "../../../../core/services/equipos.service";
+import {Equipo} from "../../../../shared/models/equipo.models";
+import {map, Observable, startWith} from "rxjs";
 
 @Component({
   selector: 'app-crate-jugador',
@@ -24,26 +27,34 @@ import {NgIf} from "@angular/common";
     MatButton,
     MatLabel,
     MatError,
-    NgIf
+    NgIf,
+    MatAutocomplete,
+    MatAutocompleteTrigger,
+    AsyncPipe,
+    NgForOf
   ],
   templateUrl: './create-jugador.component.html',
   styleUrl: './create-jugador.component.css'
 })
-export class CreateJugadorComponent {
+export class CreateJugadorComponent implements OnInit {
   jugadorForm: FormGroup;
   selectedFile: File | null = null;
   imagePreview: string | null = null;
+  equipos: Equipo[] = [];
+  filteredEquipos: Observable<Equipo[]> = new Observable<Equipo[]>();
+
 
   constructor(
     private fb: FormBuilder,
     private jugadoresService: JugadoresService,
+    private equiposService: EquiposService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {
     this.jugadorForm = this.fb.group({
       nombreCompleto: ['', Validators.required],
       edad: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
-      equipo: ['', Validators.required],
+      equipo: [null, Validators.required], // Cambiado a null
       media: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
       rareza: ['', Validators.required],
       imagen: [null, Validators.required],
@@ -54,12 +65,45 @@ export class CreateJugadorComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.equiposService.getEquipos().subscribe({
+      next: (data) => {
+        this.equipos = data.results;
+      },
+      error: (err) => {
+        this.snackBar.open('Error al cargar los equipos. Intenta de nuevo.' + err, 'Cerrar', {duration: 5000});
+      }
+    });
+
+    if (this.jugadorForm && this.jugadorForm.get('equipo')) {
+      // @ts-ignore
+      this.filteredEquipos = this.jugadorForm.get('equipo').valueChanges
+        .pipe(
+          startWith(''),
+          map(value => typeof value === 'string' ? value : value.nombre),
+          map(nombre => nombre ? this._filterEquipos(nombre) : this.equipos.slice()),
+        );
+    }
+
+  }
+
+  private _filterEquipos(nombre: string): Equipo[] {
+    const filterValue = nombre.toLowerCase();
+
+    return this.equipos.filter(equipo => equipo.nombre.toLowerCase().includes(filterValue));
+  }
+
+  displayFn(equipo: Equipo): string {
+    return equipo && equipo.nombre ? equipo.nombre : '';
+  }
+
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0] || null;
     if (this.selectedFile) {
       const reader = new FileReader();
       reader.onload = () => {
         this.imagePreview = reader.result as string;
+        this.jugadorForm.patchValue({imagen: this.selectedFile});
       };
       reader.readAsDataURL(this.selectedFile);
     }
@@ -67,7 +111,9 @@ export class CreateJugadorComponent {
 
   submit(): void {
     if (this.jugadorForm.valid && this.selectedFile) {
-      this.jugadoresService.createJugador(this.jugadorForm.value, this.selectedFile).subscribe({
+      const jugador = this.jugadorForm.value;
+      jugador.equipo = jugador.equipo.id;
+      this.jugadoresService.createJugador(jugador, this.selectedFile).subscribe({
         next: () => {
           this.snackBar.open('Jugador creado exitosamente', 'Cerrar', {duration: 3000});
           this.router.navigate(['/admin/jugadores']);
