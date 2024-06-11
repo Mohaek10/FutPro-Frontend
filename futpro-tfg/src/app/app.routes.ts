@@ -52,5 +52,6 @@ export const routes: Routes = [
   {path: 'mercado-user', component: MercadoUseComponent, canActivate: [authGuard]},
   {path: 'mi-equipo', component: MiEquipoComponent, canActivate: [authGuard]},
 
+  {path: '404', component: NotfoundComponent},
   {path: '**', component: NotfoundComponent}
 ];

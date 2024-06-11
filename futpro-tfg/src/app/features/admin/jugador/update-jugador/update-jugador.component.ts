@@ -73,23 +73,29 @@ export class UpdateJugadorComponent implements OnInit {
   ngOnInit(): void {
     this.jugadorId = this.route.snapshot.params['id'];
     this.jugadoresService.getJugador(this.jugadorId!).subscribe(jugador => {
-      this.jugadorForm.patchValue({
-        id: jugador.id,
-        nombreCompleto: jugador.nombreCompleto,
-        edad: jugador.edad,
-        equipo: jugador.equipo,
-        equipoId: jugador.equipo,
-        media: jugador.media,
-        rareza: jugador.rareza,
-        valor: jugador.valor,
-        posicion: jugador.posicion,
-        en_mercado: jugador.en_mercado,
-        isActive: jugador.isActive,
-        createdAt: jugador.createdAt,
-        updatedAt: jugador.updatedAt
-      });
-      this.imagePreview = jugador.imagen;
-    });
+        this.jugadorForm.patchValue({
+          id: jugador.id,
+          nombreCompleto: jugador.nombreCompleto,
+          edad: jugador.edad,
+          equipo: jugador.equipo,
+          equipoId: jugador.equipo,
+          media: jugador.media,
+          rareza: jugador.rareza,
+          valor: jugador.valor,
+          posicion: jugador.posicion,
+          en_mercado: jugador.en_mercado,
+          isActive: jugador.isActive,
+          createdAt: jugador.createdAt,
+          updatedAt: jugador.updatedAt
+        });
+        this.imagePreview = jugador.imagen;
+      },
+      error => {
+        if (error.status === 404) {
+          this.router.navigate(['404/']);
+        }
+      }
+    );
 
     this.equiposService.getEquipos().subscribe({
       next: (data) => {
@@ -159,6 +165,9 @@ export class UpdateJugadorComponent implements OnInit {
     return 'Error al actualizar el jugador. Verifica los datos.';
   }
 
+  goBack(): void {
+    window.history.back();
+  }
 
 }
 

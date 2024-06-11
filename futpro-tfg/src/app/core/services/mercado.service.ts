@@ -82,4 +82,25 @@ export class MercadoService {
     const endPoints = this.apiUrl.concat(`comprar-usuario/${ventaId}/`);
     return this.http.post(endPoints, {cantidad});
   }
+
+  getTransacciones(search?: string, page: number = 1, pageSize: number = 10): Observable<{
+    count: number,
+    next: string | null,
+    previous: string | null,
+    results: any[]
+  }> {
+    let params = new HttpParams();
+    if (search) {
+      params = params.set('search', search);
+    }
+    params = params.set('limit', pageSize.toString());
+    params = params.set('offset', ((page - 1) * pageSize).toString());
+    return this.http.get<{
+      count: number,
+      next: string | null,
+      previous: string | null,
+      results: any[]
+    }>(`${this.apiUrl}transacciones-admin/`, {params});
+  }
+
 }

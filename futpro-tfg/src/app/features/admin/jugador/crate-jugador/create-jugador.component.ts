@@ -147,6 +147,11 @@ export class CreateJugadorComponent implements OnInit {
     }
     return 'Error al crear el jugador. Verifica los datos.';
   }
+
+  goBack(): void {
+    window.history.back();
+
+  }
 }
 
 function integerValidator(control: FormControl) {
