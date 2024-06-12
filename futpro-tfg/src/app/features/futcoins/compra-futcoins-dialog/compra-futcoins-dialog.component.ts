@@ -18,7 +18,7 @@ import {
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {NgIf} from "@angular/common";
+import {DatePipe, NgIf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 
 @Component({
@@ -34,7 +34,8 @@ import {MatButton} from "@angular/material/button";
     MatButton,
     MatDialogActions,
     MatLabel,
-    MatError
+    MatError,
+    DatePipe
   ],
   templateUrl: './compra-futcoins-dialog.component.html',
   styleUrl: './compra-futcoins-dialog.component.css'
@@ -44,6 +45,7 @@ export class CompraFutcoinsDialogComponent {
   localStorage = localStorage.getItem('currentUser')?.toString();
   usuario = JSON.parse(this.localStorage || '{}');
   nombreDelUsuario = this.usuario.first_name + ' ' + this.usuario.last_name;
+  fechaActual = new Date().toLocaleDateString('default', {year: 'numeric', month: 'long'});
 
   constructor(
     private fb: FormBuilder,
@@ -52,6 +54,7 @@ export class CompraFutcoinsDialogComponent {
     public dialogRef: MatDialogRef<CompraFutcoinsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { lote: any }
   ) {
+    this.fechaActual = new Date().toLocaleDateString('default', {year: '2-digit', month: '2-digit'});
     this.compraForm = this.fb.group({
       numero_tarjeta: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16), numeroTarjetaValidator, sinEspaciosValidator]],
       fecha_expiracion: ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/), fechaExpiracionValidator]],
