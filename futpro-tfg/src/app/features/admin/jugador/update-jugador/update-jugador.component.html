@@ -1,0 +1,129 @@
+<div class="container mx-auto mt-20 bg-gradient-to-b from-indigo-950 to-cyan-800 rounded-3xl p-5 text-white">
+  <h1 class="text-center text-4xl font-light mb-8">Editar Jugador</h1>
+  <div class="flex flex-col lg:flex-row justify-center items-center">
+    <div class="lg:w-1/3 w-full flex justify-center lg:justify-start mb-4 lg:mb-0">
+      <div class="w-3/4 lg:w-full h-full">
+        <label class="block mb-2">Imagen</label>
+        <input type="file" (change)="onFileSelected($event)"
+               accept="image/jpeg, image/png, image/jfif, image/tiff, image/webp"
+               class="block mb-2 w-full text-white">
+        <img alt="Imagen" [src]="imagePreview" *ngIf="imagePreview" class="preview-image rounded-lg mt-4 max-h-56">
+      </div>
+    </div>
+    <div class="lg:w-2/3 w-full">
+      <form [formGroup]="jugadorForm" (ngSubmit)="submit()" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="id">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Nombre Completo</mat-label>
+          <input matInput formControlName="nombreCompleto" required>
+          <mat-error *ngIf="jugadorForm.get('nombreCompleto')?.hasError('required')">Nombre Completo es obligatorio
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Edad</mat-label>
+          <input matInput type="number" formControlName="edad" required>
+          <mat-error *ngIf="jugadorForm.get('edad')?.hasError('required')">Edad es obligatorio</mat-error>
+          <mat-error *ngIf="jugadorForm.get('edad')?.hasError('min')">Edad no puede ser menor que 0</mat-error>
+          <mat-error *ngIf="jugadorForm.get('edad')?.hasError('max')">Edad no puede ser mayor que 100</mat-error>
+          <mat-error *ngIf="jugadorForm.get('edad')?.hasError('notInteger')">Edad debe ser un número entero</mat-error>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Equipo</mat-label>
+          <input type="text" matInput formControlName="equipo" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let equipo of filteredEquipos | async" [value]="equipo">
+              {{ equipo.nombre }}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="jugadorForm.get('equipo')?.hasError('required')">Equipo es obligatorio</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Media</mat-label>
+          <input matInput type="number" formControlName="media" required>
+          <mat-error *ngIf="jugadorForm.get('media')?.hasError('required')">Media es obligatorio</mat-error>
+          <mat-error *ngIf="jugadorForm.get('media')?.hasError('min')">Media no puede ser menor que 0</mat-error>
+          <mat-error *ngIf="jugadorForm.get('media')?.hasError('max')">Media no puede ser mayor que 100</mat-error>
+          <mat-error *ngIf="jugadorForm.get('media')?.hasError('notInteger')">Media debe ser un número entero
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Rareza</mat-label>
+          <mat-select formControlName="rareza" required>
+            <mat-option value="Común">Común</mat-option>
+            <mat-option value="Rara">Rara</mat-option>
+            <mat-option value="Épica">Épica</mat-option>
+            <mat-option value="Legendaria">Legendaria</mat-option>
+          </mat-select>
+          <mat-error *ngIf="jugadorForm.get('rareza')?.hasError('required')">Rareza es obligatorio</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Valor</mat-label>
+          <input matInput type="number" formControlName="valor" required>
+          <mat-error *ngIf="jugadorForm.get('valor')?.hasError('required')">Valor es obligatorio</mat-error>
+          <mat-error *ngIf="jugadorForm.get('valor')?.hasError('min')">Valor no puede ser negativo</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Posición</mat-label>
+          <mat-select formControlName="posicion" required>
+            <mat-option value="DC">Delantero Centro</mat-option>
+            <mat-option value="EI">Extremo Izquierdo</mat-option>
+            <mat-option value="ED">Extremo Derecho</mat-option>
+            <mat-option value="SD">Segundo Delantero</mat-option>
+            <mat-option value="MCO">Mediapunta</mat-option>
+            <mat-option value="CDM">Mediocentro Defensivo</mat-option>
+            <mat-option value="CM">Mediocentro</mat-option>
+            <mat-option value="DFC">Defensa Central</mat-option>
+            <mat-option value="LD">Lateral Derecho</mat-option>
+            <mat-option value="LI">Lateral Izquierdo</mat-option>
+            <mat-option value="CAD">Carrilero Derecho</mat-option>
+            <mat-option value="CAI">Carrilero Izquierdo</mat-option>
+            <mat-option value="PT">Portero</mat-option>
+          </mat-select>
+          <mat-error *ngIf="jugadorForm.get('posicion')?.hasError('required')">Posición es obligatorio</mat-error>
+        </mat-form-field>
+
+        <div class="col-span-1 flex items-center">
+          <mat-checkbox formControlName="en_mercado">En Mercado</mat-checkbox>
+          <mat-checkbox formControlName="isActive">Activo</mat-checkbox>
+        </div>
+
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Fecha de Creación</mat-label>
+          <input matInput formControlName="createdAt">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Fecha de Actualización</mat-label>
+          <input matInput formControlName="updatedAt">
+        </mat-form-field>
+
+        <div class="col-span-2 flex justify-center">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!jugadorForm.valid">Actualizar Jugador
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <button type="button" (click)="goBack()"
+          class="bg-gray-800 text-white rounded-l-md border-r border-gray-100 py-2 hover:bg-red-700 hover:text-white px-3 mt-4">
+    <div class="flex flex-row align-middle">
+      <svg class="w-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+              d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+              clip-rule="evenodd"></path>
+      </svg>
+      <p class="ml-2">Atrás</p>
+    </div>
+  </button>
+</div>

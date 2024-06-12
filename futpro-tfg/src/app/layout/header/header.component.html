@@ -1,0 +1,107 @@
+<header
+  id="landing-header"
+  class="py-1 px-6 md:px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white bg-black"
+>
+  <div class="flex flex-grow basis-0">
+    <a href="/"><img src="assets/images/logos/logo-header.jpg" alt="FutPro Logo"
+                     class="w-24 h-10 object-cover md:w-32 md:h-14"></a>
+  </div>
+
+  <nav class="hidden md:flex md:flex-grow md:justify-center">
+    <ul
+      class="flex text-sm md:[&>li>a]:transition-colors md:[&>li>a]:duration-500 md:[&>li>a]:text-current md:[&>li>a]:font-medium md:[&>li>a]:inline-block md:[&>li>a]:px-4 md:[&>li>a]:py-2"
+    >
+      <li><a href="jugadores/" class="hover:text-gray-300">Jugadores</a></li>
+      <li><a href="mi-equipo/" class="hover:text-gray-300">Mi Equipo</a></li>
+      <li><a href="mercado-sis/" class="hover:text-gray-300">Mercado de jugadores</a></li>
+      <li><a href="mercado-user/" class="hover:text-gray-300">Mercado de Usuarios</a></li>
+      <li *ngIf="isAdmin()"><a href="admin/" class="hover:text-gray-300">Panel de Admin</a></li>
+    </ul>
+  </nav>
+
+  <nav class="flex flex-grow justify-end basis-0">
+    <ul
+      class="flex text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+    >
+      @if (!isAuthenticated()) {
+        <li class="hover:text-gray-800 hover:bg-gray-50"><a href="/login">Iniciar Sesión</a>
+        </li>
+        <li class="hover:text-gray-800 hover:bg-red-50"><a href="/register">Registrarse</a>
+        </li>
+      } @else {
+        <li class="relative inline-block text-left align-middle">
+          <button type="button"
+                  class="inline-flex w-full justify-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-gray-900"
+                  (click)="toggleProfileMenu()" aria-expanded="true" aria-haspopup="true">
+            {{ (usuarioActual | async)?.username }}
+            <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                    clip-rule="evenodd"/>
+            </svg>
+          </button>
+          <div
+            class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+            @if (verMenuPerfil) {
+              <div class="py-1" role="none">
+                <a href="perfil/" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem"
+                   tabindex="-1">Ver Perfil</a>
+                <a href="transacciones/" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem"
+                   tabindex="-1">Mis Transacciones</a>
+                <a (click)="logout()" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
+                   role="menuitem" tabindex="-1">Cerrar Sesión</a>
+              </div>
+            }
+          </div>
+        </li>
+        <li
+          class="hidden md:flex md:flex-grow p-0.5 rounded items-center hover:text-gray-800 hover:bg-gray-50 ml-6 text-center">
+          <div class="flex items-center"><a href="futcoins/" class="none">
+            <span>Futcoins: {{ (((usuarioActual | async)?.futcoins) || 0 | formatoNumero) }} </span> </a>
+            <img src="assets/images/futcoin.webp" alt="Futcoins Logo" class="w-5 h-5 ml-2.5">
+          </div>
+        </li>
+      }
+
+    </ul>
+  </nav>
+
+  <div class="md:hidden flex items-center">
+    <button id="menu-button" class="text-white focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+      </svg>
+    </button>
+  </div>
+
+  <nav id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-black bg-opacity-90 md:hidden">
+    <ul
+      class="flex flex-col items-center text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:block [&>li>a]:px-4 [&>li>a]:py-2"
+    >
+      <li><a href="jugadores/" class="hover:text-gray-300">Jugadores</a></li>
+      <li><a href="mi-equipo/" class="hover:text-gray-300">Mi Equipo</a></li>
+      <li><a href="mercado-sis/" class="hover:text-gray-300">Mercado de jugadores</a></li>
+      <li><a href="mercado-user/" class="hover:text-gray-300">Mercado de Usuarios</a></li>
+      <li *ngIf="!isAuthenticated()"><a href="/login" class="hover:text-gray-300">Iniciar Sesión</a></li>
+      <li *ngIf="!isAuthenticated()"><a href="/register" class="hover:text-gray-300">Registrarse</a></li>
+      <li *ngIf="isAuthenticated()"><a href="perfil/" class="hover:text-gray-300">Ver Perfil</a></li>
+      <li *ngIf="isAuthenticated() && (usuarioActual | async)?.futcoins"><a href="futcoins/"
+                                                                            class="hover:text-gray-300">Futcoins: {{ (usuarioActual | async)?.futcoins }}
+        F</a></li>
+      <li *ngIf="isAdmin()"><a href="admin/" class="hover:text-gray-300">Panel de Admin</a></li>
+    </ul>
+  </nav>
+
+  <div
+    id="menu-backdrop"
+    class="
+      absolute bg-white/10 shadow-lg rounded-lg
+      translate-x-[var(--left)] translate-y-[var(--top)]
+      left-0 top-0
+      w-[var(--width)] h-[var(--height)]
+      transition-all duration-500
+      ease-in-out opacity-0 -z-10
+    "
+  ></div>
+</header>

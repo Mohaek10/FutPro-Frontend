@@ -1,0 +1,27 @@
+<div class="venta-dialog-container">
+  <h2 mat-dialog-title>Poner en Venta</h2>
+  <mat-dialog-content>
+    <form [formGroup]="ventaForm">
+      <div class="jugador-info">
+        <img [src]="data.jugador.imagen" alt="{{ data.jugador.nombreCompleto }}" class="jugador-imagen">
+        <div>
+          <h3>{{ data.jugador.nombreCompleto }}</h3>
+          <p>Cantidad disponible: {{ data.jugador.cantidad }}</p>
+        </div>
+      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Cantidad</mat-label>
+        <input matInput formControlName="cantidad" type="number" min="1" max="{{ data.jugador.cantidad }}">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Precio por unidad</mat-label>
+        <input matInput formControlName="precio" type="number" min="1">
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="cancelar()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="ponerEnVenta()" [disabled]="ventaForm.invalid">Poner en Venta
+    </button>
+  </mat-dialog-actions>
+</div>

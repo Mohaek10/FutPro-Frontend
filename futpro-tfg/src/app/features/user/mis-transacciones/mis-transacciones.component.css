@@ -1,0 +1,21 @@
+.container {
+  background-color: #1a202c;
+  color: #edf2f7;
+}
+
+.mat-form-field {
+  margin-bottom: 20px;
+}
+
+.mat-elevation-z8 {
+  background-color: #2d3748;
+  color: #edf2f7;
+}
+
+.mat-header-cell, .mat-cell {
+  padding: 16px;
+}
+
+button {
+  margin-top: 20px;
+}

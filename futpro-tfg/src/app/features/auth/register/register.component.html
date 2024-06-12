@@ -1,0 +1,81 @@
+<div class="min-h-screen mt-20 flex items-center justify-center bg-gray-900">
+  <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+    <h2 class="text-2xl font-bold text-center mb-8">FUTPRO - Registrarse</h2>
+
+    <div class="text-center mb-4 ">
+      <a href="">
+        <img src="assets/images/register.webp" alt="logo" class="rounded-2xl w-52 inline-block"/>
+      </a>
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="sm:grid-cols-2  ">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Nombre de usuario</mat-label>
+        <input matInput formControlName="username" required>
+        <mat-error *ngIf="registerForm.get('username')?.hasError('required')">Usuario es obligatorio</mat-error>
+        <mat-error *ngIf="registerForm.get('username')?.hasError('whitespace')">Usuario tiene que ser válido, sin
+          espacios
+        </mat-error>
+        <mat-error *ngIf="registerForm.get('username')?.hasError('minlength')">Tiene que ser de 8 carácteres</mat-error>
+        <mat-error *ngIf="registerForm.get('username')?.hasError('innerWhitespace')">Usuario tiene que ser válido, sin
+          espacios
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="first_name" required>
+        <mat-error *ngIf="registerForm.get('first_name')?.hasError('required')">Nombre es obligatorio</mat-error>
+        <mat-error *ngIf="registerForm.get('first_name')?.hasError('whitespace')">Tiene que ser un nombre válido
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Apellidos</mat-label>
+        <input matInput formControlName="last_name" required>
+        <mat-error *ngIf="registerForm.get('last_name')?.hasError('required')">Apellidos es obligatorio</mat-error>
+        <mat-error *ngIf="registerForm.get('last_name')?.hasError('whitespace')">Tiene que ser un apellido válido
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required>
+        <mat-error *ngIf="registerForm.get('email')?.hasError('required')">Email es Obligatorio</mat-error>
+        <mat-error *ngIf="registerForm.get('email')?.hasError('email')">Debe tener un formato adecuado a un email
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Número de telefono</mat-label>
+        <input matInput formControlName="phone_number" [maxLength]="9" [minlength]="9" required>
+        <mat-error *ngIf="registerForm.get('phone_number')?.hasError('required')">El telefono es obligatorio</mat-error>
+        <mat-error *ngIf="registerForm.get('phone_number')?.hasError('pattern')">Tiene que ser un número válido, que
+          tenga
+          9 dígitos.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" formControlName="password" required>
+        <mat-error *ngIf="registerForm.get('password')?.hasError('required')">La contraseña es obligatorias</mat-error>
+        <mat-error *ngIf="registerForm.get('password')?.hasError('minlength')">Tiene que ser de 8 carácteres</mat-error>
+        <mat-error *ngIf="registerForm.get('password')?.hasError('pattern')">Tiene que tener al menos un número
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Confirmar Contraseña</mat-label>
+        <input matInput type="password" formControlName="password2" required>
+        <mat-error *ngIf="registerForm.get('password2')?.hasError('required')">Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="registerForm.hasError('mismatch')">La contraseña tiene que coincidir</mat-error>
+      </mat-form-field>
+      <div class="col-span-2 bg-gray-300 rounded-xl p-1">
+        <mat-checkbox color="primary" formControlName="acceptTerms"></mat-checkbox>
+        <span class="ml-2 font-semibold">Acepto los <a href="">términos y condiciones</a></span>
+        <mat-error *ngIf="registerForm.get('acceptTerms')?.hasError('required')">Tienes que aceptar los términos y
+          condiciones
+        </mat-error>
+      </div>
+      <div class="col-span-2 flex justify-center !mt-10">
+        <button mat-flat-button color="primary" type="submit" [disabled]="!registerForm.valid">Registrarse</button>
+      </div>
+    </form>
+  </div>
+</div>
+<app-footer/>

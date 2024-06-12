@@ -1,0 +1,70 @@
+.mi-equipo {
+  padding: 20px;
+}
+
+.posicion-container {
+  margin-bottom: 40px;
+}
+
+.carrusel {
+  display: flex;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.carrusel-item {
+  flex: 0 0 auto;
+  margin-right: 10px;
+}
+
+section {
+  /*background-image: url("../../../assets/images/campo.jpeg");*/
+  /*background-position: center;*/
+  /*background-size: cover;*/
+  background: #181733;
+
+}
+
+.delanteros {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../../../assets/images/iconos/delanteros.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.centrocampistas {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../../../assets/images/iconos/mc.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+.defensas {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../../../assets/images/iconos/defensas.webp");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+.header-title {
+  background-image: url("../../../assets/images/header-miequipo.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-gray-900 {
+  background-color: #121212;
+}

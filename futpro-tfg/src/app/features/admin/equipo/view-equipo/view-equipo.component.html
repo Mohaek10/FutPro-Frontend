@@ -1,0 +1,19 @@
+@if (equipo) {
+  <div
+    class="container mx-auto mt-20 bg-gradient-to-b from-indigo-950 to-cyan-800 rounded-3xl p-5 text-white">
+    <h1 class="text-center text-4xl font-light mb-8">Detalles del Equipo</h1>
+    <div class="flex flex-col items-center">
+      <img [src]="equipo.escudo" alt="{{ equipo.nombre }}" class="w-32 h-32 mb-4">
+      <h2 class="text-2xl font-bold">{{ equipo.nombre }}</h2>
+      <p class="mt-2"><strong>Liga:</strong> {{ equipo.liga }}</p>
+      <p class="mt-2"><strong>País:</strong> {{ equipo.pais }}</p>
+      <p class="mt-2"><strong>Activo:</strong> {{ equipo.isActive ? 'Sí' : 'No' }}</p>
+      <p class="mt-2"><strong>Creado:</strong> {{ equipo.createdAt | date }}</p>
+      <p class="mt-2"><strong>Actualizado:</strong> {{ equipo.updatedAt | date }}</p>
+    </div>
+  </div>
+} @else {
+  <div class="container mx-auto mt-20 bg-gradient-to-b from-indigo-950 to-cyan-800 rounded-3xl p-5 text-white">
+    <h1 class="text-center text-4xl font-light mb-8">Equipo no encontrado</h1>
+  </div>
+}
