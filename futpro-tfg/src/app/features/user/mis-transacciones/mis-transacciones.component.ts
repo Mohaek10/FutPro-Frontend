@@ -14,6 +14,7 @@ import {MercadoService} from "../../../core/services/mercado.service";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatInput} from "@angular/material/input";
 import {DatePipe} from "@angular/common";
+import {FooterComponent} from "../../../layout/footer/footer.component";
 
 @Component({
   selector: 'app-mis-transacciones',
@@ -35,6 +36,7 @@ import {DatePipe} from "@angular/common";
     MatRowDef,
     DatePipe,
     MatLabel,
+    FooterComponent,
   ],
   templateUrl: './mis-transacciones.component.html',
   styleUrl: './mis-transacciones.component.css'

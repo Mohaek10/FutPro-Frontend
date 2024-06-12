@@ -3,13 +3,15 @@ import {AuthService} from "../../../core/services/auth.service";
 import {Router} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import Swal from 'sweetalert2'
+import {FooterComponent} from "../../../layout/footer/footer.component";
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    FooterComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'

@@ -8,6 +8,7 @@ import {MatButton} from "@angular/material/button";
 import {NgIf} from "@angular/common";
 import {MatError} from "@angular/material/form-field";
 import {NoWhitespaceValidator} from "../../auth/register/register.component";
+import {FooterComponent} from "../../../layout/footer/footer.component";
 
 @Component({
   selector: 'app-ver-perfil',
@@ -20,7 +21,8 @@ import {NoWhitespaceValidator} from "../../auth/register/register.component";
     MatButton,
     NgIf,
     MatLabel,
-    MatError
+    MatError,
+    FooterComponent
   ],
   templateUrl: './ver-perfil.component.html',
   styleUrl: './ver-perfil.component.css'

@@ -16,6 +16,7 @@ import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatButton} from "@angular/material/button";
+import {FooterComponent} from "../../../layout/footer/footer.component";
 
 @Component({
   selector: 'app-register',
@@ -31,6 +32,7 @@ import {MatButton} from "@angular/material/button";
     MatError,
     MatButton,
     MatLabel,
+    FooterComponent,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
