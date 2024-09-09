@@ -8,7 +8,7 @@ import {User} from "../../shared/models/user.models";
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8000/account/';
+  private apiUrl = 'https://futpro-backend.onrender.com/account/';
 
   constructor(private http: HttpClient) {
   }

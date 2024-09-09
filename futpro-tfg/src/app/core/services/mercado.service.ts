@@ -7,7 +7,7 @@ import {Jugador} from "../../shared/models/jugador.models";
   providedIn: 'root'
 })
 export class MercadoService {
-  private apiUrl = 'http://localhost:8000/api/ventas/';
+  private apiUrl = 'https://futpro-backend.onrender.com/api/ventas/';
 
   constructor(private http: HttpClient) {
   }
