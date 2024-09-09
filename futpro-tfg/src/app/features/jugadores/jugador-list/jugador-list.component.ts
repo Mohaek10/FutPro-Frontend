@@ -11,6 +11,7 @@ import {MatButton} from "@angular/material/button";
 import {MatButtonToggle} from "@angular/material/button-toggle";
 import {MatPaginatorModule, PageEvent} from "@angular/material/paginator";
 import {FooterComponent} from "../../../layout/footer/footer.component";
+import {LoadderComponent} from "../../../shared/components/loadder/loadder.component";
 
 @Component({
   selector: 'app-jugador-list',
@@ -19,6 +20,7 @@ import {FooterComponent} from "../../../layout/footer/footer.component";
     ReactiveFormsModule,
     NgForOf,
     JugadorComponent,
+    LoadderComponent,
     MatInput,
     MatFormFieldModule,
     MatInputModule,
@@ -41,6 +43,7 @@ export class JugadorListComponent implements OnInit {
   totalJugadores: number = 0;
   pageSize: number = 12;
   pageIndex: number = 0;
+  loading: boolean = false;
 
   constructor(private jugadoresService: JugadoresService) {
     this.filterForm = new FormGroup({
@@ -68,11 +71,16 @@ export class JugadorListComponent implements OnInit {
   }
 
   getJugadores(search?: string, filters?: any): void {
+    this.loading = true;
     this.jugadoresService.getJugadores(search, filters, this.pageIndex + 1, this.pageSize).subscribe(response => {
-      this.jugadores = response.results;
-      this.totalJugadores = response.count;
-      console.log(this.jugadores);
-    });
+        this.jugadores = response.results;
+        this.totalJugadores = response.count;
+        this.loading = false;
+        console.log(this.jugadores);
+      }, () => {
+        this.loading = false;
+      }
+    );
   }
 
   limpiarFiltros(): void {
