@@ -15,6 +15,7 @@ import {CompraUserDialogComponent} from "../compra-user-dialog/compra-user-dialo
 import {MatDialog} from '@angular/material/dialog';
 import {AuthService} from "../../../core/services/auth.service";
 import {FooterComponent} from "../../../layout/footer/footer.component";
+import {LoadderComponent} from "../../../shared/components/loadder/loadder.component";
 
 @Component({
   selector: 'app-mercado-use',
@@ -33,7 +34,8 @@ import {FooterComponent} from "../../../layout/footer/footer.component";
     NgForOf,
     FormatoNumeroPipe,
     DatePipe,
-    FooterComponent
+    FooterComponent,
+    LoadderComponent
   ],
   templateUrl: './mercado-use.component.html',
   styleUrl: './mercado-use.component.css'
@@ -45,6 +47,7 @@ export class MercadoUseComponent implements OnInit {
   totalJugadores: number = 0;
   pageSize: number = 12;
   pageIndex: number = 0;
+  loading: boolean = false;
 
   constructor(private mercadoService: MercadoService, private dialog: MatDialog, private auhtService: AuthService) {
     this.filterForm = new FormGroup({
@@ -87,10 +90,15 @@ export class MercadoUseComponent implements OnInit {
   }
 
   getMercadoUserList(search?: string, filters?: any): void {
+    this.loading = true;
     this.mercadoService.getMercadoUsuario(search, filters, this.pageIndex + 1, this.pageSize).subscribe(response => {
-      this.jugadoresEnVenta = response.results;
-      this.totalJugadores = response.count;
-    });
+        this.jugadoresEnVenta = response.results;
+        this.totalJugadores = response.count;
+        this.loading = false;
+      }, () => {
+        this.loading = false;
+      }
+    );
   }
 
   limpiarFiltros(): void {

@@ -72,9 +72,12 @@
       </div>
     </form>
   </div>
+  <div *ngIf="loading" class="loader-container">
+    <app-loadder></app-loadder>
+  </div>
 
-  <div
-    class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 animate__animated animate__bounceInLeft">
+  <div *ngIf="!loading"
+       class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 animate__animated animate__bounceInLeft">
     <div *ngFor="let item of jugadoresEnVenta" class="jugador-en-venta card">
       <app-jugador [jugador]="item.jugador"></app-jugador>
       <div class="card-body bg-gray-900 text-white p-2 rounded-2xl text-center">
