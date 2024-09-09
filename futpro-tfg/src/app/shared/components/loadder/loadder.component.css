@@ -1,81 +1,26 @@
-body {
-  padding: 0;
-  margin: 0;
+.loader {
+  width: fit-content;
+  padding-bottom: 5px;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 30px;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0);
+  text-shadow: 0 0 0 #ffffff, 10ch 0 0 #ffffff;
+  background: linear-gradient(to right, #ffffff 0%, #ffffff 100%) bottom left/0 3px no-repeat;
+  animation: l14 1.5s infinite;
 }
 
-main-loader {
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.75);
+.loader:before {
+  content: "Cargando..";
 }
 
-.main-fader {
-  width: 100%;
-  height: 100vh;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.8);
-
-  .loader {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    svg {
-      height: 300px;
-      display: block;
-      margin: 0 auto;
-
-      path {
-        animation-duration: 1s;
-        animation-name: pulse;
-        animation-iteration-count: infinite;
-        color: #26a380;
-
-        &.path-7 {
-          animation-delay: -1s
-        }
-
-        &.path-6 {
-          animation-delay: -.875s
-        }
-
-        &.path-5 {
-          animation-delay: -.75s
-        }
-
-        &.path-4 {
-          animation-delay: -.625s
-        }
-
-        &.path-3 {
-          animation-delay: -.5s
-        }
-
-        &.path-2 {
-          animation-delay: -.375s
-        }
-
-        &.path-1 {
-          animation-delay: -.25s
-        }
-
-        &.path-0 {
-          animation-delay: -.125s
-        }
-      }
-    }
-  }
-}
-
-
-@keyframes pulse {
-  0% {
-    opacity: .1;
-  }
-  30% {
-    opacity: .8;
+@keyframes l14 {
+  80% {
+    text-shadow: 0 0 0 #ffffff, 10ch 0 0 #ffffff;
+    background-size: 100% 3px
   }
   100% {
-    opacity: .1;
+    text-shadow: -10ch 0 0 #ffffff, 0 0 0 #ffffff
   }
 }
