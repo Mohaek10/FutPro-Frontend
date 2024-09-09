@@ -12,6 +12,7 @@ import {MatSelect} from "@angular/material/select";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {FooterComponent} from "../../../layout/footer/footer.component";
+import {LoadderComponent} from "../../../shared/components/loadder/loadder.component";
 
 @Component({
   selector: 'app-mercado-sis',
@@ -29,7 +30,8 @@ import {FooterComponent} from "../../../layout/footer/footer.component";
     NgIf,
     ReactiveFormsModule,
     MatButton,
-    FooterComponent
+    FooterComponent,
+    LoadderComponent
   ],
   templateUrl: './mercado-sis.component.html',
   styleUrl: './mercado-sis.component.css'
@@ -41,6 +43,7 @@ export class MercadoSisComponent implements OnInit {
   totalJugadores: number = 0;
   pageSize: number = 12;
   pageIndex: number = 0;
+  loading: boolean = false;
 
   constructor(private mercadoService: MercadoService) {
     this.filterForm = new FormGroup({
@@ -69,10 +72,15 @@ export class MercadoSisComponent implements OnInit {
   }
 
   getMercadoSisList(search?: string, filters?: any): void {
+    this.loading = true;
     this.mercadoService.getJugadoresMercadoSistema(search, filters, this.pageIndex + 1, this.pageSize).subscribe(data => {
-      this.jugadores = data.results;
-      this.totalJugadores = data.count;
-    });
+        this.jugadores = data.results;
+        this.totalJugadores = data.count;
+        this.loading = false;
+      }, () => {
+        this.loading = false;
+      }
+    );
   }
 
   limpiarFiltros(): void {
