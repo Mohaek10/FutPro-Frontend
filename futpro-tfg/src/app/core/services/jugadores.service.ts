@@ -8,7 +8,7 @@ import {Comentario} from "../../shared/models/comentario.models";
   providedIn: 'root'
 })
 export class JugadoresService {
-  private apiUrl = 'http://localhost:8000/api/jugadores/';
+  private apiUrl = 'https://futpro-backend.onrender.com/api/jugadores/';
 
   constructor(private http: HttpClient) {
   }
