@@ -69,8 +69,12 @@
     </form>
   </div>
 
-  <div
-    class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 animate__animated animate__bounceInLeft">
+  <div *ngIf="loading" class="loader-container">
+    <app-loadder></app-loadder>
+  </div>
+
+  <div *ngIf="!loading"
+       class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 animate__animated animate__bounceInLeft">
     <app-jugador *ngFor="let jugador of jugadores" [jugador]="jugador"></app-jugador>
     <div *ngIf="jugadores.length === 0" class="text-center text-white text-2xl">No hay jugadores</div>
   </div>

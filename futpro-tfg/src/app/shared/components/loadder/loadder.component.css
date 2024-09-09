@@ -1,0 +1,26 @@
+.loader {
+  width: fit-content;
+  padding-bottom: 5px;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 30px;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0);
+  text-shadow: 0 0 0 #ffffff, 10ch 0 0 #ffffff;
+  background: linear-gradient(to right, #ffffff 0%, #ffffff 100%) bottom left/0 3px no-repeat;
+  animation: l14 1.5s infinite;
+}
+
+.loader:before {
+  content: "Cargando..";
+}
+
+@keyframes l14 {
+  80% {
+    text-shadow: 0 0 0 #ffffff, 10ch 0 0 #ffffff;
+    background-size: 100% 3px
+  }
+  100% {
+    text-shadow: -10ch 0 0 #ffffff, 0 0 0 #ffffff
+  }
+}
