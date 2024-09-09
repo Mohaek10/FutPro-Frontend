@@ -1,11 +1,18 @@
 @if (delanteros.length === 0 && centrocampistas.length === 0 && defensasYPorteros.length === 0) {
-  <div class="flex-auto">
-    <div class="text-center text-white text-2xl mt-24">No tienes jugadores, recarga FutCoins y ve al mercado</div>
-    <div class="flex justify-center mt-5">
-      <a href="mercado-sis/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ir al
-        mercado</a>
+  @if (loading) {
+    <div class=" p-24 mt-18 bg-gray-800 loader-container">
+      <app-loadder></app-loadder>
     </div>
-  </div>
+  } @else {
+    <div class="flex-auto">
+      <div class="text-center text-white text-2xl mt-24">No tienes jugadores, recarga FutCoins y ve al mercado</div>
+      <div class="flex justify-center mt-5">
+        <a href="mercado-sis/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ir al
+          mercado</a>
+      </div>
+    </div>
+  }
+
 } @else {
   <section class="p-10 mt-18 bg-gray-800">
     <div class=" flex justify-center  ">

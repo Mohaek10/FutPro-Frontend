@@ -4,6 +4,7 @@ import {NgForOf, NgIf, NgStyle} from "@angular/common";
 import {JugadorComponent} from "../../shared/components/jugador/jugador.component";
 import {Jugador} from "../../shared/models/jugador.models";
 import {FooterComponent} from "../../layout/footer/footer.component";
+import {LoadderComponent} from "../../shared/components/loadder/loadder.component";
 
 @Component({
   selector: 'app-mi-equipo',
@@ -13,7 +14,8 @@ import {FooterComponent} from "../../layout/footer/footer.component";
     NgStyle,
     NgForOf,
     JugadorComponent,
-    FooterComponent
+    FooterComponent,
+    LoadderComponent
   ],
   templateUrl: './mi-equipo.component.html',
   styleUrls: ['./mi-equipo.component.css']
@@ -23,6 +25,7 @@ export class MiEquipoComponent implements OnInit {
   centrocampistas: Jugador[] = [];
   defensasYPorteros: Jugador[] = [];
   cantidad: number = 1;
+  loading: boolean = false;
 
   constructor(private userService: UserService) {
   }
@@ -34,17 +37,22 @@ export class MiEquipoComponent implements OnInit {
   }
 
   getJugadores() {
+    this.loading = true;
     this.userService.getMisJuagdores().subscribe(response => {
-      const jugadores = response.results.map((j: any) => {
-        let jugador = j.jugadorSerializado;
-        jugador.cantidad = j.cantidad;
-        jugador.id_usuario_jugador = j.id;
-        return jugador;
-      });
-      this.delanteros = jugadores.filter((j: any) => ['DC', 'EI', 'ED', 'SD'].includes(j.posicion));
-      this.centrocampistas = jugadores.filter((j: any) => ['MCO', 'CM', 'CDM'].includes(j.posicion));
-      this.defensasYPorteros = jugadores.filter((j: any) => ['DFC', 'LD', 'LI', 'CAD', 'CAI', 'PT'].includes(j.posicion));
-    });
+        const jugadores = response.results.map((j: any) => {
+          let jugador = j.jugadorSerializado;
+          jugador.cantidad = j.cantidad;
+          jugador.id_usuario_jugador = j.id;
+          return jugador;
+        });
+        this.delanteros = jugadores.filter((j: any) => ['DC', 'EI', 'ED', 'SD'].includes(j.posicion));
+        this.centrocampistas = jugadores.filter((j: any) => ['MCO', 'CM', 'CDM'].includes(j.posicion));
+        this.defensasYPorteros = jugadores.filter((j: any) => ['DFC', 'LD', 'LI', 'CAD', 'CAI', 'PT'].includes(j.posicion));
+        this.loading = false;
+      }, () => {
+        this.loading = false;
+      }
+    );
   }
 
 }
