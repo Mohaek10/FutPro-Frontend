@@ -7,7 +7,7 @@ import {Equipo} from "../../shared/models/equipo.models";
   providedIn: 'root'
 })
 export class EquiposService {
-  private apiUrl = 'http://localhost:8000/api/equipos/';
+  private apiUrl = 'https://futpro-backend.onrender.com/api/equipos/';
 
   constructor(private http: HttpClient) {
   }
